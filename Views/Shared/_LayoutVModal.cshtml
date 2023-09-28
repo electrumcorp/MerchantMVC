@@ -1,0 +1,106 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - MerchantMVC</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+</head>
+<body>
+    <div class="wrapper">
+        <header>
+            <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light box-shadow mb-3">
+                <div class="container">
+                    <a class="navbar-brand" href="#">
+                        <img src="~/img/Elogo.bmp" alt="" />
+                    </a>
+                    <button class="navbar-toggler navbar-dark" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                            aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="navbar-collapse collapse d-sm-inline-flex justify-content-end">
+                        <ul class="nav navbar-nav">
+                            <li>
+                                @if (User.Identity.IsAuthenticated)
+                                {
+                                    <span class="text-white">@User.Identity.Name</span>
+                                    <a class="nav-link  text-white" asp-action="Logout" asp-controller="Account"><i class="fa fa-sign-out"></i>Logout</a>
+                                }
+
+                            </li>
+                        </ul>
+
+
+                    </div>
+                </div>
+            </nav>
+        </header>
+        <div class="container-fluid">
+            <div class="row">
+                <div class=" col-2 collapse show d-md-flex  bg-ligh pt-2 pl-0 min-vh-100" id="sidebar">
+
+                    <ul class="nav flex-column flex-nowrap overflow-hidden">
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Merchant" asp-action="Edit">Merchant</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Location" asp-action="Index">Locations</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Feedback" asp-action="Index">Feedback</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark">Call Tracking</a>
+                            <ul>
+                                <li>
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="CallTracking" asp-action="AddSupportCall">Add Call Tracking</a>
+                                </li>
+                                <li>
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="CallTracking" asp-action="ShowCallTracking">Show Call Tracking</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link " asp-area="" asp-controller="Home" asp-action="Links">Links</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Report" asp-action="ShowReport">Reports</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Training</a>
+                        </li>
+                    </ul>
+
+
+                </div>
+
+
+
+                <div class="col">
+                    <main role="main">
+                        @RenderBody()
+                    </main>
+                </div>
+                
+            </div>
+
+        </div>
+        
+        <footer class="footer text-center text-white">
+            Copyright &copy; @DateTime.Now.Year Electrum Corporation. All rights reserved.
+        </footer>
+    </div>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>
+
+           

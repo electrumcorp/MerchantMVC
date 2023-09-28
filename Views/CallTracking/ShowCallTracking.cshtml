@@ -1,0 +1,18 @@
+﻿
+@{
+    ViewData["Title"] = "ShowCallTracking";
+    Layout = "~/Views/Shared/_LayoutV.cshtml";
+}
+
+<h1>ShowCallTracking</h1>
+<div class="card " style="width:auto">
+    <div class="card-header">
+        Call Trackings
+    </div>
+    <div class="card-body">
+
+        @await Component.InvokeAsync("CallTracking");
+        
+
+        </div>
+    </div>

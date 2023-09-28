@@ -1,0 +1,151 @@
+﻿@model MerchantMVC.ViewModels.EditLocationViewModel
+
+@{
+    ViewData["Title"] = "Add New Locatoin";
+    Layout = "_LayoutV";
+}
+
+<h1>Add</h1>
+
+<h4>EditLocationViewModel</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Add">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            @*<div class="form-group">
+                <label asp-for="MerchantId" class="control-label"></label>
+                <input asp-for="MerchantId" class="form-control" />
+                <span asp-validation-for="MerchantId" class="text-danger"></span>
+            </div>*@
+            <div class="form-group">
+                <label asp-for="LocationStatus" class="control-label"></label>
+                <input asp-for="LocationStatus" class="form-control" />
+                <span asp-validation-for="LocationStatus" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="EntityCategoryId" class="control-label"></label>
+                <input asp-for="EntityCategoryId" class="form-control" />
+                <span asp-validation-for="EntityCategoryId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="LName" class="control-label"></label>
+                <input asp-for="LName" class="form-control" />
+                <span asp-validation-for="LName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="LAddr1" class="control-label"></label>
+                <input asp-for="LAddr1" class="form-control" />
+                <span asp-validation-for="LAddr1" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="LAddr2" class="control-label"></label>
+                <input asp-for="LAddr2" class="form-control" />
+                <span asp-validation-for="LAddr2" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="LCity" class="control-label"></label>
+                <input asp-for="LCity" class="form-control" />
+                <span asp-validation-for="LCity" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="LState" class="control-label"></label>
+                <input asp-for="LState" class="form-control" />
+                <span asp-validation-for="LState" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="LZip" class="control-label"></label>
+                <input asp-for="LZip" class="form-control" />
+                <span asp-validation-for="LZip" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Fax" class="control-label"></label>
+                <input asp-for="Fax" class="form-control" />
+                <span asp-validation-for="Fax" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="EmailAddr" class="control-label"></label>
+                <input asp-for="EmailAddr" class="form-control" />
+                <span asp-validation-for="EmailAddr" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Url" class="control-label"></label>
+                <input asp-for="Url" class="form-control" />
+                <span asp-validation-for="Url" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="LFname" class="control-label"></label>
+                <input asp-for="LFname" class="form-control" />
+                <span asp-validation-for="LFname" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="LLname" class="control-label"></label>
+                <input asp-for="LLname" class="form-control" />
+                <span asp-validation-for="LLname" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="LPhone" class="control-label"></label>
+                <input asp-for="LPhone" class="form-control" />
+                <span asp-validation-for="LPhone" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Comments" class="control-label"></label>
+                <input asp-for="Comments" class="form-control" />
+                <span asp-validation-for="Comments" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MerchantNumber" class="control-label"></label>
+                <input asp-for="MerchantNumber" class="form-control" />
+                <span asp-validation-for="MerchantNumber" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="InternetServiceProvider" class="control-label"></label>
+                <input asp-for="InternetServiceProvider" class="form-control" />
+                <span asp-validation-for="InternetServiceProvider" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="WifiSecurityType" class="control-label"></label>
+                <input asp-for="WifiSecurityType" class="form-control" />
+                <span asp-validation-for="WifiSecurityType" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="WifiKey" class="control-label"></label>
+                <input asp-for="WifiKey" class="form-control" />
+                <span asp-validation-for="WifiKey" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Latitude" class="control-label"></label>
+                <input asp-for="Latitude" class="form-control" />
+                <span asp-validation-for="Latitude" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Longitude" class="control-label"></label>
+                <input asp-for="Longitude" class="form-control" />
+                <span asp-validation-for="Longitude" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TimeZone" class="control-label"></label>
+                <input asp-for="TimeZone" class="form-control" />
+                <span asp-validation-for="TimeZone" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Brand" class="control-label"></label>
+                <input asp-for="Brand" class="form-control" />
+                <span asp-validation-for="Brand" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ActiveTab" class="control-label"></label>
+                <select asp-for="ActiveTab" class="form-control"></select>
+                <span asp-validation-for="ActiveTab" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+

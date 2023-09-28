@@ -1,0 +1,214 @@
+﻿@model MerchantMVC.Models.LoyaltyTransactionTEc
+
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Views/Shared/_LayoutV.cshtml";
+}
+
+<h1>Edit</h1>
+
+<h4>LoyaltyTransactionTEc</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="LoyaltyTransactionId" />
+            <div class="form-group">
+                <label asp-for="LoyaltyDetailTerminalId" class="control-label"></label>
+                <input asp-for="LoyaltyDetailTerminalId" class="form-control" />
+                <span asp-validation-for="LoyaltyDetailTerminalId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CardId" class="control-label"></label>
+                <select asp-for="CardId" class="form-control" asp-items="ViewBag.CardId"></select>
+                <span asp-validation-for="CardId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TransactionId" class="control-label"></label>
+                <input asp-for="TransactionId" class="form-control" />
+                <span asp-validation-for="TransactionId" class="text-danger"></span>
+            </div>
+          
+            <div class="form-group">
+                <label asp-for="Points" class="control-label"></label>
+                <input asp-for="Points" class="form-control" />
+                <span asp-validation-for="Points" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="UpdatedDate" class="control-label"></label>
+                <input asp-for="UpdatedDate" class="form-control" />
+                <span asp-validation-for="UpdatedDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ItemId" class="control-label"></label>
+                <input asp-for="ItemId" class="form-control" />
+                <span asp-validation-for="ItemId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Item" class="control-label"></label>
+                <input asp-for="Item" class="form-control" />
+                <span asp-validation-for="Item" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Amount" class="control-label"></label>
+                <input asp-for="Amount" class="form-control" />
+                <span asp-validation-for="Amount" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Factor" class="control-label"></label>
+                <input asp-for="Factor" class="form-control" />
+                <span asp-validation-for="Factor" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Value" class="control-label"></label>
+                <input asp-for="Value" class="form-control" />
+                <span asp-validation-for="Value" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Quantity" class="control-label"></label>
+                <input asp-for="Quantity" class="form-control" />
+                <span asp-validation-for="Quantity" class="text-danger"></span>
+            </div>
+           
+            <div class="form-group">
+                <label asp-for="Discount" class="control-label"></label>
+                <input asp-for="Discount" class="form-control" />
+                <span asp-validation-for="Discount" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Chances" class="control-label"></label>
+                <input asp-for="Chances" class="form-control" />
+                <span asp-validation-for="Chances" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Message" class="control-label"></label>
+                <input asp-for="Message" class="form-control" />
+                <span asp-validation-for="Message" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="RequiredPoints" class="control-label"></label>
+                <input asp-for="RequiredPoints" class="form-control" />
+                <span asp-validation-for="RequiredPoints" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="LoyaltyCouponNumber" class="control-label"></label>
+                <input asp-for="LoyaltyCouponNumber" class="form-control" />
+                <span asp-validation-for="LoyaltyCouponNumber" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Descriptor" class="control-label"></label>
+                <input asp-for="Descriptor" class="form-control" />
+                <span asp-validation-for="Descriptor" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="LocationId" class="control-label"></label>
+                <input asp-for="LocationId" class="form-control" />
+                <span asp-validation-for="LocationId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="LoyaltyRewardId" class="control-label"></label>
+                <input asp-for="LoyaltyRewardId" class="form-control" />
+                <span asp-validation-for="LoyaltyRewardId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="LineNumber" class="control-label"></label>
+                <input asp-for="LineNumber" class="form-control" />
+                <span asp-validation-for="LineNumber" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="OriginalDiscount" class="control-label"></label>
+                <input asp-for="OriginalDiscount" class="form-control" />
+                <span asp-validation-for="OriginalDiscount" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ChangeReason" class="control-label"></label>
+                <input asp-for="ChangeReason" class="form-control" />
+                <span asp-validation-for="ChangeReason" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PendingDiscountId" class="control-label"></label>
+                <input asp-for="PendingDiscountId" class="form-control" />
+                <span asp-validation-for="PendingDiscountId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="FuelGradeId" class="control-label"></label>
+                <input asp-for="FuelGradeId" class="form-control" />
+                <span asp-validation-for="FuelGradeId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="RedemptionLoyaltyTransactionId" class="control-label"></label>
+                <input asp-for="RedemptionLoyaltyTransactionId" class="form-control" />
+                <span asp-validation-for="RedemptionLoyaltyTransactionId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="RedemptionAmount" class="control-label"></label>
+                <input asp-for="RedemptionAmount" class="form-control" />
+                <span asp-validation-for="RedemptionAmount" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PostransactionId" class="control-label"></label>
+                <input asp-for="PostransactionId" class="form-control" />
+                <span asp-validation-for="PostransactionId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="LoyaltyDetailRewardSkugroupId" class="control-label"></label>
+                <input asp-for="LoyaltyDetailRewardSkugroupId" class="form-control" />
+                <span asp-validation-for="LoyaltyDetailRewardSkugroupId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="LoyaltySkugroupId" class="control-label"></label>
+                <input asp-for="LoyaltySkugroupId" class="form-control" />
+                <span asp-validation-for="LoyaltySkugroupId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="LoyaltyLocationGroupId" class="control-label"></label>
+                <input asp-for="LoyaltyLocationGroupId" class="form-control" />
+                <span asp-validation-for="LoyaltyLocationGroupId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="LoyaltyProgramId" class="control-label"></label>
+                <input asp-for="LoyaltyProgramId" class="form-control" />
+                <span asp-validation-for="LoyaltyProgramId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PromoText" class="control-label"></label>
+                <input asp-for="PromoText" class="form-control" />
+                <span asp-validation-for="PromoText" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Posnum" class="control-label"></label>
+                <input asp-for="Posnum" class="form-control" />
+                <span asp-validation-for="Posnum" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="LoyaltyVendorId" class="control-label"></label>
+                <input asp-for="LoyaltyVendorId" class="form-control" />
+                <span asp-validation-for="LoyaltyVendorId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Upc" class="control-label"></label>
+                <input asp-for="Upc" class="form-control" />
+                <span asp-validation-for="Upc" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ResponseLoyaltySequenceId" class="control-label"></label>
+                <input asp-for="ResponseLoyaltySequenceId" class="form-control" />
+                <span asp-validation-for="ResponseLoyaltySequenceId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ClubCount" class="control-label"></label>
+                <input asp-for="ClubCount" class="form-control" />
+                <span asp-validation-for="ClubCount" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+

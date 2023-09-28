@@ -1,0 +1,67 @@
+﻿@model IEnumerable<MerchantMVC.ViewModels.EditLocationViewModel>
+
+@{ 
+    ViewData["Title"] = "Locations";
+    Layout = "_LayoutV"; 
+}
+
+<p>
+    <a asp-action="Create">Add New Location</a>
+</p>
+<form asp-action="Index" method="get">
+    <div class="form-actions no-color">
+        <p>
+            Find by name: <input type="text" name="SearchString" value='@ViewData["CurrentFilter"]' />
+            <input type="submit" value="Search" class="btn btn-default" /> | <a asp-action="Index">Back to Full List</a>
+        </p>
+    </div>
+</form>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["NameSortParam"]">@Html.DisplayNameFor(model => model.LName)</a>
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MerchantNumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LAddr1)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LCity)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LState)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LName)
+                    @Html.HiddenFor(modelItem => item.LocationId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MerchantNumber)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LAddr1)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LCity)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LState)
+                </td>
+                <td>
+                    <a asp-controller="Location" asp-action="Edit" asp-route-id="@item.LocationId">Edit</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

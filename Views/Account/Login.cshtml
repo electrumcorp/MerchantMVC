@@ -1,0 +1,116 @@
+﻿@model MerchantMVC.ViewModels.UserLoginModel
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+
+    <link rel="stylesheet" href="~/css/login.css" />
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#txtusername").focus(function () {
+                
+                $("#divMsg").hide();
+            });
+            $("#txtpwd").focus(function () {
+
+                $("#divMsg").hide();
+            });
+        });
+       
+    </script>
+</head>
+<body>
+    <div class="container my-lg-4">
+        <div class="row content">
+            <div class="col-md-6 mb-3">
+                <div class="text-center">
+                    <img src="~/img/ElectrumLogo2016.png" class="img-fluid" />
+                </div>
+
+            </div>
+            <div class="col-md-6 login-form">
+
+                <h3 class="signin-text mb-3">Login</h3>
+
+                <form id="loginForm" method="post" asp-action="Login">
+                    <div class="form-row">
+                        <div class="col pb-3">
+                            <div class="form-group">
+                                <label class="control-label" asp-for="username">Username</label>
+                                <input type="text" id="txtusername" asp-for="username" class="form-control" data-val="true" data-val-required="Please enter username." name="username" placeholder="Username" />
+                                <span asp-validation-for="username" data-valmsg-for="username" data-valmsg-replace="true" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="form-row">
+                        <div class="col pb-3">
+                            <div class="form-group">
+                                <label class="control-label" asp-for="password" >Password</label>
+                                <input id="txtpwd" onclick="clearAlertMessage()" class="form-control" asp-for="password" type="password" data-val="true" data-val-required="Please enter password." name="password" placeholder="password" />
+                                <span asp-validation-for="password" data-valmsg-for="password" data-valmsg-replace="true" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group form-check">
+
+                            <input type="checkbox" class="form-check-input" />
+                            <label class="form-check-label">Remember me </label>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="col pb-3 m-0 ">
+
+                            <button type="button" class="btn btn-link" style="padding-left:0px"> Forgot Password?</button>
+
+
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="col pb-3 m-0 ">
+
+                            @if (ViewBag.Message != null)
+                            {
+                                <div id="divMsg" class="@(ViewBag.message.Contains("success")? "alert alert-success alert-dismissible":"alert alert-danger alert-dismissible")">
+                                    <a href="#" aria-label="close" data-dismiss="alert" class="close">&times;</a>
+                                    <span id="spnMsg"> @ViewBag.message</span> 
+                                </div>
+
+                            }
+
+
+
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group ">
+
+                            <button type="submit" class="btn btn-class"> Login</button>&nbsp;&nbsp;&nbsp;
+                            <button type="reset" class="btn btn-class"> Cancel</button>
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
+

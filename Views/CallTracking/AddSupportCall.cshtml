@@ -1,0 +1,197 @@
+﻿@model MerchantMVC.ViewModels.CallTrackingViewModel
+
+@{
+    ViewData["Title"] = "AddSupportCall";
+    Layout = "~/Views/Shared/_LayoutV.cshtml";
+}
+<div class="container-fluid">
+    <div class="card  " style="width:auto">
+        <div class="card-header">
+            Add Support Call 
+        </div>
+        <div class="card-body">
+            <form asp-action="AddSupportCall" method="post">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-row">
+                    <div class="col-lg-8">
+                        <div class="form-group">
+                            <label asp-for="EmployeeName" class="control-label ">Employee</label>
+                            <input asp-for="EmployeeName" class="form-control " readonly />
+
+                        </div>
+
+                        <div class="form-group">
+                            <label asp-for="Comment" class="control-label"></label>
+                            <textarea asp-for="Comment" rows="8" class="form-control"></textarea>
+                            <span asp-validation-for="Comment" class="text-danger"></span>
+                        </div>
+                        
+                       
+                    </div>
+
+
+
+                   
+                    <div class="col-lg-4">
+                        <div class="form-group">
+                            <label asp-for="TrackingDateTime" class="control-label"> Date Time</label>
+
+                            <input asp-for="TrackingDateTime" class="form-control" readonly="readonly" type="datetime" value="@DateTime.Now" />
+                            <span asp-validation-for="TrackingDateTime" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Status" class="control-label"></label>
+                            @Html.DropDownListFor(p => p.StatusID, new SelectList(Model.Status, "Value", "Text", 0), "Select Status", htmlAttributes: new { @class = "form-control", id = "ddlSelectStatus" })
+                            @*<select id="ddlStatus" theme="google" class="form-control select2" data-search="true" data-image="1.png">
+                <option>Select Status</option>
+            </select>*@
+
+                            <span asp-validation-for="StatusID" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+
+
+                            <label asp-for="Priority" class="control-label"></label>
+                            @Html.DropDownListFor(p => p.PriorityID, new SelectList(Model.Priority, "Value", "Text", 0), "Select Priority", htmlAttributes: new { @class = "form-control", id = "ddlSelectPriority" })
+                            @*<select id="ddlPriority" theme="google" onchange="" class="form-control select2" data-search="true" data-image="1.png">
+                <option>Select Priority</option>
+            </select>
+            <input type="hidden" id="hdnPriorityId" asp-for="PriorityID"/>*@
+                            <span asp-validation-for="PriorityID" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="TrackingType" class="control-label">Type</label>
+                            <select id="ddlType" theme="google"  class="form-control select2" data-search="true" data-image="1.png">
+                                <option>Select Type</option>
+                            </select>
+                            <input type="hidden" id="hdnTypeId" asp-for="TrackingType" />
+                            <span asp-validation-for="TrackingType" class="text-danger"></span>
+                        </div>
+                       
+
+                    </div>
+</div>
+                    <div class="form-row">
+                        <div class="col">
+                            <div class="form-group">
+                                <input type="submit" value="Add" class="btn btn-primary" />
+                                <input type="reset" value="Clear" asp-controller="CallTracking" asp-action="AddSupportCall" class="btn btn-primary" />
+                            </div>
+                            @if (TempData["Message"] != null)
+                            {
+                                <div class="@(TempData["Message"].ToString().Contains("success")? "alert alert-success alert-dismissible":"alert alert-danger alert-dismissible")">
+                                    <a href="#" aria-label="close" data-dismiss="alert" class="close">&times;</a>
+                                    @TempData["Message"].ToString()
+                                </div>
+
+                            }
+                        </div>
+                       
+                    </div>
+
+
+
+
+
+</form>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+@section Scripts {
+
+    <link href="~/lib/select2.js/4.0.13/content/Content/css/select2.css" rel="stylesheet" />
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+    <script src="~/lib/select2.js/4.0.13/content/Scripts/select2.min.js"></script>
+
+
+    <script>
+        $(document).ready(function () {
+
+         
+            $('#ddlPriority').select2(
+                {
+                    placeholder: "Select Priority",
+                    allowClear: false,
+
+                    ajax: {
+                        url: "../Category/GetPriority",
+                        dataType: 'json',
+                        delay: 250,
+                        data: function (params) {
+                            return {
+
+                                searchTerm: params.term
+
+                            };
+                        },
+                        processResults: function (data, params) {
+                            return {
+                                results: data
+                            }
+                        }
+                    }
+
+                }
+            );
+
+
+            $('#ddlType').select2(
+                {
+                    placeholder: "Select Type",
+                    allowClear: true,
+
+                    closeOnSelect: true,
+                    ajax: {
+                        url: "../Category/GetCategoryType",
+                        dataType: 'json',
+                        delay:250,
+                        data: function (params) {
+                            return {
+
+                                searchTerm: params.term
+
+                            };
+                        },
+                        processResults: function (data, params) {
+                            return {
+                                results: data
+                            }
+                        }
+                    }
+
+                }
+            ).on('change', function (e) {
+               
+                $("#hdnTypeId").val($(this).val());
+            }
+                );
+
+
+
+            //$.get('/LoyaltyTran/GetCard', function (data) {
+
+            //    $("select").each(function (index, element) {
+            //        $.each(data, function (index, value) {
+
+            //            $('<option>').val(value.value).text(value.text).appendTo("#cardSelect_" + i);
+            //        });
+            //        i = i + 1;
+
+
+            //    });
+
+            //});
+
+
+
+        });
+
+    </script>
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

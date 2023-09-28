@@ -1,0 +1,28 @@
+﻿@model MerchantMVC.ViewModels.CallTrackingViewModel
+@using System.Security.Claims
+
+@{
+    ViewData["Title"] = "Show Report";
+    Layout = "~/Views/Shared/_LayoutV.cshtml";
+    
+    }
+
+@*<div>
+    <div class="form-group">
+        <label>Report Name</label>
+        <select id="ddlReportName">
+            <option value="0">Select Report</option>
+            <option value="805">Location Batch Summary Details</option>
+            <option value="2">Location Batch Close Details</option>
+            <option value="3">Loyalty Discounts Labels Large</option>
+            <option value="4">Loyalty Discounts Labels Small</option>
+            <option value="5">Pump Activations By Location</option>
+        </select>
+    </div>
+</div>*@
+
+    <iframe id="iFrameReport"  width="100%" height="auto" style="border:none" src=@ViewBag.Url></iframe>
+
+
+
+

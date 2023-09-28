@@ -1,0 +1,93 @@
+﻿@model MerchantMVC.ViewModels.MerchantViewModel
+
+<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+<input type="hidden" asp-for="MerchantId" />
+<div class="form-row">
+    <div class="col-lg-3">
+        <div class="form-group">
+            <label asp-for="MName" class="control-label"></label>
+            <input asp-for="MName" class="form-control" />
+            <span asp-validation-for="MName" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="MFname" class="control-label"></label>
+            <input asp-for="MFname" class="form-control" />
+            <span asp-validation-for="MFname" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="MLname" class="control-label"></label>
+            <input asp-for="MLname" class="form-control" />
+            <span asp-validation-for="MLname" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="MAddr1" class="control-label"></label>
+            <input asp-for="MAddr1" class="form-control" />
+            <span asp-validation-for="MAddr1" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="MAddr2" class="control-label"></label>
+            <input asp-for="MAddr2" class="form-control" />
+            <span asp-validation-for="MAddr2" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="MCity" class="control-label"></label>
+            <input asp-for="MCity" class="form-control" />
+            <span asp-validation-for="MCity" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div class="col-lg-3">
+        <div class="form-group">
+            <label asp-for="MState" class="control-label"></label>
+            <input asp-for="MState" class="form-control" />
+            <span asp-validation-for="MState" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="MZip" class="control-label"></label>
+            <input asp-for="MZip" class="form-control" />
+            <span asp-validation-for="MZip" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="MPhone" class="control-label"></label>
+            <input asp-for="MPhone" class="form-control" />
+            <span asp-validation-for="MPhone" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="MExten" class="control-label"></label>
+            <input asp-for="MExten" class="form-control" />
+            <span asp-validation-for="MExten" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="EmailAddress" class="control-label"></label>
+            <input asp-for="EmailAddress" class="form-control" />
+            <span asp-validation-for="EmailAddress" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Urladdress" class="control-label"></label>
+            <input asp-for="Urladdress" class="form-control" />
+            <span asp-validation-for="Urladdress" class="text-danger"></span>
+        </div>
+    </div>
+</div>
+
+<div class="form-row">
+    <div class="col-sm-4">
+        <div class="form-group">
+            <input type="submit" value="Update" class="btn btn-primary btn-block" />
+        </div>
+    </div>
+    </div>
+<div class="form-row">
+    <div class="col">
+        @if (ViewBag.message != null)
+        {
+            <div class="@(ViewBag.message.Contains("success")? "alert alert-success alert-dismissible":"alert alert-danger alert-dismissible")">
+                <a href="#" aria-label="close" data-dismiss="alert" class="close">&times;</a>
+                @ViewBag.message
+            </div>
+        }
+    </div>
+
+</div>
+
+

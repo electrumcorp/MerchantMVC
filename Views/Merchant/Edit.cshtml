@@ -1,0 +1,44 @@
+﻿@model MerchantMVC.ViewModels.MerchantViewModel
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "_LayoutV";
+}
+
+        <div class="card " style="width:auto">
+            <div class="card-header">
+                <h3>Merchant: <label>@Model.MName</label></h3>
+            </div>
+            <div class="card-body">
+
+                <form asp-action="Edit" data-ajax-method="POST" asp-controller="Merchant" data-ajax="true" data-ajax-update="#ajaxEditMerchant" data-ajax-mode="replace">
+                    <div id="ajaxEditMerchant">
+
+                        @await Html.PartialAsync("_PartialEditMerchant", Model)
+
+
+                    </div>
+                </form>
+            </div>
+        </div>
+
+
+        <div class="modal" tabindex="-1" role="dialog" id="form-modal">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+
+                    <div class="modal-header">
+                        <h5 class="modal-title"></h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+
+                    <div class="modal-body" style="width:auto">
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+

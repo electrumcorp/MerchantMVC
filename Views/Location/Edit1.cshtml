@@ -1,0 +1,230 @@
+﻿@model MerchantMVC.ViewModels.EditLocationViewModel
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<div class="container">
+
+    <div class="card" style="width:auto">
+        <div class="card-header">
+            Edit
+        </div>
+        <div class="card-body">
+
+            <form asp-action="Edit">
+                <div class="row">
+                    <div class="col-md-4">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <input type="hidden" asp-for="@Model.LocationId" />
+
+                        <div class="form-group">
+                            <label asp-for="@Model.LName" class="control-label">Name</label>
+                            <input asp-for="@Model.LName" class="form-control" />
+                            <span asp-validation-for="@Model.LName" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="@Model.LFname" class="control-label">First Name</label>
+                            <input asp-for="@Model.LFname" class="form-control" />
+                            <span asp-validation-for="@Model.LFname" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label asp-for="@Model.LLname" class="control-label">Last Name</label>
+                            <input asp-for="@Model.LLname" class="form-control" />
+                            <span asp-validation-for="@Model.LLname" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label asp-for="@Model.Fax" class="control-label">Fax</label>
+                            <input asp-for="@Model.Fax" class="form-control" />
+                            <span asp-validation-for="@Model.Fax" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label asp-for="@Model.LPhone" class="control-label">Phone</label>
+                            <input asp-for="@Model.LPhone" class="form-control" />
+                            <span asp-validation-for="@Model.LPhone" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="@Model.EmailAddr" class="control-label"></label>
+                            <input asp-for="@Model.EmailAddr" class="form-control" />
+                            <span asp-validation-for="@Model.EmailAddr" class="text-danger"></span>
+                        </div>
+
+
+                        <div class="form-group">
+                            <label asp-for="@Model.MerchantNumber" class="control-label"></label>
+                            <input asp-for="@Model.MerchantNumber" class="form-control" />
+                            <span asp-validation-for="@Model.MerchantNumber" class="text-danger"></span>
+                        </div>
+
+
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <label asp-for="@Model.LocationStatus" class="control-label"></label>
+                            <input asp-for="@Model.LocationStatus" class="form-control" />
+                            <span asp-validation-for="@Model.LocationStatus" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label asp-for="@Model.LAddr1" class="control-label">Address 1</label>
+                            <input asp-for="@Model.LAddr1" class="form-control" />
+                            <span asp-validation-for="@Model.LAddr1" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="@Model.LAddr2" class="control-label">Address2</label>
+                            <input asp-for="@Model.LAddr2" class="form-control" />
+                            <span asp-validation-for="@Model.LAddr2" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="@Model.LCity" class="control-label">City</label>
+                            <input asp-for="@Model.LCity" class="form-control" />
+                            <span asp-validation-for="@Model.LCity" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="@Model.LState" class="control-label">State</label>
+                            <input asp-for="@Model.LState" class="form-control" />
+                            <span asp-validation-for="@Model.LState" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="@Model.LZip" class="control-label">Zip</label>
+                            <input asp-for="@Model.LZip" class="form-control" />
+                            <span asp-validation-for="@Model.LZip" class="text-danger"></span>
+                        </div>
+
+
+
+
+
+
+
+                    </div>
+                    <div class="col-sm-4">
+
+                        <div class="form-group">
+                            <label asp-for="@Model.Url" class="control-label"></label>
+                            <input asp-for="@Model.Url" class="form-control" />
+                            <span asp-validation-for="@Model.Url" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="@Model.Latitude" class="control-label"></label>
+                            <input asp-for="@Model.Latitude" class="form-control" />
+                            <span asp-validation-for="@Model.Latitude" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="@Model.Longitude" class="control-label"></label>
+                            <input asp-for="@Model.Longitude" class="form-control" />
+                            <span asp-validation-for="@Model.Longitude" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label asp-for="@Model.WifiSecurityType" class="control-label"></label>
+                            <input asp-for="@Model.WifiSecurityType" class="form-control" />
+                            <span asp-validation-for="@Model.WifiSecurityType" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="@Model.WifiKey" class="control-label"></label>
+                            <input asp-for="@Model.WifiKey" class="form-control" />
+                            <span asp-validation-for="@Model.WifiKey" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="@Model.InternetServiceProvider" class="control-label"></label>
+                            <input asp-for="@Model.InternetServiceProvider" class="form-control" />
+                            <span asp-validation-for="@Model.InternetServiceProvider" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-md-10">
+                        <div class="form-group">
+                            <label asp-for="@Model.Comments" class="control-label"></label>
+                            <textarea asp-for="@Model.Comments" class="form-control"></textarea>
+                            <span asp-validation-for="@Model.Comments" class="text-danger"></span>
+                        </div>
+                    </div>
+
+
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Save" class="btn btn-primary" />
+                </div>
+                @if (ViewBag.message != null)
+                {
+                    <div class="@(ViewBag.message.Contains("success")? "alert alert-success alert-dismissible":"alert alert-danger alert-dismissible")">
+                        <a href="#" aria-label="close" data-dismiss="alert" class="close">&times;</a>
+                        @ViewBag.message
+                    </div>
+
+                }
+
+            </form>
+        </div>
+    </div>
+
+
+
+
+    <div class="card text-center">
+        <div class="card-header">
+            <ul class="nav nav-tabs card-header-tabs">
+                <li class="@(Model.ActiveTab==MerchantMVC.ViewModels.EditLocationViewModel.Tab.LoyaltyTransaction? "active":string.Empty)">
+                    <a asp-route-tabname="LoyaltyTransaction" asp-action="SwitchTabs">
+                        <span class="glyphicon glyphicon-credit-card"></span> Loyalty Transaction
+                    </a>
+                </li>
+
+                <li class="@(Model.ActiveTab==MerchantMVC.ViewModels.EditLocationViewModel.Tab.CurrentTransaction? "active":string.Empty)">
+                    <a asp-route-tabname="CurrentTransaction" asp-action="SwitchTabs">
+                        <span class="glyphicon glyphicon-tasks"></span>  Current Transaction
+                    </a>
+                </li>
+
+                <li class="@(Model.ActiveTab==MerchantMVC.ViewModels.EditLocationViewModel.Tab.SupportCalls? "active":string.Empty)">
+                    <a asp-route-tabname="SupportCalls" asp-action="SwitchTabs">
+                        <span class="glyphicon glyphicon-tasks"></span> Support Calls
+                    </a>
+                </li>
+
+                <li class="@(Model.ActiveTab==MerchantMVC.ViewModels.EditLocationViewModel.Tab.Batches? "active":string.Empty)">
+                    <a asp-route-tabname="Batches" asp-action="SwitchTabs">
+                        <span class="glyphicon glyphicon-tasks"></span> Batches
+                    </a>
+                </li>
+                <li class="@(Model.ActiveTab==MerchantMVC.ViewModels.EditLocationViewModel.Tab.Terminal? "active":string.Empty)">
+                    <a asp-route-tabname="Terminal" asp-action="SwitchTabs">
+                        <span class="glyphicon glyphicon-tasks"></span>  Terminal
+                    </a>
+                </li>
+
+            </ul>
+        </div>
+    </div>
+
+    <div class="card-body overflow-auto">
+        @switch (Model.ActiveTab)
+        {
+            case MerchantMVC.ViewModels.EditLocationViewModel.Tab.LoyaltyTransaction:
+                @await Component.InvokeAsync("LoyaltyTran");
+                break;
+            case MerchantMVC.ViewModels.EditLocationViewModel.Tab.Terminal:
+                @await Component.InvokeAsync("Terminal");
+                break;
+            case MerchantMVC.ViewModels.EditLocationViewModel.Tab.Batches:
+                @await Component.InvokeAsync("Batches");
+                break;
+
+        }
+    </div>
+
+
+
+
+</div>
+
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

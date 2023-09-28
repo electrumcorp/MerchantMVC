@@ -1,0 +1,87 @@
+﻿
+
+<table class="ui celled table" id="tblCallTracking" width="100%">
+    <thead>
+        <tr>
+            
+            <th>
+                Employee
+            </th>
+            <th>
+                Category
+            </th>
+            <th>
+                Date Time
+            </th>
+            <th>
+               Type
+            </th>
+            <th>
+                Priority
+            </th>
+
+            <th>
+                Status
+            </th>
+
+            <th>
+                Comment
+            </th>
+
+        </tr>
+    </thead>
+
+</table>
+<br />
+<br />
+
+@*<script defer src="https://code.jquery.com/jquery-3.5.1.js"></script>*@
+<script defer src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
+
+<script defer src="https://cdn.datatables.net/1.10.24/js/dataTables.bootstrap4.min.js"></script>
+
+
+<link href="https://cdn.datatables.net/1.10.24/css/dataTables.bootstrap4.min.css" rel="stylesheet" />
+
+<script>
+
+        $(document).ready(function () {
+            //$.get("/Employee/DTEmployee", function (data) {
+            //    var jsonData = data;
+            
+
+           // var jsonData =@Json.Serialize(@Model);
+            //var data = [];
+            //for (var i = 0; i < 50000; i++) {
+            //    data.push([i, i, i, i, i]);
+            //}
+
+            
+            $("#tblCallTracking").DataTable({
+                ajax: {
+                    url: "../CallTracking/GetCallTracking",
+                    dataSrc: ''
+                    
+
+                },
+               // data: @Json.Serialize(@Model),
+                scroller: true,
+                deferRender: true,
+                processing: true,
+                order:[[2,"desc"]],
+                "columns": [
+                    
+                    { title: 'Employee', data: 'employeeName' },
+                    { title: 'Category', data: 'categoryName' },
+                    { title: 'Date Time', data: 'trackingDateTime' },
+                    { title: 'Type', data: 'trackingTypeName' },
+                    { title: 'Priority', data: 'priorityName' },
+                    { title: 'Status', data: 'statusName' },
+                    { title: 'Comment', data: 'comment' }
+                ]
+
+
+            });
+        });
+</script>
+

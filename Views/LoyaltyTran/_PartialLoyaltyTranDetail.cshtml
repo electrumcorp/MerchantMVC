@@ -1,0 +1,66 @@
+﻿@model MerchantMVC.ViewModels.LoyaltyTranViewModel
+
+<div class="card " style="width:auto">
+    <div class="card-header">
+         <label class="control-label font-weight-bolder"> ID : @Html.DisplayFor(model => model.LoyaltyTransactionId)</label>
+    </div>
+    <div class="card-body">
+
+        <div class="form-row">
+            <div class="col-lg-4">
+                <label class="control-label font-weight-bolder">Terminal ID</label>
+                @Html.DisplayFor(model => model.LoyaltyDetailTerminalId)
+            </div>
+            <div class="col-lg-4">
+                <label class="control-label font-weight-bolder">Updated Date</label>
+                
+                @Html.DisplayFor(model => model.UpdatedDateFormatted)
+            </div>
+
+        </div>
+        <div class="form-row">
+            <div class="col-lg-4">
+                <label class="control-label font-weight-bolder">Item ID</label>
+
+                @Html.DisplayFor(model => model.ItemId)
+            </div>
+            <div class="col-lg-4">
+                <label class="control-label font-weight-bolder">Item</label>
+
+                @Html.DisplayFor(model => model.Item)
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="col-lg-4">
+                <label class="control-label font-weight-bolder">Amount</label>
+
+                @Html.DisplayFor(model => model.Amount)
+            </div>
+            <div class="col-lg-4">
+                <label class="control-label font-weight-bolder">Quantity</label>
+
+                @Html.DisplayFor(model => model.Quantity)
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="col-lg-4">
+                <label class="control-label font-weight-bolder">Loyalty Detail ID</label>
+
+                @Html.DisplayFor(model => model.LoyaltyDetailId)
+            </div>
+            <div class="col-lg-4">
+                <label class="control-label font-weight-bolder">Discount</label>
+
+                @Html.DisplayFor(model => model.Discount)
+            </div>
+
+            <div class="col-lg-4">
+                <label class="control-label font-weight-bolder">Card Name</label>
+
+                @Html.DisplayFor(model => model.CardName)
+            </div>
+
+        </div>
+    </div>
+    </div>
+

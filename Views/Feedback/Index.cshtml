@@ -1,0 +1,93 @@
+﻿@model MerchantMVC.ViewModels.MainViewModel
+
+@{
+    ViewData["Title"] = "Feedback Questions";
+    Layout = "_LayoutV";
+
+}
+
+<h1>Feedback Questions</h1>
+<hr />
+
+<form asp-action="Edit" data-ajax-method="POST" asp-controller="Feedback" data-ajax="true" data-ajax-update="#ajaxEditFeedback" data-ajax-mode="replace">
+    <div id="ajaxEditFeedback">
+        <div class="col">
+            @if (ViewBag.message != null)
+            {
+                <div class="@(ViewBag.message.Contains("success")? "alert alert-success alert-dismissible":"alert alert-danger alert-dismissible")">
+                    <a href="#" aria-label="close" data-dismiss="alert" class="close">&times;</a>
+                    @ViewBag.message
+                </div>
+            }
+        </div>
+    </div>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>
+                    Question
+                </th>
+                <th>
+                    Answer
+                </th>
+                <th>
+                    Notes
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model.Feedback == null || Model.Feedback.Count() == 0)
+            {
+                <tr>
+                    <td>No Feedback questions found</td>
+                    <td> </td>
+                    <td> </td>
+                </tr>
+            }
+            else
+            {
+                <tr>
+                    <td colspan="3">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    </td>
+                </tr>
+
+                @for (int i = 0; i < Model.Feedback.Count; i++)
+                {
+                    <tr>
+                        <td width="33%">
+                            <input type="hidden" name="MerchantID" value="@Model.MerchantID" />
+                            <input type="hidden" name="Feedback[@i].FeedBackId" value="@Model.Feedback[i].FeedBackId" />
+                            <input type="hidden" name="Feedback[@i].RespondentId" value="@Model.Feedback[i].RespondentId" />
+
+
+                            <label class="control-label">@Model.Feedback[i].Question</label>
+                        </td>
+
+                        <td width="33%">
+                            <input asp-for="@Model.Feedback[i].Answer" type="text" class="form-control" name="Feedback[@i].Answer" id="Feedback.Answer" />
+                            <span asp-validation-for="Feedback[@i].Answer" class="text-danger"></span>
+                        </td>
+
+                        <td width="33%">
+                            <input asp-for="@Model.Feedback[i].Notes" type="text" class="form-control" name="Feedback[@i].Notes" id="Feedback.Notes" />
+                            <span asp-validation-for="Feedback[@i].Answer" class="text-danger"></span>
+                        </td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+    <div class="d-flex justify-content-center">
+        <div class="form-group my-3">
+            <input type="submit" value="Submit" class="btn btn-lg btn-primary px-5" />
+        </div>
+    </div>
+
+    <br />
+    <br />
+    <hr />
+</form>
+
+
+
