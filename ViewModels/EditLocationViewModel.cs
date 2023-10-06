@@ -24,7 +24,7 @@ namespace MerchantMVC.ViewModels
         public string LName { get; set; }
 
         [Required(ErrorMessage = "Please enter Address.")]
-        [Display(Name = "Address")]
+        [Display(Name = "Address 1")]
         public string LAddr1 { get; set; }
 
         [Display(Name = "Address 2")]
@@ -47,14 +47,14 @@ namespace MerchantMVC.ViewModels
 
         [DataType(DataType.EmailAddress)]
         [Required(ErrorMessage = "Please enter Email.")]
-        [Display(Name = "Enail")]
+        [Display(Name = "Email")]
         public string EmailAddr { get; set; }
 
         [Display(Name = "Website")]
         public string Url { get; set; }
 
         [Required(ErrorMessage = "Please enter First Name.")]
-        [Display(Name = "Contact Last Name")]
+        [Display(Name = "Contact First Name")]
         public string LFname { get; set; }
 
         [Display(Name = "Contact Last Name")]
@@ -71,17 +71,22 @@ namespace MerchantMVC.ViewModels
         [Display(Name = "Store Number")]
         public string MerchantNumber { get; set; }
 
-        public string InternetServiceProvider { get; set; }
-        public string WifiSecurityType { get; set; }
-        public string WifiKey { get; set; }
+        //public string InternetServiceProvider { get; set; }
+        //public string WifiSecurityType { get; set; }
+        //public string WifiKey { get; set; }
 
-        public double? Latitude { get; set; }
-        public double? Longitude { get; set; }
+        //public double? Latitude { get; set; }
+        //public double? Longitude { get; set; }
+        [Display(Name = "Timezone")]
         public int? TimeZone { get; set; }
+
+        [Display(Name ="Store Brand")]
         public string Brand { get; set; }
 
         //properties below is for the tab in the edit location view
+ 
         public Tab ActiveTab { get; set; }
+
         public enum Tab
         {
             LoyaltyTransaction, CurrentTransaction, Batches, Terminal, SupportCalls

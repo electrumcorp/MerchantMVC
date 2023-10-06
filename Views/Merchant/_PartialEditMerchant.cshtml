@@ -10,16 +10,6 @@
             <span asp-validation-for="MName" class="text-danger"></span>
         </div>
         <div class="form-group">
-            <label asp-for="MFname" class="control-label"></label>
-            <input asp-for="MFname" class="form-control" />
-            <span asp-validation-for="MFname" class="text-danger"></span>
-        </div>
-        <div class="form-group">
-            <label asp-for="MLname" class="control-label"></label>
-            <input asp-for="MLname" class="form-control" />
-            <span asp-validation-for="MLname" class="text-danger"></span>
-        </div>
-        <div class="form-group">
             <label asp-for="MAddr1" class="control-label"></label>
             <input asp-for="MAddr1" class="form-control" />
             <span asp-validation-for="MAddr1" class="text-danger"></span>
@@ -34,9 +24,6 @@
             <input asp-for="MCity" class="form-control" />
             <span asp-validation-for="MCity" class="text-danger"></span>
         </div>
-    </div>
-
-    <div class="col-lg-3">
         <div class="form-group">
             <label asp-for="MState" class="control-label"></label>
             <input asp-for="MState" class="form-control" />
@@ -47,15 +34,28 @@
             <input asp-for="MZip" class="form-control" />
             <span asp-validation-for="MZip" class="text-danger"></span>
         </div>
+    </div>
+
+    <div class="col-lg-3">
         <div class="form-group">
+            <div class="form-group">
+                <label asp-for="TaxId" class="control-label"></label>
+                <input asp-for="TaxId" class="form-control" />
+                <span asp-validation-for="TaxId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MFname" class="control-label"></label>
+                <input asp-for="MFname" class="form-control" />
+                <span asp-validation-for="MFname" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MLname" class="control-label"></label>
+                <input asp-for="MLname" class="form-control" />
+                <span asp-validation-for="MLname" class="text-danger"></span>
+            </div>
             <label asp-for="MPhone" class="control-label"></label>
             <input asp-for="MPhone" class="form-control" />
             <span asp-validation-for="MPhone" class="text-danger"></span>
-        </div>
-        <div class="form-group">
-            <label asp-for="MExten" class="control-label"></label>
-            <input asp-for="MExten" class="form-control" />
-            <span asp-validation-for="MExten" class="text-danger"></span>
         </div>
         <div class="form-group">
             <label asp-for="EmailAddress" class="control-label"></label>

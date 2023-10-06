@@ -6,6 +6,13 @@
     Layout = "~/Views/Shared/_LayoutV.cshtml";
     
     }
+<style>
+    iframe {
+        width: 100%;
+        height: 100%;
+        border: none;
+    }
+</style>
 
 @*<div>
     <div class="form-group">
@@ -21,7 +28,11 @@
     </div>
 </div>*@
 
-    <iframe id="iFrameReport"  width="100%" height="auto" style="border:none" src=@ViewBag.Url></iframe>
+<h2>Merchant Reports </h2>
+
+<p> </p>
+
+    <iframe id="iFrameReport" src=@ViewBag.Url></iframe>
 
 
 

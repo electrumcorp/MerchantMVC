@@ -1,0 +1,74 @@
+﻿@model IEnumerable<MerchantMVC.ViewModels.CallTrackingViewModel>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "_LayoutV";
+}
+
+<h2>Support Call Tracking</h2>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.CallTrackingId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TrackingDateTime)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TrackingTypeName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PriorityName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Comment)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.StatusName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EmployeeName)
+            </th>
+            @*<th></th>*@
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CallTrackingId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TrackingDateTime)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TrackingTypeName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PriorityName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Comment)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.StatusName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EmployeeName)
+                </td>
+                @*<td>
+                        <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                        <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                        <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                    </td>*@
+            </tr>
+        }
+    </tbody>
+</table>

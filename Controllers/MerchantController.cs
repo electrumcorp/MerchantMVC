@@ -47,38 +47,30 @@ namespace MerchantMVC.Controllers
         [HttpPost]
         public async Task<IActionResult> Edit(MerchantViewModel editMerchantVM)
         {
-            if (ModelState.IsValid)
+            try
             {
-                Merchant merchantResult = null;
-                merchantResult = await _merchantRepository.Get((int)HttpContext.Session.GetInt32("MerchantId"));
-                if (merchantResult == null)
+                Merchant merchantResult = new Merchant();
+                MerchantViewModel merchantViewModel = new MerchantViewModel();
+
+                if (ModelState.IsValid)
                 {
-                    return BadRequest("Please verify the Merchant Details.");
+                    HttpContext.Session.SetString("LocationID", editMerchantVM.MerchantId.ToString());
+                    merchantResult = await _merchantRepository.Get((int)editMerchantVM.MerchantId);
+
+                    _mapper.Map(editMerchantVM, merchantResult);
+                    _merchantRepository.Update(merchantResult);
+                    merchantViewModel = _mapper.Map<MerchantViewModel>(merchantResult);
+                    ViewBag.Message = "Merchant updated successfully.";
+
+                    return PartialView("_PartialEditMerchant", merchantViewModel);
                 }
-
-                merchantResult.MName = editMerchantVM.MName;
-                merchantResult.MAddr1 = editMerchantVM.MAddr1;
-                merchantResult.MAddr2 = editMerchantVM.MAddr2;
-                merchantResult.MCity = editMerchantVM.MCity;
-                merchantResult.MState = editMerchantVM.MState;
-                merchantResult.MZip = editMerchantVM.MZip;
-                merchantResult.MFname = editMerchantVM.MFname;
-                merchantResult.MLname = editMerchantVM.MLname;
-                merchantResult.MPhone = editMerchantVM.MPhone;
-                merchantResult.EmailAddress = editMerchantVM.EmailAddress; 
-                merchantResult.MExten = editMerchantVM.MExten; 
-                merchantResult.Urladdress = editMerchantVM.Urladdress; 
-                _merchantRepository.Update(merchantResult);
-
-
-                MerchantViewModel merchantVM = _mapper.Map<MerchantViewModel>(merchantResult);
-                ViewBag.Message = "Merchant updated successfully.";
-                return View("Edit", merchantVM);
             }
-            else
+            catch (Exception ex)
             {
-                return BadRequest("Please verify the Merchant Details.");
+                ModelState.AddModelError("", ex.Message);
             }
+
+            return View(editMerchantVM);
 
         }
     }

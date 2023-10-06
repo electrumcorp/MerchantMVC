@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - MerchantMVC</title>
+    <title>@ViewData["Title"] - Electrum Loyalty Merchant</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
@@ -19,46 +19,44 @@
             if ($(window).width > 780) {
                 $("#ulMenu").hide();
             }
-               
-            
-            }
+
+
+        }
 
         $(document).ready(function () {
-           
+
             toggleNav();
-           
+
             $("#sidebarCollapse").on('click', function () {
                 $("#sidebar").toggleClass('active');
             });
-           
+
 
             $('#btnToggle').click(function (e) {
-                    e.preventDefault();
+                e.preventDefault();
                 $("#ulMenu").show();
-                   
-                });
 
-
-               
             });
+
+
+
+        });
     </script>
 </head>
 
 <body>
-
     <header>
-        
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light box-shadow mb-3">
             <a class="m-0" href="#">
-                <img class="logo" src="~/img/Elogo.bmp" alt="" />
+                <img class="logo" src="~/img/electrum_logo_no_shadow.png" alt="Electrum Logo No Shadow" />
             </a>
-            <div class="container" >
+            <div class="container">
 
                 <button class="navbar-toggler navbar-dark" id="btnToggle" style="background-color:#007CB2" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between" >
+                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1 hide" id="ulMenu">
                         <li class="nav-item">
                             <a class="nav-link " asp-area="" asp-controller="Merchant" asp-action="Edit">Merchant</a>
@@ -74,8 +72,8 @@
                                 Call Tracking
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" asp-controller="CallTracking" asp-action="AddSupportCall">Add Support Call</a>
-
+                                <a class="dropdown-item" asp-controller="CallTracking" asp-action="Index">View Support Calls</a>
+                                <a class="dropdown-item" asp-controller="CallTracking" asp-action="Create">Add Support Call</a>
                             </div>
                         </li>
                         <li class="nav-item">
@@ -96,21 +94,20 @@
 
                 @if (User.Identity.IsAuthenticated)
                 {
-                <span>@User.Identity.Name</span>
-                <a class="nav-link " asp-action="Logout" asp-controller="Account"><i class="fas fa-sign-out-alt"></i>Logout</a>
-                }
+    <span>@User.Identity.Name</span>
+                    <a class="nav-link " asp-action="Logout" asp-controller="Account"><i class="fas fa-sign-out-alt"></i>Logout</a>}
 
             </div>
         </nav>
-        </header>
-        @*<div>
+    </header>
+    @*<div>
             <a class="m-0" href="">
                 <img src="~/img/Elogo.bmp" alt="" />
             </a>
 
         </div>*@
 
-        @*<nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light box-shadow ">
+    @*<nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light box-shadow ">
             <div class="container">
 
                 <button class="navbar-toggler navbar-dark" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
@@ -133,16 +130,16 @@
                 </div>
             </div>
         </nav>*@
- 
+
 
     <div class="wrapper d-flex align-items-stretch">
         <nav id="sidebar">
             @*<div style="width:180px;background-color:#fff;">
-                <a href="">
-                    <img class="logo" src="~/img/Elogo.bmp" alt="" />
-                </a>
+                    <a href="">
+                        <img class="logo" src="~/img/Elogo.bmp" alt="" />
+                    </a>
 
-            </div>*@
+                </div>*@
             <div class="p-4 pt-5">
                 <ul class="list-unstyled components mb-5">
                     <li class="active">
@@ -152,7 +149,8 @@
                         <a href="#callTrackingMenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Call Tracking</a>
                         <ul class="collapse list-unstyled" id="callTrackingMenu">
                             <li>
-                                <a asp-area="" asp-controller="CallTracking" asp-action="AddSupportCall">Add Call Tracking</a>
+                                <a asp-area="" asp-controller="CallTracking" asp-action="Index">View Support Calls</a>
+                                <a asp-area="" asp-controller="CallTracking" asp-action="Create">Add Call Tracking</a>
                             </li>
                         </ul>
                     </li>
@@ -174,7 +172,7 @@
             @RenderBody()
             @*<div class="content-wrapper">
 
-            </div>*@
+                </div>*@
         </div>
 
         <footer class="footer text-center text-white">
@@ -185,5 +183,7 @@
 
     <script src="~/js/site.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
 </body>
 </html>

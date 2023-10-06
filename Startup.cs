@@ -36,8 +36,7 @@ namespace MerchantMVC
                 .AddCookie()
                 ;
             services.AddSession(option => option.IdleTimeout = TimeSpan.FromMinutes(60));
-            services.AddDbContext<EbaseDBContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DevConnection")));
-            services.AddDbContext<EdataDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("EdataConnection")));
+            services.AddDbContext<EbaseDBContext>();
             services.AddControllersWithViews();
             services.AddScoped<ILocationRepository, LocationRepository>();
             services.AddScoped<ILoyaltyTranRepository, LoyaltyTranRepository>();
@@ -49,7 +48,7 @@ namespace MerchantMVC
             services.AddScoped<IMerchantProfileRepository, MerchantProfileRepository>();
             services.AddScoped<IFeedBackRepository, FeedbackRepository>();
             services.AddScoped<ILocationProfileRepository, LocationProfileRepository>();
-            services.AddScoped<ITerminalRepository, TerminalRepository>();
+            //services.AddScoped<ITerminalRepository, TerminalRepository>();
             services.AddAutoMapper(Assembly.GetExecutingAssembly());
 
         }

@@ -11,5 +11,6 @@ namespace MerchantMVC.Repositories
   public  interface ICallTrackingRepository : IRepository<CallTracking>
     {
         public IEnumerable<CallTrackingViewModel> GetCallTrackingByLocationId(int locationID);
+        public List<CallTrackingViewModel> GetCallTrackingByMerchantId(int merchantID);
     }
 }

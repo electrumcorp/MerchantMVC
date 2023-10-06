@@ -18,6 +18,7 @@ namespace MerchantMVC.ViewModels
 
         [Column("M_NAME")]
         [StringLength(50)]
+        [Required]
         [Display(Name = "Merchant Name")]
         public string MName { get; set; }
 
@@ -33,6 +34,7 @@ namespace MerchantMVC.ViewModels
 
         [Column("M_ADDR1")]
         [StringLength(30)]
+        [Required]
         [Display(Name = "Address 1")]
         public string MAddr1 { get; set; }
 
@@ -43,21 +45,25 @@ namespace MerchantMVC.ViewModels
 
         [Column("M_CITY")]
         [StringLength(20)]
+        [Required]
         [Display(Name = "City")]
         public string MCity { get; set; }
 
         [Column("M_STATE")]
         [StringLength(2)]
+        [Required]
         [Display(Name = "State")]
         public string MState { get; set; }
 
         [Column("M_ZIP")]
         [StringLength(10)]
+        [Required]
         [Display(Name = "ZIP Code")]
         public string MZip { get; set; }
 
         [Column("M_PHONE")]
         [StringLength(15)]
+        [Required]
         [Display(Name = "Phone")]
         public string MPhone { get; set; }
 
@@ -73,6 +79,12 @@ namespace MerchantMVC.ViewModels
         [StringLength(50)]
         [Display(Name = "Website")]
         public string Urladdress { get; set; }
+
+        [Column("TAX_ID")]
+        [StringLength(11)]
+        [Display(Name = "FEIN/Tax ID Number")]
+        [Required]
+        public string TaxId { get; set; }
         public enum Tab
         {
             Locations, LoyaltyTransaction, CurrentTransaction, Batches, Terminal, SupportCalls

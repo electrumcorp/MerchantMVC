@@ -5,7 +5,6 @@
         <tr>
             <th>
             </th>
-
             <th>
                 UpdateDate
             </th>
@@ -39,42 +38,27 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
 <script defer src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
-
 <link href="https://cdn.datatables.net/1.10.24/css/dataTables.bootstrap4.min.css" rel="stylesheet" />
-
-
-        <script defer src="https://cdn.datatables.net/datetime/1.1.0/js/dataTables.dateTime.min.js"></script>
-        <script src="https://cdn.datatables.net/plug-ins/1.10.21/sorting/datetime-moment.js"></script>
-    <script src="https://cdn.datatables.net/plug-ins/1.10.25/dataRender/datetime.js"></script>
-
-
-
+<script defer src="https://cdn.datatables.net/datetime/1.1.0/js/dataTables.dateTime.min.js"></script>
+<script src="https://cdn.datatables.net/plug-ins/1.10.21/sorting/datetime-moment.js"></script>
+<script src="https://cdn.datatables.net/plug-ins/1.10.25/dataRender/datetime.js"></script>
 
 <script>
-
-
-
-
-        $(document).ready(function () {
-
+    $(document).ready(function () {
 
             //$.get("/Employee/DTEmployee", function (data) {
             //    var jsonData = data;
-
-
            // var jsonData =@Json.Serialize(@Model);
         //var data = [];
         //for (var i = 0; i < 50000; i++) {
         //    data.push([i, i, i, i, i]);
         //}
-            
 
             $("#tblloyaltyTransactions").DataTable({
 
                 ajax: {
                     url: "../LoyaltyTran/GetLoyaltyTran",
                     dataSrc: '',
-                 
 
 
                 },
@@ -82,14 +66,14 @@
                 scroller: true,
                 deferRender: true,
                 processing: true,
-                
+
                 language: { "processing": " <div id='divLoader' class='loaderbody'><div class='loader'></div></div>"},
                 "columns": [
                     {
                         data: 'loyaltyTransactionId',
                         ordering: false,
                         render: function (data, row, type) {
-                            return '<button onclick="getLoyaltyTranDetail( '+data + ')" class="btn btn-link">View More</button>'; 
+                            return '<button onclick="getLoyaltyTranDetail( '+data + ')" class="btn btn-link">View More</button>';
                         }
                     },
 
@@ -116,7 +100,7 @@
         });
 
     function getLoyaltyTranDetail(id) {
-        
+
         $.get("../LoyaltyTran/GetDetail", { id: id }, function (res) {
             $('#form-modal .modal-body').html(res);
             $('#form-modal .modal-title').html('Loyalty Transaction Details');

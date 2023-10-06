@@ -18,6 +18,7 @@ namespace MerchantMVC.ViewModels
 
         public int? EmployeeId { get; set; }
 
+        [Display(Name = "Date")]
         public DateTime? TrackingDateTime { get; set; }
 
         public string TrackingDTFormatted { get; set; }

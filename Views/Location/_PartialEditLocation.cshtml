@@ -1,168 +1,122 @@
 ﻿@model MerchantMVC.ViewModels.EditLocationViewModel
 
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="LocationId" />
-            <div class="form-row">
-                <div class="col-lg-3">
-                    <div class="form-group">
-                        <label asp-for="LName" class="control-label">Location Name</label>
-                        <input asp-for="LName" class="form-control" />
-                        <span asp-validation-for="LName" class="text-danger"></span>
-                    </div>
-                    <div class="form-group">
-                        <label asp-for="LFname" class="control-label">First Name</label>
-                        <input asp-for="LFname" class="form-control" />
-                        <span asp-validation-for="LFname" class="text-danger"></span>
-                    </div>
-                    <div class="form-group">
-                        <label asp-for="LLname" class="control-label">Last Name</label>
-                        <input asp-for="LLname" class="form-control" />
-                        <span asp-validation-for="LLname" class="text-danger"></span>
-                    </div>
-                    <div class="form-group">
-                        <label asp-for="EmailAddr" class="control-label">Email Address</label>
-                        <input asp-for="EmailAddr" class="form-control" />
-                        <span asp-validation-for="EmailAddr" class="text-danger"></span>
-                    </div>
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <input type="hidden" asp-for="LocationId" />
+    <div class="form-row">
+        <div class="col-lg-3">
+            <div class="form-group">
+                <label asp-for="LName" class="control-label">Location Name</label>
+                <input asp-for="LName" class="form-control" />
+                <span asp-validation-for="LName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="LFname" class="control-label">Contact First Name</label>
+                <input asp-for="LFname" class="form-control" />
+                <span asp-validation-for="LFname" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="LLname" class="control-label">Contact Last Name</label>
+                <input asp-for="LLname" class="form-control" />
+                <span asp-validation-for="LLname" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="EmailAddr" class="control-label">Contact Email Address</label>
+                <input asp-for="EmailAddr" class="form-control" />
+                <span asp-validation-for="EmailAddr" class="text-danger"></span>
+            </div>
 
-                    <div class="form-group">
-                        <label asp-for="LAddr1" class="control-label">Address1</label>
-                        <input asp-for="LAddr1" class="form-control" />
-                        <span asp-validation-for="LAddr1" class="text-danger"></span>
-                    </div>
-                    <div class="form-group">
-                        <label asp-for="LAddr2" class="control-label">Address2</label>
-                        <input asp-for="LAddr2" class="form-control" />
-                        <span asp-validation-for="LAddr2" class="text-danger"></span>
-                    </div>
-                   
+            <div class="form-group">
+                <label asp-for="LPhone" class="control-label">Contact Phone</label>
+                <input asp-for="LPhone" class="form-control" />
+                <span asp-validation-for="LPhone" class="text-danger"></span>
+            </div>
+
+        </div>
+
+        <div class="col-lg-3">
+            <div class="form-group">
+                <label asp-for="LAddr1" class="control-label">Address1</label>
+                <input asp-for="LAddr1" class="form-control" />
+                <span asp-validation-for="LAddr1" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="LAddr2" class="control-label">Address2</label>
+                <input asp-for="LAddr2" class="form-control" />
+                <span asp-validation-for="LAddr2" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="LCity" class="control-label">City</label>
+                <input asp-for="LCity" class="form-control" />
+                <span asp-validation-for="LCity" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="LState" class="control-label">State</label>
+                <input asp-for="LState" class="form-control" />
+                <span asp-validation-for="LState" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="LZip" class="control-label">Zip</label>
+                <input asp-for="LZip" class="form-control" />
+                <span asp-validation-for="LZip" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="col-lg-3">
+            <div class="form-group">
+                <label asp-for="MerchantNumber" class="control-label">Merchant Number</label>
+                <input asp-for="MerchantNumber" class="form-control" />
+                <span asp-validation-for="MerchantNumber" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="LocationStatus" class="control-label"></label>
+                <input asp-for="LocationStatus" class="form-control" />
+                <span asp-validation-for="LocationStatus" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TimeZone" class="control-label"></label>
+                <input asp-for="TimeZone" class="form-control" />
+                <span asp-validation-for="TimeZone" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Brand" class="control-label">Store Brand</label>
+                <input asp-for="Brand" class="form-control" />
+                <span asp-validation-for="Brand" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Url" class="control-label">URL</label>
+                <input asp-for="Url" class="form-control" />
+                <span asp-validation-for="Url" class="text-danger"></span>
+            </div>
+        </div>
+        </div>
+
+    <div class="form-row">
+        <div class="col-lg-8">
+            <div class="form-group">
+                <label asp-for="Comments" class="control-label">Comments</label>
+                <textarea asp-for="Comments" rows="5" class="form-control"></textarea>
+                <span asp-validation-for="Comments" class="text-danger"></span>
+            </div>
+        </div>                   
+    </div>
+
+    <div class="form-row">
+        <div class="col-sm-4">
+            <div class="form-group">
+                <input type="submit" value="Update" class="btn btn-primary btn-block" />
+            </div>
+        </div>
+
+        <div class="col">
+            @if (ViewBag.message != null)
+            {
+                <div class="@(ViewBag.message.Contains("success")? "alert alert-success alert-dismissible":"alert alert-danger alert-dismissible")">
+                    <a href="#" aria-label="close" data-dismiss="alert" class="close">&times;</a>
+                    @ViewBag.message
                 </div>
 
-                <div class="col-lg-3">
-                    <div class="form-group">
-                        <label asp-for="LocationStatus" class="control-label"></label>
-                        <input asp-for="LocationStatus" class="form-control" />
-                        <span asp-validation-for="LocationStatus" class="text-danger"></span>
-                    </div>
-                    <div class="form-group">
-                        <label asp-for="LPhone" class="control-label">Phone</label>
-                        <input asp-for="LPhone" class="form-control" />
-                        <span asp-validation-for="LPhone" class="text-danger"></span>
-                    </div>
-                    <div class="form-group">
-                        <label asp-for="Fax" class="control-label">Fax</label>
-                        <input asp-for="Fax" class="form-control" />
-                        <span asp-validation-for="Fax" class="text-danger"></span>
-                    </div>
+            }
+        </div>
+    </div>
 
-                    <div class="form-group">
-                        <label asp-for="LCity" class="control-label">City</label>
-                        <input asp-for="LCity" class="form-control" />
-                        <span asp-validation-for="LCity" class="text-danger"></span>
-                    </div>
-                    <div class="form-group">
-                        <label asp-for="LState" class="control-label">State</label>
-                        <input asp-for="LState" class="form-control" />
-                        <span asp-validation-for="LState" class="text-danger"></span>
-                    </div>
-                    <div class="form-group">
-                        <label asp-for="LZip" class="control-label">Zip</label>
-                        <input asp-for="LZip" class="form-control" />
-                        <span asp-validation-for="LZip" class="text-danger"></span>
-                    </div>
-                </div>
-                <div class="col-lg-3">
-                    <div class="form-group">
-                        <label asp-for="MerchantId" class="control-label"></label>
-                        <input asp-for="MerchantId" class="form-control" />
-                        <span asp-validation-for="MerchantId" class="text-danger"></span>
-                    </div>
-                    <div class="form-group">
-                        <label asp-for="MerchantNumber" class="control-label">Merchant Number</label>
-                        <input asp-for="MerchantNumber" class="form-control" />
-                        <span asp-validation-for="MerchantNumber" class="text-danger"></span>
-                    </div>
-                    <div class="form-group">
-                        <label asp-for="Latitude" class="control-label"></label>
-                        <input asp-for="Latitude" class="form-control" />
-                        <span asp-validation-for="Latitude" class="text-danger"></span>
-                    </div>
-                    <div class="form-group">
-                        <label asp-for="Longitude" class="control-label"></label>
-                        <input asp-for="Longitude" class="form-control" />
-                        <span asp-validation-for="Longitude" class="text-danger"></span>
-                    </div>
-                    <div class="form-group">
-                        <label asp-for="TimeZone" class="control-label"></label>
-                        <input asp-for="TimeZone" class="form-control" />
-                        <span asp-validation-for="TimeZone" class="text-danger"></span>
-                    </div>
-                    <div class="form-group">
-                        <label asp-for="Brand" class="control-label"></label>
-                        <input asp-for="Brand" class="form-control" />
-                        <span asp-validation-for="Brand" class="text-danger"></span>
-
-                    </div>
-
-                </div>
-                
-                <div class="col-md-3">
-
-                    <div class="form-group">
-                        <label asp-for="InternetServiceProvider" class="control-label">ISP</label>
-                        <input asp-for="InternetServiceProvider" class="form-control" />
-                        <span asp-validation-for="InternetServiceProvider" class="text-danger"></span>
-                    </div>
-                    <div class="form-group">
-                        <label asp-for="WifiSecurityType" class="control-label"></label>
-                        <input asp-for="WifiSecurityType" class="form-control" />
-                        <span asp-validation-for="WifiSecurityType" class="text-danger"></span>
-                    </div>
-                    <div class="form-group">
-                        <label asp-for="WifiKey" class="control-label"></label>
-                        <input asp-for="WifiKey" class="form-control" />
-                        <span asp-validation-for="WifiKey" class="text-danger"></span>
-                    </div>
-                    <div class="form-group">
-                        <label asp-for="Url" class="control-label">URL</label>
-                        <input asp-for="Url" class="form-control" />
-                        <span asp-validation-for="Url" class="text-danger"></span>
-                    </div>
-                </div>
-                   
-                   
-             </div>
-
-                <div class="form-row">
-                    <div class="col-lg-8">
-
-
-                        <div class="form-group">
-                            <label asp-for="Comments" class="control-label">Comments</label>
-                            <textarea asp-for="Comments" rows="5" class="form-control"></textarea>
-                            <span asp-validation-for="Comments" class="text-danger"></span>
-                        </div>
-                    </div>
-                    
-
-                </div>
-                <div class="form-row">
-                    <div class="col-sm-4">
-                        <div class="form-group">
-                            <input type="submit" value="Update" class="btn btn-primary btn-block" />
-                        </div>
-                    </div>
-                    <div class="col">
-                        @if (ViewBag.message != null)
-                        {
-                            <div class="@(ViewBag.message.Contains("success")? "alert alert-success alert-dismissible":"alert alert-danger alert-dismissible")">
-                                <a href="#" aria-label="close" data-dismiss="alert" class="close">&times;</a>
-                                @ViewBag.message
-                            </div>
-
-                        }
-                    </div>
-
-                </div>
 
 

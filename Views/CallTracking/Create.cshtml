@@ -1,14 +1,17 @@
 ﻿@model MerchantMVC.ViewModels.CallTrackingViewModel
 
-@{ ViewData["Title"] = "AddSupportCall";
-                Layout = "~/Views/Shared/_LayoutV.cshtml"; }
+@{ 
+    ViewData["Title"] = "Create Support Call";                
+    Layout = "~/Views/Shared/_LayoutV.cshtml"; 
+}
+
 <div class="container-fluid">
     <div class="card  " style="width:auto">
         <div class="card-header">
-            Add Support Call
+            Create Support Call
         </div>
         <div class="card-body">
-            <form asp-action="AddSupportCall" method="post">
+            <form asp-action="AddMerchantSupportCall" method="post">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 <div class="form-row">
                     <div class="col-lg-8">
@@ -31,14 +34,14 @@
                             <span asp-validation-for="TrackingDateTime" class="text-danger"></span>
                         </div>
 
-                        <div class="form-group">
+                        <!--<div class="form-group">
                             <label asp-for="Status" class="control-label"></label>
-                            @Html.DropDownListFor(p => p.StatusID, new SelectList(Model.Status, "Value", "Text", 0), "Select Status", htmlAttributes: new { @class = "form-control", id = "ddlSelectStatus" })
+                            @Html.DropDownListFor(p => p.StatusID, new SelectList(Model.Status, "Value", "Text", 0), "Select Status", htmlAttributes: new { @class = "form-control", id = "ddlSelectStatus" })-->
                             @*<select id="ddlStatus" theme="google" class="form-control select2" data-search="true" data-image="1.png">
                                     <option>Select Status</option>
                                 </select>*@
-                            <span asp-validation-for="StatusID" class="text-danger"></span>
-                        </div>
+                            <!--<span asp-validation-for="StatusID" class="text-danger"></span>
+                        </div>-->
 
                         <div class="form-group">
                             <label asp-for="Priority" class="control-label"></label>
@@ -51,7 +54,7 @@
                         </div>
 
                         <div class="form-group">
-                            <label asp-for="TrackingType" class="control-label">Type</label>
+                            <label asp-for="TrackingType" class="control-label">Issue Type</label>
                             <select id="ddlType" theme="google" class="form-control select2" data-search="true" data-image="1.png">
                                 <option>Select Type</option>
                             </select>
