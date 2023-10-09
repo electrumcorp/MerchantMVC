@@ -18,12 +18,13 @@ namespace MerchantMVC.ViewModels
 
         public int? EmployeeId { get; set; }
 
-        [Display(Name = "Date")]
         public DateTime? TrackingDateTime { get; set; }
 
+        [Display(Name = "Date")]
         public string TrackingDTFormatted { get; set; }
 
         // [Required(ErrorMessage = "Select Type")]
+        [Display(Name = "Type")]
         public int? TrackingType { get; set; }
 
         [NotMapped]
@@ -32,6 +33,7 @@ namespace MerchantMVC.ViewModels
         [Required(ErrorMessage="Select Priority")]
         public int? PriorityID { get; set; }
         [NotMapped]
+        [Display(Name = "Priority")]
         public string PriorityName { get; set; }
 
         [NotMapped]
@@ -46,11 +48,13 @@ namespace MerchantMVC.ViewModels
         public int? StatusID { get; set; }
 
         [NotMapped]
+        [Display(Name = "Status")]
         public string StatusName { get; set; }
 
         [NotMapped]
         public IEnumerable<SelectListItem> Status { get; set; }
 
+        [Display(Name = "Employee")]
         public string EmployeeName { get; set; }
 
     }
