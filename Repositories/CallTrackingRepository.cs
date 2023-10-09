@@ -105,18 +105,18 @@ namespace MerchantMVC.Repositories
             List<CallTrackingViewModel> cv = null;
 
             var callTracking = ebaseDBContext.CallTrackings
-               .Join(ebaseDBContext.Employees, c => c.EmployeeId, e => e.EmployeeId, (c, e) => new CallTrackingViewModel
+               .Join(ebaseDBContext.Categories, c => c.Type, e => e.CategoryId, (c, e) => new CallTrackingViewModel
                {
                    CallTrackingId = c.CallTrackingId,
                    Id = c.Id,
                    EntityCategoryId = c.EntityCategoryId,
                    EmployeeId = c.EmployeeId,
+                   Comment = c.Comment,
                    TrackingDateTime = c.DateTime,
                    TrackingType = c.Type,
+                   TrackingTypeName = e.CategoryName,
                    PriorityID = c.Priority,
-                   EmployeeName = string.Concat(e.FirstName, " ", e.LastName),
-                   Comment = c.Comment
-
+                   StatusID = c.Status,
                })
                .OrderByDescending(o => o.TrackingDateTime).Where(l => l.Id == merchantId).ToList();
 
@@ -124,8 +124,8 @@ namespace MerchantMVC.Repositories
             {
                 if (callTracking.Count > 0)
                 {
-                    var entitycategory = callTracking.Take(1).Select(c => c.EntityCategoryId).SingleOrDefault();
-                    var categoryName = ebaseDBContext.Categories.Where(ct => ct.CategoryId == entitycategory.Value).FirstOrDefault();
+                    //var entitycategory = callTracking.Take(1).Select(c => c.EntityCategoryId).SingleOrDefault();
+                    //var categoryName = ebaseDBContext.Categories.Where(ct => ct.CategoryId == entitycategory.Value).FirstOrDefault();
 
                     var callT2 = (from cc in callTracking
                                   join c in ebaseDBContext.Categories on cc.PriorityID equals c.CategoryId
@@ -136,35 +136,18 @@ namespace MerchantMVC.Repositories
                                       EntityCategoryId = cc.EntityCategoryId,
                                       EmployeeId = cc.EmployeeId,
                                       TrackingDateTime = cc.TrackingDateTime,
+                                      TrackingDTFormatted = cc.TrackingDTFormatted,
+                                      TrackingTypeName = cc.TrackingTypeName,
                                       TrackingType = cc.TrackingType,
+                                      PriorityID = cc.PriorityID,
                                       PriorityName = c.CategoryName,
                                       EmployeeName = cc.EmployeeName,
                                       Comment = cc.Comment,
-                                      StatusName = c.CategoryName,
-                                      CategoryName = categoryName.CategoryName
+                                      StatusID = cc.StatusID
                                   }
-                        ).OrderByDescending(p => p.TrackingDateTime).ToList();
+                        ).ToList();
 
                     var callT3 = (from cc in callT2
-                                  join c in ebaseDBContext.Categories on cc.TrackingType equals c.CategoryId
-                                  select new CallTrackingViewModel
-                                  {
-                                      CallTrackingId = cc.CallTrackingId,
-                                      Id = cc.Id,
-                                      EntityCategoryId = cc.EntityCategoryId,
-                                      EmployeeId = cc.EmployeeId,
-                                      TrackingDateTime = cc.TrackingDateTime,
-                                      TrackingTypeName = c.CategoryName,
-                                      PriorityName = cc.PriorityName,
-                                      EmployeeName = cc.EmployeeName,
-                                      Comment = cc.Comment,
-                                      StatusName = cc.StatusName,
-                                      CategoryName = categoryName.CategoryName,
-                                      TrackingDTFormatted = DateTime.Parse(cc.TrackingDateTime.ToString()).ToString("MM/dd/yyyy")
-                                  }
-                       ).OrderByDescending(p => p.TrackingDateTime.Value.Date).ThenByDescending(p => p.TrackingDateTime.Value.TimeOfDay).ToList();
-
-                    var callT4 = (from cc in callT3
                                   join c in ebaseDBContext.Categories on cc.StatusID equals c.CategoryId
                                   select new CallTrackingViewModel
                                   {
@@ -175,14 +158,39 @@ namespace MerchantMVC.Repositories
                                       EmployeeName = cc.EmployeeName,
                                       TrackingDateTime = cc.TrackingDateTime,
                                       TrackingTypeName = cc.TrackingTypeName,
+                                      TrackingDTFormatted = DateTime.Parse(cc.TrackingDateTime.ToString()).ToShortDateString(),
                                       StatusID = cc.StatusID,
                                       StatusName = c.CategoryName,
                                       Comment = cc.Comment,
                                       PriorityID = cc.PriorityID,
-                                      PriorityName = cc.PriorityName,
-                                      TrackingDTFormatted = cc.TrackingDTFormatted
-                                  });
-                    cv = callT3;
+                                      PriorityName = cc.PriorityName
+                                  }
+                        ).ToList();
+
+
+                    //var callT4 = (from cc in callT3
+                    //              join e in ebaseDBContext.Employees on cc.EmployeeId equals e.EmployeeId 
+                    //                into grouping
+                    //              from e in grouping.DefaultIfEmpty()
+                    //              select new CallTrackingViewModel
+                    //              {
+                    //                  CallTrackingId = cc.CallTrackingId,
+                    //                  Id = cc.Id,
+                    //                  EntityCategoryId = cc.EntityCategoryId,
+                    //                  EmployeeId = cc.EmployeeId,
+                    //                  EmployeeName = String.Format(e.FirstName + ' ' + e.LastName),
+                    //                  TrackingDateTime = cc.TrackingDateTime,
+                    //                  TrackingType = cc.TrackingType,
+                    //                  PriorityID = cc.PriorityID,
+                    //                  PriorityName = cc.PriorityName,
+                    //                  Comment = cc.Comment,
+                    //                  StatusName = cc.StatusName,
+                    //                  StatusID = cc.StatusID,
+                    //                  TrackingDTFormatted = cc.TrackingDTFormatted
+                    //              }
+                    //   ).ToList();   
+
+                    cv = callT3.OrderByDescending(p => p.TrackingDateTime).ToList();
                 }
             }
 

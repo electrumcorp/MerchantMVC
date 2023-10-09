@@ -137,7 +137,7 @@ namespace MerchantMVC.Controllers
             if (ModelState.IsValid)
             {
                 callTrackingViewModel.Id = HttpContext.Session.GetInt32("MerchantId");
-                callTrackingViewModel.EntityCategoryId = 58;
+                callTrackingViewModel.EntityCategoryId = 57;
                 callTrackingViewModel.EmployeeId = HttpContext.Session.GetInt32("EmployeeId");
                 callTrackingViewModel.EntityCategoryId = HttpContext.Session.GetInt32("CategoryId");
                 callTrackingViewModel.StatusID = 378;
