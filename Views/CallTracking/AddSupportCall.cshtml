@@ -33,20 +33,28 @@
 
                         <div class="form-group">
                             <label asp-for="Status" class="control-label"></label>
-                            @Html.DropDownListFor(p => p.StatusID, new SelectList(Model.Status, "Value", "Text", 0), "Select Status", htmlAttributes: new { @class = "form-control", id = "ddlSelectStatus" })
-                            @*<select id="ddlStatus" theme="google" class="form-control select2" data-search="true" data-image="1.png">
-                                    <option>Select Status</option>
-                                </select>*@
+                            @*@Html.DropDownListFor(p => p.StatusID, new SelectList(Model.Status, "Value", "Text", 0), "Select Status", htmlAttributes: new { @class = "form-control", id = "ddlSelectStatus" })*@
+                        <select id="ddlStatus" theme="google" class="form-control select2" data-search="true" data-image="1.png">
+                            <option selected value="378">Open Escalate Electrum</option>
+                            <option value="111">Open</option>
+                            <option value="112">Closed</option>
+                            <option value="375">Open Escalate</option>
+                            <option value="376">Open Escalate Sponsor</option>
+                            <option value="377">Resolved Open Escalate Sponsor</option>
+                            <option value="379">Resolved Open Escalate Electrum</option>
+                        </select>
                             <span asp-validation-for="StatusID" class="text-danger"></span>
                         </div>
 
                         <div class="form-group">
                             <label asp-for="Priority" class="control-label"></label>
-                            @Html.DropDownListFor(p => p.PriorityID, new SelectList(Model.Priority, "Value", "Text", 0), "Select Priority", htmlAttributes: new { @class = "form-control", id = "ddlSelectPriority" })
-                            @*<select id="ddlPriority" theme="google" onchange="" class="form-control select2" data-search="true" data-image="1.png">
-                                    <option>Select Priority</option>
-                                </select>
-                                <input type="hidden" id="hdnPriorityId" asp-for="PriorityID"/>*@
+                            @*@Html.DropDownListFor(p => p.PriorityID, new SelectList(Model.Priority, "Value", "Text", 0), "Select Priority", htmlAttributes: new { @class = "form-control", id = "ddlSelectPriority" })*@
+                        <select id="ddlPriority" theme="google" onchange="" class="form-control select2" data-search="true" data-image="1.png">
+                            <option selected="selected" value="115">4 - Low Severity</option>
+                            <option value="117">3 - Medium Severity</option>
+                            <option value="116">2 - High Severity</option>
+                        </select>
+                                <input type="hidden" id="hdnPriorityId" asp-for="PriorityID"/>
                             <span asp-validation-for="PriorityID" class="text-danger"></span>
                         </div>
 
@@ -91,32 +99,55 @@
 
     <script>
         $(document).ready(function () {
-            $('#ddlPriority').select2(
-                {
-                    placeholder: "Select Priority",
-                    allowClear: false,
+            //$('#ddlPriority').select2(
+            //    {
+            //        placeholder: "Select Priority",
+            //        allowClear: false,
 
-                    ajax: {
-                        url: "../Category/GetPriority",
-                        dataType: 'json',
-                        delay: 250,
-                        data: function (params) {
-                            return {
+            //        ajax: {
+            //            url: "../Category/GetPriority",
+            //            dataType: 'json',
+            //            delay: 250,
+            //            data: function (params) {
+            //                return {
 
-                                searchTerm: params.term
+            //                    searchTerm: params.term
 
-                            };
-                        },
-                        processResults: function (data, params) {
-                            return {
-                                results: data
-                            }
-                        }
-                    }
-                }
-            );
+            //                };
+            //            },
+            //            processResults: function (data, params) {
+            //                return {
+            //                    results: data
+            //                }
+            //            }
+            //        }
+            //    }
+            //);
 
+            //$('#ddlStatus').select2(
+            //    {
+            //        placeholder: "Select Status",
+            //        allowClear: false,
 
+            //        ajax: {
+            //            url: "../Category/GetStatus",
+            //            dataType: 'json',
+            //            delay: 250,
+            //            data: function (params) {
+            //                return {
+
+            //                    searchTerm: params.term
+
+            //                };
+            //            },
+            //            processResults: function (data, params) {
+            //                return {
+            //                    results: data
+            //                }
+            //            }
+            //        }
+            //    }
+            //);
             $('#ddlType').select2(
                 {
                     placeholder: "Select Type",

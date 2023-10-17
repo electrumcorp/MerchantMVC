@@ -23,6 +23,8 @@ namespace MerchantMVC
                 .ReverseMap();
             CreateMap<FeedBackViewModel, FeedBack>()
                 .ReverseMap();
+            CreateMap<EntityDocumentMerchantViewModel, EntityDocumentMerchant>()
+                .ReverseMap();
             CreateMap<CallTrackingViewModel, CallTracking>()
                 .ForMember(dest=>dest.DateTime, opt=>opt.MapFrom(src=>src.TrackingDateTime))
                 .ForMember(dest=>dest.Type,opt=>opt.MapFrom(src=>src.TrackingType))

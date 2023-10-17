@@ -7,7 +7,8 @@ using MerchantMVC.Models;
 using MerchantMVC.ViewModels;
 namespace MerchantMVC.Repositories
 {
-    public interface IEdataConfigurationRepository :IRepository<EdataConfiguration>
+  public   interface IEntityDocumentMerchantRepository :IRepository<EntityDocumentMerchantViewModel>
     {
+        public List<EntityDocumentMerchantViewModel> GetDocuments();
     }
 }

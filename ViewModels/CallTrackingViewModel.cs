@@ -28,6 +28,7 @@ namespace MerchantMVC.ViewModels
         public int? TrackingType { get; set; }
 
         [NotMapped]
+        [Display(Name = "Type")]
         public string TrackingTypeName { get; set; }
 
         [Required(ErrorMessage="Select Priority")]

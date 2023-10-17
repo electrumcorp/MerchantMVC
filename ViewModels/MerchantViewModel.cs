@@ -68,6 +68,7 @@ namespace MerchantMVC.ViewModels
         public string MPhone { get; set; }
 
         [Column("M_EXTEN")]
+        [Display(Name = "EXT")]
         [StringLength(4)]
         public string MExten { get; set; }
 
@@ -80,11 +81,6 @@ namespace MerchantMVC.ViewModels
         [Display(Name = "Website")]
         public string Urladdress { get; set; }
 
-        [Column("TAX_ID")]
-        [StringLength(11)]
-        [Display(Name = "FEIN/Tax ID Number")]
-        [Required]
-        public string TaxId { get; set; }
         public enum Tab
         {
             Locations, LoyaltyTransaction, CurrentTransaction, Batches, Terminal, SupportCalls

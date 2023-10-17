@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
-
+using MerchantMVC.Models;
 
 namespace MerchantMVC.ViewModels
 {
@@ -23,7 +23,7 @@ namespace MerchantMVC.ViewModels
         [Display(Name = "Location Name")]
         public string LName { get; set; }
 
-        [Required(ErrorMessage = "Please enter Address.")]
+        [Required(ErrorMessage = "Please enter Address 1.")]
         [Display(Name = "Address 1")]
         public string LAddr1 { get; set; }
 
@@ -53,12 +53,12 @@ namespace MerchantMVC.ViewModels
         [Display(Name = "Website")]
         public string Url { get; set; }
 
-        [Required(ErrorMessage = "Please enter First Name.")]
+        [Required(ErrorMessage = "Please enter Contact First Name.")]
         [Display(Name = "Contact First Name")]
         public string LFname { get; set; }
 
         [Display(Name = "Contact Last Name")]
-        [Required(ErrorMessage = "Please enter Last Name.")]
+        [Required(ErrorMessage = "Please enter Contact Last Name.")]
         public string LLname { get; set; }
 
         [DataType(DataType.PhoneNumber)]
@@ -75,8 +75,8 @@ namespace MerchantMVC.ViewModels
         //public string WifiSecurityType { get; set; }
         //public string WifiKey { get; set; }
 
-        //public double? Latitude { get; set; }
-        //public double? Longitude { get; set; }
+        public double? Latitude { get; set; }
+        public double? Longitude { get; set; }
         [Display(Name = "Timezone")]
         public int? TimeZone { get; set; }
 
@@ -86,6 +86,10 @@ namespace MerchantMVC.ViewModels
         //properties below is for the tab in the edit location view
  
         public Tab ActiveTab { get; set; }
+        public int? DefaultOriginationDeviceId { get; set; }
+        public string FuelBrand { get; set; }
+        public string PosmaintSupport { get; set; }
+        public string PosmaintSupportPhone { get; set; }
 
         public enum Tab
         {

@@ -1,0 +1,34 @@
+﻿@model IEnumerable<MerchantMVC.ViewModels.EntityDocumentMerchantViewModel>
+
+@{
+    ViewData["Title"] = "Documents";
+    Layout = "_LayoutV";
+}
+
+<h1>Training / Documents</h1>
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Document
+            </th>
+            <th>
+                Category
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                <a href="@item.DocumentUrl" target="_blank">@item.Title</a>
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CategoryName)
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

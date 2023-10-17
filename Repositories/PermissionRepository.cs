@@ -30,7 +30,7 @@ namespace MerchantMVC.Repositories
             }
             catch(Exception e)
             {
-
+                Console.WriteLine(e.Message);
 
             }
             //permissionMdl=ebaseDBContext.Permissions.Where(u => u.UserName.Equals(username) && u.Password.Equals(password)).SingleOrDefault(); ;

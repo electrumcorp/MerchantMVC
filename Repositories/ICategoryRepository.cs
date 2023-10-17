@@ -11,6 +11,6 @@ namespace MerchantMVC.Repositories
     {
         public IEnumerable<Category> GetCategoryByTypeId(int typeid);
         public IEnumerable<Category> GetCategoryForPriorityByCategoryId();
-       // public IEnumerable<Category> GetCategoryForStatus();
+
     }
 }

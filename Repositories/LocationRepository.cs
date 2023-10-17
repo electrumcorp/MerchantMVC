@@ -21,7 +21,7 @@ namespace MerchantMVC.Repositories
         {
             IEnumerable<EditLocationViewModel> locations = null;
             locations = ebaseDbContext.Locations.Where(c => c.MerchantId == merchantId).Where(c => c.CategoryId == 385)
-               .Join(ebaseDbContext.LocationProfiles, c => c.LocationId, e => e.LocationId, (c, e) => new EditLocationViewModel
+               .Join(ebaseDbContext.LocationActivates, c => c.LocationId, e => e.LocationId, (c, e) => new EditLocationViewModel
                {
                    LocationId = c.LocationId,
                    LName = c.LName,
@@ -40,8 +40,12 @@ namespace MerchantMVC.Repositories
                    TimeZone = c.TimeZone,
                    Comments = c.Comments,
                    EntityCategoryId = c.EntityCategoryId,
-                   MerchantNumber = c.MerchantNumber
-
+                   MerchantNumber = c.MerchantNumber,
+                   Longitude = c.Longitude,
+                   Latitude = c.Latitude,
+                   DefaultOriginationDeviceId = e.DefaultOriginationDeviceId,
+                   PosmaintSupport = e.PosmaintSupport,
+                   PosmaintSupportPhone = e.PosmaintSupportPhone
                });
                
                //.Join(ebaseDBContext.Categories,ct=>ct.EntityCategoryId,ce=>ce.CategoryId,(ct,ce)=>new CallTrackingViewModel

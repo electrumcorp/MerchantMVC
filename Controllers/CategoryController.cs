@@ -25,26 +25,31 @@ namespace MerchantMVC.Controllers
         }
         [HttpGet]
         public JsonResult GetPriority(string searchTerm)
-        {
-           
+        {           
             List<Category> lstCs = new List<Category>();
 
             var lstC = _categoryRepository.GetCategoryForPriorityByCategoryId().ToList();
+            lstC = lstC.Where(c => c.CategoryId != 171).ToList();
+
             if (!string.IsNullOrEmpty(searchTerm))
             {
                // lstC= from c in lstCs
             }
-            //var jsVal = new[]
-            //{
-            //    new { id=1,text="Card1"},
-            //    new { id = 2, text = "Card2" },new { id = 3, text = "Card3" },new { id = 4, text = "Card4" }
-            //};
-            // var searchVal = from p in jsVal.Where(p => p.text == searchCard).Select{
 
             var jsonData = lstC.Select(x => new { id = x.CategoryId, text = x.CategoryName });
-            //JsonConvert.SerializeObject(jsVal);
             return Json(jsonData);
         }
+
+        [HttpGet]
+        public JsonResult GetStatus()
+        {
+            var lstStatus = _categoryRepository.GetCategoryByTypeId(26).ToList();
+
+            var json = lstStatus.Select(x => new { id = x.CategoryId, text = x.CategoryName });
+
+            return Json(json);
+        }
+
         [HttpGet]
         public JsonResult GetCategoryType(string searchTerm)
         {
@@ -64,12 +69,6 @@ namespace MerchantMVC.Controllers
             {
                 lstCSearch = lstCs;
             }
-            //var jsVal = new[]
-            //{
-            //    new { id=1,text="Card1"},
-            //    new { id = 2, text = "Card2" },new { id = 3, text = "Card3" },new { id = 4, text = "Card4" }
-            //};
-            // var searchVal = from p in jsVal.Where(p => p.text == searchCard).Select{
 
             var jsonData = lstCSearch.Select(x => new { id = x.CategoryId, text = x.CategoryName });
             //JsonConvert.SerializeObject(jsVal);

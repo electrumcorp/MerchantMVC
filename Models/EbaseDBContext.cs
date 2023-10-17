@@ -42,21 +42,389 @@ namespace MerchantMVC.Models
         public virtual DbSet<Merchant> Merchants { get; set; }
         public virtual DbSet<MerchantProfile> MerchantProfiles { get; set; }
         public virtual DbSet<MerchantActivate> MerchantActivates { get; set; }
+        public virtual DbSet<EntityDocumentMerchant> EntityDocumentMerchants { get; set; }
+        public virtual DbSet<LocationActivate> LocationActivates { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
             {
                 // production CS
-                //optionsBuilder.UseSqlServer("server=tcp:172.30.4.10;Database=Ebase5;Trusted_Connection=no;User Id=sqladmin;Password=sql@dm1n;");// ;
+                optionsBuilder.UseSqlServer("server=tcp:172.30.4.10;Database=Ebase5;Trusted_Connection=no;User Id=sqladmin;Password=sql@dm1n;");// ;
 
                 // dev CS
-                optionsBuilder.UseSqlServer("server=tcp:172.30.4.14;Database=Ebase5;Trusted_Connection=no;User Id=sqladmin;Password=sql@dm1n;");// ;
+                //optionsBuilder.UseSqlServer("server=tcp:172.30.4.14;Database=Ebase5;Trusted_Connection=no;User Id=sqladmin;Password=sql@dm1n;");// ;
             }
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.HasAnnotation("Relational:Collation", "SQL_Latin1_General_CP1_CI_AS");
+
+            modelBuilder.Entity<LocationActivate>(entity =>
+            {
+                entity.ToTable("LocationActivate");
+
+                entity.Property(e => e.LocationActivateId).HasColumnName("LocationActivateID");
+
+                entity.Property(e => e.AppCompletedByCo)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.AppCompletedByName)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.AppCompletedByPhone)
+                    .HasMaxLength(15)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.AppCompletedByTitle)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.AppCompletedbyEmail)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.AppEntityCategoryId).HasColumnName("AppEntityCategoryID");
+
+                entity.Property(e => e.AppId).HasColumnName("AppID");
+
+                entity.Property(e => e.BatchCloseType).HasDefaultValueSql("((106))");
+
+                entity.Property(e => e.CardsAccpeted)
+                    .HasMaxLength(100)
+                    .IsFixedLength(true);
+
+                entity.Property(e => e.CategoryId).HasColumnName("CategoryID");
+
+                entity.Property(e => e.Comments).IsUnicode(false);
+
+                entity.Property(e => e.CountryId).HasColumnName("CountryID");
+
+                entity.Property(e => e.CreditCardAcquirer)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.DefaultOriginationDeviceId).HasColumnName("DefaultOriginationDeviceID");
+
+                entity.Property(e => e.EmailAddr).HasMaxLength(50);
+
+                entity.Property(e => e.EmployeeId).HasColumnName("EmployeeID");
+
+                entity.Property(e => e.EnrollDate)
+                    .HasColumnType("datetime")
+                    .HasDefaultValueSql("(getdate())");
+
+                entity.Property(e => e.EntityCategoryId)
+                    .HasColumnName("EntityCategoryID")
+                    .HasDefaultValueSql("((58))");
+
+                entity.Property(e => e.EntityId).HasColumnName("EntityID");
+
+                entity.Property(e => e.Fax)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.FileFormatId).HasColumnName("FileFormatID");
+
+                entity.Property(e => e.FuelBrand)
+                    .HasMaxLength(20)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.InstallationSupplier)
+                    .HasMaxLength(40)
+                    .IsFixedLength(true);
+
+                entity.Property(e => e.InstallationSupplierEmail)
+                    .HasMaxLength(40)
+                    .HasColumnName("installationSupplierEmail")
+                    .IsFixedLength(true);
+
+                entity.Property(e => e.InstallationSupplierId)
+                    .HasMaxLength(50)
+                    .HasColumnName("InstallationSupplierID");
+
+                entity.Property(e => e.InstllationSupplierPhone)
+                    .HasMaxLength(10)
+                    .IsFixedLength(true);
+
+                entity.Property(e => e.InternetServiceProvider)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.LAddr1)
+                    .HasMaxLength(50)
+                    .IsUnicode(false)
+                    .HasColumnName("L_ADDR1");
+
+                entity.Property(e => e.LAddr2)
+                    .HasMaxLength(50)
+                    .IsUnicode(false)
+                    .HasColumnName("L_ADDR2");
+
+                entity.Property(e => e.LCity)
+                    .HasMaxLength(20)
+                    .IsUnicode(false)
+                    .HasColumnName("L_CITY");
+
+                entity.Property(e => e.LFname)
+                    .HasMaxLength(20)
+                    .IsUnicode(false)
+                    .HasColumnName("L_FNAME");
+
+                entity.Property(e => e.LLname)
+                    .HasMaxLength(20)
+                    .IsUnicode(false)
+                    .HasColumnName("L_LNAME");
+
+                entity.Property(e => e.LName)
+                    .HasMaxLength(50)
+                    .HasColumnName("L_NAME");
+
+                entity.Property(e => e.LPaba)
+                    .HasMaxLength(9)
+                    .IsUnicode(false)
+                    .HasColumnName("L_PABA");
+
+                entity.Property(e => e.LPbatype)
+                    .HasMaxLength(1)
+                    .IsUnicode(false)
+                    .HasColumnName("L_PBATYPE");
+
+                entity.Property(e => e.LPbnkacct)
+                    .HasMaxLength(17)
+                    .IsUnicode(false)
+                    .HasColumnName("L_PBNKACCT");
+
+                entity.Property(e => e.LPhone)
+                    .HasMaxLength(50)
+                    .IsUnicode(false)
+                    .HasColumnName("L_PHONE");
+
+                entity.Property(e => e.LState)
+                    .HasMaxLength(2)
+                    .IsUnicode(false)
+                    .HasColumnName("L_STATE");
+
+                entity.Property(e => e.LZip)
+                    .HasMaxLength(10)
+                    .IsUnicode(false)
+                    .HasColumnName("L_ZIP");
+
+                entity.Property(e => e.Latitude)
+                    .HasMaxLength(15)
+                    .IsFixedLength(true);
+
+                entity.Property(e => e.LayOut)
+                    .HasMaxLength(10)
+                    .IsFixedLength(true);
+
+                entity.Property(e => e.LayOutImage).HasColumnType("image");
+
+                entity.Property(e => e.LocationId).HasColumnName("LocationID");
+
+                entity.Property(e => e.Longitude)
+                    .HasMaxLength(15)
+                    .IsFixedLength(true);
+
+                entity.Property(e => e.MerchantActivateId).HasColumnName("MerchantActivateID");
+
+                entity.Property(e => e.MerchantId).HasColumnName("MerchantID");
+
+                entity.Property(e => e.MerchantNumber)
+                    .HasMaxLength(12)
+                    .IsUnicode(false)
+                    .HasColumnName("Merchant_Number")
+                    .IsFixedLength(true);
+
+                entity.Property(e => e.NetworkId).HasColumnName("NetworkID");
+
+                entity.Property(e => e.NumberTerminals).HasDefaultValueSql("((2))");
+
+                entity.Property(e => e.OpHours)
+                    .HasMaxLength(100)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.OpId)
+                    .HasMaxLength(10)
+                    .HasColumnName("OP_ID")
+                    .IsFixedLength(true);
+
+                entity.Property(e => e.OtherLoyaltyService)
+                    .HasMaxLength(100)
+                    .IsFixedLength(true);
+
+                entity.Property(e => e.PayableTo).HasMaxLength(35);
+
+                entity.Property(e => e.PbankCity)
+                    .HasMaxLength(50)
+                    .IsUnicode(false)
+                    .HasColumnName("PBankCity");
+
+                entity.Property(e => e.Pbankname)
+                    .HasMaxLength(50)
+                    .IsUnicode(false)
+                    .HasColumnName("PBANKNAME");
+
+                entity.Property(e => e.PosapplicationVersion)
+                    .HasMaxLength(50)
+                    .IsUnicode(false)
+                    .HasColumnName("POSApplicationVersion");
+
+                entity.Property(e => e.Posappplication)
+                    .HasMaxLength(50)
+                    .IsUnicode(false)
+                    .HasColumnName("POSAppplication");
+
+                entity.Property(e => e.Poscard)
+                    .HasMaxLength(50)
+                    .HasColumnName("POSCard")
+                    .IsFixedLength(true);
+
+                entity.Property(e => e.PosdistRouter).HasColumnName("POSDistRouter");
+
+                entity.Property(e => e.PosmaintSupport)
+                    .HasMaxLength(50)
+                    .HasColumnName("POSMaintSupport")
+                    .IsFixedLength(true);
+
+                entity.Property(e => e.PosmaintSupportPhone)
+                    .HasMaxLength(15)
+                    .HasColumnName("POSMaintSupportPhone")
+                    .IsFixedLength(true);
+
+                entity.Property(e => e.PosmaintenanceSupplierId).HasColumnName("POSMaintenanceSupplierID");
+
+                entity.Property(e => e.PosproductEntryMethods)
+                    .HasMaxLength(200)
+                    .HasColumnName("POSProductEntryMethods")
+                    .IsFixedLength(true);
+
+                entity.Property(e => e.PosrouterBrand)
+                    .HasMaxLength(20)
+                    .HasColumnName("POSRouterBrand")
+                    .IsFixedLength(true);
+
+                entity.Property(e => e.Possystem)
+                    .HasMaxLength(50)
+                    .HasColumnName("POSSystem");
+
+                entity.Property(e => e.PreparedDate).HasColumnType("datetime");
+
+                entity.Property(e => e.PreparedbyEmail)
+                    .HasMaxLength(50)
+                    .IsFixedLength(true);
+
+                entity.Property(e => e.PreparedbyName)
+                    .HasMaxLength(50)
+                    .IsFixedLength(true);
+
+                entity.Property(e => e.PreparedbyPhone)
+                    .HasMaxLength(15)
+                    .IsFixedLength(true);
+
+                entity.Property(e => e.PumpDispenserModel)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.PumpTopperSize)
+                    .HasMaxLength(10)
+                    .IsFixedLength(true);
+
+                entity.Property(e => e.RAba)
+                    .HasMaxLength(9)
+                    .IsUnicode(false)
+                    .HasColumnName("R_ABA");
+
+                entity.Property(e => e.RAcct)
+                    .HasMaxLength(17)
+                    .IsUnicode(false)
+                    .HasColumnName("R_ACCT");
+
+                entity.Property(e => e.RBatype)
+                    .HasMaxLength(1)
+                    .IsUnicode(false)
+                    .HasColumnName("R_BATYPE");
+
+                entity.Property(e => e.RackBarrelHeight)
+                    .HasMaxLength(10)
+                    .IsFixedLength(true);
+
+                entity.Property(e => e.RbankCity)
+                    .HasMaxLength(50)
+                    .IsUnicode(false)
+                    .HasColumnName("RBankCity");
+
+                entity.Property(e => e.Rbankname)
+                    .HasMaxLength(50)
+                    .IsUnicode(false)
+                    .HasColumnName("RBANKNAME");
+
+                entity.Property(e => e.RemotePcid)
+                    .HasMaxLength(50)
+                    .HasColumnName("RemotePCID");
+
+                entity.Property(e => e.Reserved1)
+                    .HasMaxLength(25)
+                    .IsUnicode(false)
+                    .HasColumnName("RESERVED1");
+
+                entity.Property(e => e.Reserved2)
+                    .HasMaxLength(20)
+                    .HasColumnName("RESERVED2")
+                    .IsFixedLength(true);
+
+                entity.Property(e => e.Reserved3)
+                    .HasMaxLength(25)
+                    .IsUnicode(false)
+                    .HasColumnName("RESERVED3");
+
+                entity.Property(e => e.Reserved4)
+                    .HasMaxLength(25)
+                    .IsUnicode(false)
+                    .HasColumnName("RESERVED4");
+
+                entity.Property(e => e.Reserved5)
+                    .HasMaxLength(50)
+                    .IsUnicode(false)
+                    .HasColumnName("RESERVED5");
+
+                entity.Property(e => e.Siccode)
+                    .HasMaxLength(10)
+                    .HasColumnName("SICCode")
+                    .IsFixedLength(true);
+
+                entity.Property(e => e.StoreManagementSystem).HasMaxLength(50);
+
+                entity.Property(e => e.SurgeProtection)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.TimeZone)
+                    .HasMaxLength(15)
+                    .IsFixedLength(true);
+
+                entity.Property(e => e.Url)
+                    .HasMaxLength(75)
+                    .HasColumnName("URL");
+
+                entity.Property(e => e.WifiKey)
+                    .HasMaxLength(50)
+                    .IsFixedLength(true);
+
+                entity.Property(e => e.WifiSecurityType).HasMaxLength(50);
+            });
+
+            modelBuilder.Entity<EntityDocumentMerchant>(entity =>
+            {
+                entity.ToView("EntityDocumentMerchant_V_EC");
+
+                entity.Property(e => e.Content).IsUnicode(false);
+
+                entity.Property(e => e.Htmlcontent).IsUnicode(false);
+            });
+
             modelBuilder.Entity<MerchantActivate>(entity =>
             {
                 entity.Property(e => e.AcceptAgreement).IsUnicode(false);
@@ -2610,5 +2978,7 @@ namespace MerchantMVC.Models
         public DbSet<MerchantMVC.ViewModels.TerminalViewModel> TerminalViewModel { get; set; }
 
         public DbSet<MerchantMVC.ViewModels.FeedBackViewModel> FeedBackViewModel { get; set; }
+
+        public DbSet<MerchantMVC.ViewModels.EntityDocumentMerchantViewModel> EntityDocumentMerchantViewModel { get; set; }
     }
 }

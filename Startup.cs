@@ -48,6 +48,7 @@ namespace MerchantMVC
             services.AddScoped<IMerchantProfileRepository, MerchantProfileRepository>();
             services.AddScoped<IFeedBackRepository, FeedbackRepository>();
             services.AddScoped<ILocationProfileRepository, LocationProfileRepository>();
+            services.AddScoped<IEntityDocumentMerchantRepository, EntityDocumentMerchantRepository>();
             //services.AddScoped<ITerminalRepository, TerminalRepository>();
             services.AddAutoMapper(Assembly.GetExecutingAssembly());
 
