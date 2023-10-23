@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 using MerchantMVC.Models;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace MerchantMVC.ViewModels
 {
@@ -11,7 +13,7 @@ namespace MerchantMVC.ViewModels
     {
         [Key]
         public int LocationId { get; set; }
-
+        public int? CategoryId { get; set; }
         public int? MerchantId { get; set; }
 
         [Display(Name = "Status")]
@@ -69,31 +71,52 @@ namespace MerchantMVC.ViewModels
         public string Comments { get; set; }
 
         [Display(Name = "Store Number")]
+        [Required(ErrorMessage = "Please enter Store Number.")]
         public string MerchantNumber { get; set; }
-
-        //public string InternetServiceProvider { get; set; }
-        //public string WifiSecurityType { get; set; }
-        //public string WifiKey { get; set; }
 
         public double? Latitude { get; set; }
         public double? Longitude { get; set; }
-        [Display(Name = "Timezone")]
-        public int? TimeZone { get; set; }
 
         [Display(Name ="Store Brand")]
+        [Required]
         public string Brand { get; set; }
-
-        //properties below is for the tab in the edit location view
- 
-        public Tab ActiveTab { get; set; }
-        public int? DefaultOriginationDeviceId { get; set; }
+        [Required(ErrorMessage = "Please enter Fuel Brand.")]
         public string FuelBrand { get; set; }
+        [Required(ErrorMessage = "Please enter POS Support Contact.")]
         public string PosmaintSupport { get; set; }
+        [Required(ErrorMessage = "Please enter POS Support Number.")]
         public string PosmaintSupportPhone { get; set; }
+        public int? CountryId { get; set; }
 
+        [Display(Name = "Timezone")]
+        public int? TimeZone { get; set; }
+        [Display(Name = "POS Origination Device")]
+        public int? DefaultOriginationDeviceId { get; set; }
+
+        [NotMapped]
+        public Tab ActiveTab { get; set; }
         public enum Tab
         {
             LoyaltyTransaction, CurrentTransaction, Batches, Terminal, SupportCalls
         }
+
+        //public EditLocationViewModel()
+        //{
+        //    AvailableTimezones = new List<SelectListItem>()
+        //    {
+        //        new SelectListItem{ Text = "Eastern (GMT-5)", Value = "-5"},
+        //        new SelectListItem{ Text = "Central (GMT-6)", Value = "-6"},
+        //        new SelectListItem{ Text = "Mountain (GMT-7)", Value = "-7"},
+        //        new SelectListItem{ Text = "Pacific (GMT-8)", Value = "-8"},
+        //        new SelectListItem{ Text = "Alaska (GMT-9)", Value = "-9"},
+        //        new SelectListItem{ Text = "Hawaii-Aleutian (GMT-10)", Value = "-10"}
+        //    };
+
+        //    AvailableOriginationDevices = new List<SelectListItem>()
+        //    {
+        //        new SelectListItem{ Text = "Gilbarco Passport", Value = "19"},
+        //        new SelectListItem{ Text = "Gilbarco Passport", Value = "22"}
+        //    };
+        //}
     }
 }

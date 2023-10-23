@@ -29,8 +29,8 @@ namespace MerchantMVC.Repositories
                 EmployeeId =c.EmployeeId,
                 TrackingDateTime =c.DateTime,
                 TrackingType=c.Type,
-             PriorityID=c.Priority,
-             EmployeeName=string.Concat(e.FirstName," ",e.LastName),
+                 Priority=c.Priority,
+                 EmployeeName=string.Concat(e.FirstName," ",e.LastName),
                  Comment =c.Comment
         
             })
@@ -47,7 +47,7 @@ namespace MerchantMVC.Repositories
 
                     var categoryName = ebaseDBContext.Categories.Where(ct => ct.CategoryId == entitycategory.Value).FirstOrDefault();
                     var callT2 = (from cc in callTracking
-                                  join c in ebaseDBContext.Categories on cc.PriorityID equals c.CategoryId
+                                  join c in ebaseDBContext.Categories on cc.Priority equals c.CategoryId
                                   //join ct in ebaseDbContext.Categories on lt.CategoryId equals ct.CategoryId
                                   select new CallTrackingViewModel
                                   // .Join(ebaseDBContext.Categories, c => c.EntityCategoryId, ctg => ctg.CategoryId, (c, ctg) => new CallTrackingViewModel
@@ -115,8 +115,8 @@ namespace MerchantMVC.Repositories
                    TrackingDateTime = c.DateTime,
                    TrackingType = c.Type,
                    TrackingTypeName = e.CategoryName,
-                   PriorityID = c.Priority,
-                   StatusID = c.Status,
+                   Priority = c.Priority,
+                   Status = c.Status,
                })
                .OrderByDescending(o => o.TrackingDateTime).Where(l => l.Id == merchantId).ToList();
 
@@ -128,7 +128,7 @@ namespace MerchantMVC.Repositories
                     //var categoryName = ebaseDBContext.Categories.Where(ct => ct.CategoryId == entitycategory.Value).FirstOrDefault();
 
                     var callT2 = (from cc in callTracking
-                                  join c in ebaseDBContext.Categories on cc.PriorityID equals c.CategoryId
+                                  join c in ebaseDBContext.Categories on cc.Priority equals c.CategoryId
                                   select new CallTrackingViewModel
                                   {
                                       CallTrackingId = cc.CallTrackingId,
@@ -139,16 +139,16 @@ namespace MerchantMVC.Repositories
                                       TrackingDTFormatted = cc.TrackingDTFormatted,
                                       TrackingTypeName = cc.TrackingTypeName,
                                       TrackingType = cc.TrackingType,
-                                      PriorityID = cc.PriorityID,
+                                      Priority = cc.Priority,
                                       PriorityName = c.CategoryName,
                                       EmployeeName = cc.EmployeeName,
                                       Comment = cc.Comment,
-                                      StatusID = cc.StatusID
+                                      Status = cc.Status
                                   }
                         ).ToList();
 
                     var callT3 = (from cc in callT2
-                                  join c in ebaseDBContext.Categories on cc.StatusID equals c.CategoryId
+                                  join c in ebaseDBContext.Categories on cc.Status equals c.CategoryId
                                   select new CallTrackingViewModel
                                   {
                                       CallTrackingId = cc.CallTrackingId,
@@ -159,10 +159,10 @@ namespace MerchantMVC.Repositories
                                       TrackingDateTime = cc.TrackingDateTime,
                                       TrackingTypeName = cc.TrackingTypeName,
                                       TrackingDTFormatted = DateTime.Parse(cc.TrackingDateTime.ToString()).ToShortDateString(),
-                                      StatusID = cc.StatusID,
+                                      Status = cc.Status,
                                       StatusName = c.CategoryName,
                                       Comment = cc.Comment,
-                                      PriorityID = cc.PriorityID,
+                                      Priority = cc.Priority,
                                       PriorityName = cc.PriorityName
                                   }
                         ).ToList();

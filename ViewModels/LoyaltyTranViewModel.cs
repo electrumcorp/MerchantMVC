@@ -18,11 +18,13 @@ namespace MerchantMVC.ViewModels
        public string UpdatedDateFormatted { get; set; } 
         public int? ItemId { get; set; }
         public string Item { get; set; }
+        [DataType(DataType.Currency)]
         public decimal? Amount { get; set; }
-       
+        [DataType(DataType.Text)]
         public decimal? Quantity { get; set; }
         
         public int? LoyaltyDetailId { get; set; }
+        [DataType(DataType.Currency)]
         public decimal? Discount { get; set; }
 
         public int? CategoryId { get; set; }

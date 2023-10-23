@@ -8,16 +8,21 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace MerchantMVC.Controllers
 {
     public class LocationController : Controller
     {
         private ILocationRepository _locationRepository;
+        private ILocationActivateRepository _locationActivateRepository;
         private IMapper _mapper;
-        public LocationController(ILocationRepository locationRepository, IMapper mapper)
+
+        public LocationController(ILocationRepository locationRepository, ILocationActivateRepository locationActivateRepository, IMapper mapper)
         {
             _locationRepository = locationRepository;
+            _locationActivateRepository = locationActivateRepository;
             _mapper = mapper;
         }
 
@@ -56,27 +61,36 @@ namespace MerchantMVC.Controllers
         [HttpPost]
         public async Task<IActionResult> AddNewLocation(EditLocationViewModel newLocationViewModel)
         {
-            //try
-            //{
-               Location location = new Location();
+            try
+            {
+                LocationActivate locationActivate = new LocationActivate();
                 if (ModelState.IsValid)
                 {
                     newLocationViewModel.MerchantId = HttpContext.Session.GetInt32("MerchantId");
                     newLocationViewModel.LocationStatus = "P";
-                    _mapper.Map(newLocationViewModel, location);
+                    newLocationViewModel.CategoryId = 385;
+                    newLocationViewModel.EntityCategoryId = 58;
+                    newLocationViewModel.CountryId = 1;
+                    _mapper.Map(newLocationViewModel, locationActivate);
 
-                    await _locationRepository.Add(location);
-                    TempData["Message"] = "New Location successfully added.";
+                    await _locationActivateRepository.Add(locationActivate);
+                    TempData["Message"] = "New Location successfully added for review.";
                 }
-                else 
+                else
                 {
-                    TempData["Message"] = "Verify Location details.";
+                    var msg = "";
+                    IEnumerable<ModelError> allErrors = ModelState.Values.SelectMany(v => v.Errors);
+                    foreach (var error in allErrors)
+                    {
+                        msg += error.ErrorMessage + "; ";
+                    }
+                    TempData["Message"] = msg;
                 }
-            //}
-            //catch (Exception ex)
-            //{
-            //    ModelState.AddModelError("", ex.Message);
-            //}
+            }
+            catch (Exception ex)
+            {
+                ModelState.AddModelError("", ex.Message);
+            }
 
             return RedirectToAction("Create");
         }
@@ -84,14 +98,14 @@ namespace MerchantMVC.Controllers
         [HttpGet]
         public async Task<IActionResult> Edit1(int id)
         {
-            HttpContext.Session.SetString("LocationID", id.ToString());
+            HttpContext.Session.SetString("LocationId", id.ToString());
             //Location locationResult = await _locationRepository.Get((int)HttpContext.Session.GetInt32("LocationId"));
             Location locationResult = await _locationRepository.Get(id);
             EditLocationViewModel locationViewModel = _mapper.Map<EditLocationViewModel>(locationResult);
 
             //set Session vars
             HttpContext.Session.SetString("LocationName", locationViewModel.LName.ToString());
-            HttpContext.Session.SetString("LocationID", locationViewModel.LocationId.ToString());
+            HttpContext.Session.SetString("LocationId", locationViewModel.LocationId.ToString());
             TempData["LocationId"] = locationViewModel.LocationId;
             TempData["LocationName"] = string.Concat(locationViewModel.LFname, " ", locationViewModel.LLname);
 
@@ -102,7 +116,7 @@ namespace MerchantMVC.Controllers
         [HttpGet]
         public async Task<IActionResult> Edit(int id)
         {
-            HttpContext.Session.SetString("LocationID", id.ToString());
+            HttpContext.Session.SetString("LocationId", id.ToString());
             //Location locationResult = await _locationRepository.Get((int)HttpContext.Session.GetInt32("LocationId"));
             Location locationResult = await _locationRepository.Get(id);
 
@@ -111,7 +125,7 @@ namespace MerchantMVC.Controllers
 
             //set Session vars
             HttpContext.Session.SetString("LocationName", locationViewModel.LName.ToString());
-            HttpContext.Session.SetString("LocationID", locationViewModel.LocationId.ToString());
+            HttpContext.Session.SetString("LocationId", locationViewModel.LocationId.ToString());
             TempData["LocationId"] = locationViewModel.LocationId;
             TempData["LocationName"] = string.Concat(locationViewModel.LFname, " ", locationViewModel.LLname);
 
@@ -128,7 +142,7 @@ namespace MerchantMVC.Controllers
 
                 if (ModelState.IsValid)
                 {
-                    HttpContext.Session.SetString("LocationID", editLocationModel.LocationId.ToString());
+                    HttpContext.Session.SetString("LocationId", editLocationModel.LocationId.ToString());
                     locationResult = await _locationRepository.Get((int)editLocationModel.LocationId);
 
                     _mapper.Map(editLocationModel, locationResult);
@@ -146,6 +160,7 @@ namespace MerchantMVC.Controllers
 
             return View(editLocationModel);
         }
+
 
         public string SwitchTabs(string tabname)
         {

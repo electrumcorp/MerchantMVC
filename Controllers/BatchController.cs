@@ -22,9 +22,9 @@ namespace MerchantMVC.Controllers
         }
 
         [HttpGet]
-        public IActionResult GetBatchByLocationId()
+        public IActionResult GetBatchByLocationId(int locationId)
         {
-            int locationId = (int)HttpContext.Session.GetInt32("LocationId");
+            //int locationId = (int)HttpContext.Session.GetInt32("LocationId");
             var btchList = _batchRepository.GetBatchByLocationId(locationId);
             return new JsonResult(btchList);
 

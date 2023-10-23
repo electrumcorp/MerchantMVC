@@ -32,13 +32,13 @@ namespace MerchantMVC.ViewModels
         public string TrackingTypeName { get; set; }
 
         [Required(ErrorMessage="Select Priority")]
-        public int? PriorityID { get; set; }
+        public int? Priority { get; set; }
         [NotMapped]
         [Display(Name = "Priority")]
         public string PriorityName { get; set; }
 
         [NotMapped]
-        public IEnumerable<SelectListItem> Priority { get; set; }
+        public IEnumerable<SelectListItem> PriorityList { get; set; }
 
         [Required(ErrorMessage = "Please provide comment")]
         public string Comment { get; set; }
@@ -46,14 +46,14 @@ namespace MerchantMVC.ViewModels
         public string CategoryName { get; set; }
 
         [Required(ErrorMessage = "Select Status")]
-        public int? StatusID { get; set; }
+        public int? Status { get; set; }
 
         [NotMapped]
         [Display(Name = "Status")]
         public string StatusName { get; set; }
 
         [NotMapped]
-        public IEnumerable<SelectListItem> Status { get; set; }
+        public IEnumerable<SelectListItem> StatusList { get; set; }
 
         [Display(Name = "Employee")]
         public string EmployeeName { get; set; }

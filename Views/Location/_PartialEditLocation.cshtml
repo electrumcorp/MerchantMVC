@@ -82,9 +82,23 @@
             <input asp-for="LocationStatus" class="form-control" />
             <span asp-validation-for="LocationStatus" class="text-danger"></span>
         </div>
-        <div class="form-group">
+        @*<div class="form-group">
             <label asp-for="TimeZone" class="control-label"></label>
             <input asp-for="TimeZone" class="form-control" />
+            <span asp-validation-for="TimeZone" class="text-danger"></span>
+        </div>*@
+        <div class="form-group">
+            <label asp-for="TimeZone" class="control-label"></label>
+            @*<input asp-for="TimeZone" class="form-control" />*@
+            <select id="ddlStatus" class="form-control" data-image="1.png">
+                <option selected value="-5">Eastern (GMT-5)</option>
+                <option value="-6">Central (GMT-6)</option>
+                <option value="-7">Mountain (GMT-7)</option>
+                <option value="-8">Pacific (GMT-8)</option>
+                <option value="-9">Alaska (GMT-9)</option>
+                <option value="-10">Hawaii-Aleutian (GMT-10)</option>
+            </select>
+            <input asp-for="TimeZone" type="hidden" id="hdnTimeZoneID" />
             <span asp-validation-for="TimeZone" class="text-danger"></span>
         </div>
         <div class="form-group">

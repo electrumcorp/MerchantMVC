@@ -34,7 +34,7 @@ namespace MerchantMVC.Controllers
         {
             Merchant merchantResult = await _merchantRepository.Get((int)HttpContext.Session.GetInt32("MerchantId"));
 
-            MerchantViewModel merchantViewModel = _mapper.Map<MerchantViewModel>(merchantResult); //new EditLocationViewModel();//
+            MerchantViewModel merchantViewModel = _mapper.Map<MerchantViewModel>(merchantResult); 
 
             HttpContext.Session.SetInt32("MerchantId", merchantViewModel.MerchantId);
             HttpContext.Session.SetString("MerchantName", string.Concat(merchantViewModel.MName));

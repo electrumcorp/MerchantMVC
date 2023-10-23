@@ -86,6 +86,9 @@
                             @*<a class="nav-link " target="_blank" href=" https://www.youtube.com/watch?v=Mv3_IAsz1XQ">Training</a>*@
                             <a class="nav-link" asp-area="" asp-controller="EntityDocumentMerchant" asp-action="Index">Training</a>
                         </li>
+                        @*<li class="nav-item">
+                            <a class="nav-link" asp-area="" asp-controller="Card" asp-action="Index">Card Holders</a>
+                        </li>*@
                     </ul>
 
                 </div>
@@ -155,16 +158,19 @@
                             </li>
                         </ul>
                     </li>
-                    <li class="nav-item">
+                    <li>
                         <a asp-area="" asp-controller="Home" asp-action="Links">Links</a>
                     </li>
                     <li>
                         <a asp-area="" asp-controller="Report" asp-action="ShowReport">Reports</a>
                     </li>
                     <li>
-                       @* <a target="_blank" href=" https://www.youtube.com/watch?v=Mv3_IAsz1XQ">Training</a>*@
-                        <a class="nav-link" asp-area="" asp-controller="EntityDocumentMerchant" asp-action="Index">Training</a>
+                        @* <a target="_blank" href=" https://www.youtube.com/watch?v=Mv3_IAsz1XQ">Training</a>*@
+                        <a asp-area="" asp-controller="EntityDocumentMerchant" asp-action="Index">Training</a>
                     </li>
+                    @*<li>
+                        <a asp-area="" asp-controller="Card" asp-action="Index">Card Holders</a>
+                    </li>*@
                 </ul>
             </div>
 

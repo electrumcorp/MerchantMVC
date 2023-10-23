@@ -93,7 +93,15 @@
                         </div>
                         <div class="form-group">
                             <label asp-for="TimeZone" class="control-label"></label>
-                            <input asp-for="TimeZone" class="form-control" />
+                        <select id="ddlStatus" class="form-control" data-image="1.png">
+                            <option selected value="-5">Eastern (-5)</option>
+                            <option value="-6">Central (-6)</option>
+                            <option value="-7">Mountain (-7)</option>
+                            <option value="-8">Pacific (-8)</option>
+                            <option value="-9">Alaska (-9)</option>
+                            <option value="-10">Hawaii-Aleutian (-10)</option>
+                        </select>
+                            <input asp-for="TimeZone" type="hidden" id="hdnTimeZone" />
                             <span asp-validation-for="TimeZone" class="text-danger"></span>
                         </div>
                         <div class="form-group">
@@ -131,38 +139,6 @@
                         </div>
                     </div>
                 </div>
-
-                @*<div class="col-sm-4">
-
-                            <div class="form-group">
-                                <label asp-for="@Model.Latitude" class="control-label"></label>
-                                <input asp-for="@Model.Latitude" class="form-control" />
-                                <span asp-validation-for="@Model.Latitude" class="text-danger"></span>
-                            </div>
-                            <div class="form-group">
-                                <label asp-for="@Model.Longitude" class="control-label"></label>
-                                <input asp-for="@Model.Longitude" class="form-control" />
-                                <span asp-validation-for="@Model.Longitude" class="text-danger"></span>
-                            </div>
-
-                            <div class="form-group">
-                                <label asp-for="@Model.WifiSecurityType" class="control-label"></label>
-                                <input asp-for="@Model.WifiSecurityType" class="form-control" />
-                                <span asp-validation-for="@Model.WifiSecurityType" class="text-danger"></span>
-                            </div>
-                            <div class="form-group">
-                                <label asp-for="@Model.WifiKey" class="control-label"></label>
-                                <input asp-for="@Model.WifiKey" class="form-control" />
-                                <span asp-validation-for="@Model.WifiKey" class="text-danger"></span>
-                            </div>
-                            <div class="form-group">
-                                <label asp-for="@Model.InternetServiceProvider" class="control-label"></label>
-                                <input asp-for="@Model.InternetServiceProvider" class="form-control" />
-                                <span asp-validation-for="@Model.InternetServiceProvider" class="text-danger"></span>
-                            </div>
-                        </div>
-                    </div>*@
-
                 <div class="form-group">
                     <input type="submit" value="Save" class="btn btn-primary" />
                 </div>
@@ -223,16 +199,16 @@
         @switch (Model.ActiveTab)
         {
             case MerchantMVC.ViewModels.EditLocationViewModel.Tab.LoyaltyTransaction:
-@await Component.InvokeAsync("LoyaltyTran");
-break;
-case MerchantMVC.ViewModels.EditLocationViewModel.Tab.Terminal:
-@await Component.InvokeAsync("Terminal");
-break;
-case MerchantMVC.ViewModels.EditLocationViewModel.Tab.Batches:
-@await Component.InvokeAsync("Batches");
-break;
+                @await Component.InvokeAsync("LoyaltyTran");
+            break;
+            case MerchantMVC.ViewModels.EditLocationViewModel.Tab.Terminal:
+                @await Component.InvokeAsync("Terminal");
+            break;
+            case MerchantMVC.ViewModels.EditLocationViewModel.Tab.Batches:
+                @await Component.InvokeAsync("Batches");
+            break;
 
-}
+            }
     </div>
 
 

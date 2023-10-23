@@ -42,12 +42,14 @@ namespace MerchantMVC
             services.AddScoped<ILoyaltyTranRepository, LoyaltyTranRepository>();
             services.AddScoped<ICallTrackingRepository, CallTrackingRepository>();
             services.AddScoped<ICategoryRepository, CategoryRepository>();
+            services.AddScoped<ICardRepository, CardRepository>();
             services.AddScoped<IBatchRepository, BatchRepository>();
             services.AddScoped<IPermissionRepository, PermissionRepository>();
             services.AddScoped<IMerchantRepository, MerchantRepository>();
             services.AddScoped<IMerchantProfileRepository, MerchantProfileRepository>();
             services.AddScoped<IFeedBackRepository, FeedbackRepository>();
             services.AddScoped<ILocationProfileRepository, LocationProfileRepository>();
+            services.AddScoped<ILocationActivateRepository, LocationActivateRepository>();
             services.AddScoped<IEntityDocumentMerchantRepository, EntityDocumentMerchantRepository>();
             //services.AddScoped<ITerminalRepository, TerminalRepository>();
             services.AddAutoMapper(Assembly.GetExecutingAssembly());
