@@ -18,10 +18,29 @@ namespace MerchantMVC.Repositories
         {
             ebaseDbContext = _ebaseDbContext;
         }
-        public IEnumerable<Card> GetCardsByMerchantId(int merchantId)
+        public IEnumerable<CardViewModel> GetCardsByMerchantId(int merchantId)
         {
-            IEnumerable<Card> cards = null;
-            cards = ebaseDbContext.Cards.Where(c => c.MerchantId == merchantId).OrderBy(c => c.CardId).ToList();
+            IEnumerable<CardViewModel> cards = null;
+            cards = ebaseDbContext.Cards.Where(c => c.MerchantId == merchantId).Where(c => c.ChStatus == "P")
+            .Where(c => c.ChMphone != null || c.Email != null)
+            .Join(ebaseDbContext.Programs, c => c.ProgramId, e => e.ProgramId, (c, e) => new CardViewModel
+            {
+                CardId = c.CardId,
+                ChFname = c.ChFname,
+                ChLname = c.ChLname,
+                ChHaddr1 = c.ChHaddr1,
+                ChHcity = c.ChHcity,
+                ChHstate = c.ChHstate,
+                ChHzip = c.ChHzip,
+                ChMphone = c.ChMphone,
+                AccountNumber = c.AccountNumber,
+                DateOfBirth = c.DateOfBirth,
+                Email = c.Email,
+                Gender = c.Gender,
+                LocationId = c.LocationId,
+                MerchantId = c.MerchantId
+            })
+            .OrderByDescending(c => c.CardId).ToList();
 
 
             //.Join(ebaseDBContext.Categories,ct=>ct.EntityCategoryId,ce=>ce.CategoryId,(ct,ce)=>new CallTrackingViewModel

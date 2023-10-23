@@ -6,8 +6,13 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using X.PagedList;
+using CsvHelper;
+using System.Text;
+using CsvHelper.Configuration;
 
 namespace MerchantMVC.Controllers
 {
@@ -28,18 +33,12 @@ namespace MerchantMVC.Controllers
         //}
 
         [HttpGet]
-        public IActionResult Index(string sortOrder, string searchString)
+        public IActionResult Index(string sortOrder, string searchString, int? page)
         {
-            ViewData["CurrentFilter"] = searchString;
             ViewData["LNameSortParam"] = string.IsNullOrEmpty(sortOrder) ? "LName" : "";
             ViewData["AccountNumberSortParam"] = string.IsNullOrEmpty(sortOrder) ? "AccountNumber" : "";
 
-            IEnumerable<Card> cards = _cardRepository.GetCardsByMerchantId((int)HttpContext.Session.GetInt32("MerchantId"));
-
-            if (!String.IsNullOrEmpty(searchString))
-            {
-                cards = cards.Where(x => x.ChLname.ToUpper().Contains(searchString.ToUpper()) || x.ChFname.ToUpper().Contains(searchString.ToUpper()) || x.AccountNumber.Contains(searchString.ToUpper()));
-            }
+            IEnumerable<CardViewModel> cards = _cardRepository.GetCardsByMerchantId((int)HttpContext.Session.GetInt32("MerchantId"));
 
             switch (sortOrder)
             {
@@ -53,13 +52,32 @@ namespace MerchantMVC.Controllers
                     cards = cards.OrderBy(l => l.ChLname);
                     break;
             }
-            return View(cards);
+
+            var pageNumber = page ?? 1;
+            var onePageOfCards = cards.ToPagedList(pageNumber, 25);
+
+            ViewBag.OnePageOfCards = onePageOfCards;
+            return View();
         }
 
-        //[HttpGet]
-        //public IActionResult Create()
-        //{
-        //    return View();
-        //}
+        [HttpGet]
+        public ActionResult ExportCardsToCsv()
+        {
+            var response = _cardRepository.GetCardsByMerchantId((int)HttpContext.Session.GetInt32("MerchantId"));
+            List<CardViewModel> cards = response.ToList();
+
+            var cc = new CsvConfiguration(new System.Globalization.CultureInfo("en-US"));
+            var memoryStream = new MemoryStream();
+      
+            using (var streamWriter = new StreamWriter(memoryStream, encoding: new UTF8Encoding(true)))
+            {                    
+                using (var csvWriter = new CsvWriter(streamWriter, cc))
+                {
+                    csvWriter.WriteRecords(cards);
+                    streamWriter.Flush();
+                    return File(memoryStream.ToArray(), "text/csv", String.Format("MerchantCardHolders_{0}.csv", DateTime.Now.ToString()));
+                }
+            }
+        }
     }
 }

@@ -31,6 +31,8 @@ namespace MerchantMVC.ViewModels
         //public string ChPrefix { get; set; }
         //public string ChAcct { get; set; }
         //public string AcctNum { get; set; }
+
+        [Display(Name = "Account Number")]
         public string AccountNumber { get; set; }
         //public string CardMag { get; set; }
         //public string Pin { get; set; }
@@ -48,8 +50,12 @@ namespace MerchantMVC.ViewModels
         //public int? EmployeeId { get; set; }
         //public DateTime? ChEdate { get; set; }
         //public string ChSalut { get; set; }
+        [Display(Name = "First Name")]
         public string ChFname { get; set; }
         //public string ChInitial { get; set; }
+
+
+        [Display(Name = "Last Name")]
         public string ChLname { get; set; }
         public string ChHaddr1 { get; set; }
         //public string ChHaddr2 { get; set; }
@@ -103,6 +109,7 @@ namespace MerchantMVC.ViewModels
         //public int? PreviousCustomerId { get; set; }
         //public int? CardRelationshipCategoryId { get; set; }
         //public int? EnrollmentLocationId { get; set; }
+        [Display(Name = "Mobile")]
         public string ChMphone { get; set; }
         //public byte[] AccountBarCode { get; set; }
         //public DateTime? PayEnableDate { get; set; }
