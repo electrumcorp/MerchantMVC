@@ -27,6 +27,8 @@ namespace MerchantMVC
                 .ReverseMap();
             CreateMap<CardViewModel, Card>()
                 .ReverseMap();
+            CreateMap<CardExportViewModel, Card>()
+                .ReverseMap();
             CreateMap<CallTrackingViewModel, CallTracking>()
                 .ForMember(dest=>dest.DateTime, opt=>opt.MapFrom(src=>src.TrackingDateTime))
                 .ForMember(dest=>dest.Type,opt=>opt.MapFrom(src=>src.TrackingType))

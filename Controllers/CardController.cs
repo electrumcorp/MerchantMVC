@@ -35,21 +35,17 @@ namespace MerchantMVC.Controllers
         [HttpGet]
         public IActionResult Index(string sortOrder, string searchString, int? page)
         {
-            ViewData["LNameSortParam"] = string.IsNullOrEmpty(sortOrder) ? "LName" : "";
             ViewData["AccountNumberSortParam"] = string.IsNullOrEmpty(sortOrder) ? "AccountNumber" : "";
 
             IEnumerable<CardViewModel> cards = _cardRepository.GetCardsByMerchantId((int)HttpContext.Session.GetInt32("MerchantId"));
 
             switch (sortOrder)
             {
-                case "LName":
-                    cards = cards.OrderByDescending(l => l.ChLname);
-                    break;
                 case "AccountNumber":
                     cards = cards.OrderByDescending(l => l.AccountNumber);
                     break;
                 default:
-                    cards = cards.OrderBy(l => l.ChLname);
+                    cards = cards.OrderBy(l => l.AccountNumber);
                     break;
             }
 
@@ -63,8 +59,8 @@ namespace MerchantMVC.Controllers
         [HttpGet]
         public ActionResult ExportCardsToCsv()
         {
-            var response = _cardRepository.GetCardsByMerchantId((int)HttpContext.Session.GetInt32("MerchantId"));
-            List<CardViewModel> cards = response.ToList();
+            var response = _cardRepository.GetCardExportsByMerchantId((int)HttpContext.Session.GetInt32("MerchantId"));
+            List<CardExportViewModel> cards = response.ToList();
 
             var cc = new CsvConfiguration(new System.Globalization.CultureInfo("en-US"));
             var memoryStream = new MemoryStream();

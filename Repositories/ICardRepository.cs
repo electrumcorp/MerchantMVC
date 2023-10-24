@@ -12,5 +12,6 @@ namespace MerchantMVC.Repositories
     public interface ICardRepository : IRepository<Card>
     {
         public IEnumerable<CardViewModel> GetCardsByMerchantId(int merchantId);
+        public IEnumerable<CardExportViewModel> GetCardExportsByMerchantId(int merchantId);
     }
 }

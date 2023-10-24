@@ -20,14 +20,17 @@
         <div class="col-6 justify-content-start">
             <div class="form-actions no-color">
                 <p>
-                    Find by Name/Card Number: <input type="text" name="SearchString" value='@ViewData["CurrentFilter"]' />
+                    Find by Account Number: <input type="text" name="SearchString" value='@ViewData["CurrentFilter"]' />
                     <input type="submit" value="Search" class="btn btn-default" /> | <a asp-action="Index">Back to Full List</a>
                 </p>
             </div>
         </div>
-        <div class="col-6 justify-content-end">
-            <a href="ExportCardsToCsv" class="btn btn-outline-primary">Download to CSV</a>
-        </div>
+        @if (ViewBag.OnePageOfCards != null)
+        {
+            <div class="col-6 justify-content-end">
+                <a href="ExportCardsToCsv" class="btn btn-outline-primary">Download to CSV</a>
+            </div>
+        }
     </div>
 </form>
 
@@ -41,7 +44,7 @@
                 @Html.DisplayNameFor(model => model.ChFname)
             </th>
             <th>
-                <a asp-action="Index" asp-route-sortOrder="@ViewData["LNameSortParam"]">@Html.DisplayNameFor(model => model.ChLname)</a>
+                @Html.DisplayNameFor(model => model.ChLname)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Email)

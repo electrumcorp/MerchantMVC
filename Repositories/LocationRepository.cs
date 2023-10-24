@@ -20,7 +20,7 @@ namespace MerchantMVC.Repositories
         public IEnumerable<EditLocationViewModel> GetLocationsByMerchantId(int merchantId)
         {
             IEnumerable<EditLocationViewModel> locations = null;
-            locations = ebaseDbContext.Locations.Where(c => c.MerchantId == merchantId).Where(c => c.CategoryId == 385)
+            locations = ebaseDbContext.Locations.Where(c => c.MerchantId == merchantId & c.CategoryId == 385)
                .Join(ebaseDbContext.LocationActivates, c => c.LocationId, e => e.LocationId, (c, e) => new EditLocationViewModel
                {
                    LocationId = c.LocationId,
@@ -46,58 +46,17 @@ namespace MerchantMVC.Repositories
                    DefaultOriginationDeviceId = e.DefaultOriginationDeviceId,
                    PosmaintSupport = e.PosmaintSupport,
                    PosmaintSupportPhone = e.PosmaintSupportPhone
-               });
+               })
+               .OrderBy(c => c.MerchantNumber);
                
                //.Join(ebaseDBContext.Categories,ct=>ct.EntityCategoryId,ce=>ce.CategoryId,(ct,ce)=>new CallTrackingViewModel
                //{
                //    CategoryName=ce.CategoryName
                //})
                //.OrderByDescending(o => o.MerchantNumber).ToList();
+               
 
             return locations;
         }
-
-
-        //public Task Add(Location entity)
-        //{
-        //    throw new NotImplementedException();
-        //}
-
-        //public async Task<Location> Get(int id)
-        //{
-        //    return await ebaseDbContext.Locations.FindAsync(12);
-        //}
-
-        //public Task<IEnumerable<Location>> GetAll()
-        //{
-        //    throw new NotImplementedException();
-        //}
-
-        //public void Remove(Location entity)
-        //{
-        //    throw new NotImplementedException();
-        //}
-
-        //public void Update(Location entity)
-        //{
-        //    throw new NotImplementedException();
-        //}
-
-
-
-        //Task IRepository<Location>.Add(Location entity)
-        //{
-        //    throw new NotImplementedException();
-        //}
-
-        //Task<Location> IRepository<Location>.Get(int id)
-        //{
-        //    throw new NotImplementedException();
-        //}
-
-        //Task<IEnumerable<Location>> IRepository<Location>.GetAll()
-        //{
-        //    throw new NotImplementedException();
-        //}
     }
 }
