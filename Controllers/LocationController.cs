@@ -125,9 +125,10 @@ namespace MerchantMVC.Controllers
 
             //set Session vars
             HttpContext.Session.SetString("LocationName", locationViewModel.LName.ToString());
-            HttpContext.Session.SetString("LocationId", locationViewModel.LocationId.ToString());
+            //HttpContext.Session.SetString("LocationId", locationViewModel.LocationId.ToString());
             TempData["LocationId"] = locationViewModel.LocationId;
             TempData["LocationName"] = string.Concat(locationViewModel.LFname, " ", locationViewModel.LLname);
+            ViewBag.LocationId = locationViewModel.LocationId;
 
             return View(locationViewModel);
         }

@@ -40,24 +40,17 @@
 <script defer src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
 <link href="https://cdn.datatables.net/1.10.24/css/dataTables.bootstrap4.min.css" rel="stylesheet" />
 <script defer src="https://cdn.datatables.net/datetime/1.1.0/js/dataTables.dateTime.min.js"></script>
-<script src="https://cdn.datatables.net/plug-ins/1.10.21/sorting/datetime-moment.js"></script>
-<script src="https://cdn.datatables.net/plug-ins/1.10.25/dataRender/datetime.js"></script>
+@*<script src="https://cdn.datatables.net/plug-ins/1.10.21/sorting/datetime-moment.js"></script>
+<script src="https://cdn.datatables.net/plug-ins/1.10.25/dataRender/datetime.js"></script>*@
 
 <script>
     $(document).ready(function () {
-
-            //$.get("/Employee/DTEmployee", function (data) {
-            //    var jsonData = data;
-           // var jsonData =@Json.Serialize(@Model);
-        //var data = [];
-        //for (var i = 0; i < 50000; i++) {
-        //    data.push([i, i, i, i, i]);
-        //}
 
             $("#tblloyaltyTransactions").DataTable({
 
                 ajax: {
                     url: "../../LoyaltyTran/GetLoyaltyTran",
+                    data: { locationId: @ViewBag.locationId },
                     dataSrc: '',
 
 
@@ -76,28 +69,15 @@
                             return '<button onclick="getLoyaltyTranDetail( '+data + ')" class="btn btn-link">View More</button>';
                         }
                     },
-
-            //        {title: 'Updated Date', data: 'updatedDate', render: function (data, row, type) {
-
-            //    var date = new Date(data);
-            //var y = date.getFullYear();
-            //            var d =date.getDate();
-            //    var month = date.getMonth() ;
-            //    return (month + '/' +d +'/' + y);
-            //}
-            //},
-        { title: 'Updated Date', data: 'updatedDateFormatted' ,ordering:true},
-        { title: 'Category', data: 'categoryName' },
-        { title: 'Card', data: 'cardName' },
-        { title: 'Item', data: 'item' },
-        { title: 'Amount', data: 'amount' },
-        { title: 'Quantity', data: 'quantity' },
-        { title: 'Discount', data: 'discount' }
-        ]
-
-
-        });
-        });
+                    { title: 'Updated Date', data: 'updatedDateFormatted' ,ordering:true},
+                    { title: 'Category', data: 'categoryName' },
+                    { title: 'Card', data: 'cardName' },
+                    { title: 'Item', data: 'item' },
+                    { title: 'Amount', data: 'amount' },
+                    { title: 'Quantity', data: 'quantity' },
+                    { title: 'Discount', data: 'discount' }
+                ] })
+            });
 
     function getLoyaltyTranDetail(id) {
 

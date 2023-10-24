@@ -56,9 +56,9 @@ namespace MerchantMVC.Controllers
             return View();
         }
 
-        public IActionResult GetLoyaltyTran()
+        public IActionResult GetLoyaltyTran(int locationId)
         {
-            List<LoyaltyTranViewModel> lst = _loyaltyTranRepository.GetAllLoyaltyTransactionByLocationID((int)HttpContext.Session.GetInt32("LocationId")).ToList();
+            List<LoyaltyTranViewModel> lst = _loyaltyTranRepository.GetAllLoyaltyTransactionByLocationID(locationId).ToList();
             return new JsonResult(lst);
         }
 
