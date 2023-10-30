@@ -12,7 +12,7 @@
                 Category
             </th>
             <th>
-                Card
+                Name / Mobile / Acct No
             </th>
             <th>
                 Item
@@ -77,16 +77,17 @@
                     { title: 'Quantity', data: 'quantity' },
                     { title: 'Discount', data: 'discount' }
                 ] })
-            });
+            })
 
     function getLoyaltyTranDetail(id) {
-
         $.get("../LoyaltyTran/GetDetail", { id: id }, function (res) {
             $('#form-modal .modal-body').html(res);
             $('#form-modal .modal-title').html('Loyalty Transaction Details');
             $('#form-modal').modal('show');
-        });
+        })
     }
+
+
 </script>
 
 

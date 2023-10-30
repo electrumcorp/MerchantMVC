@@ -20,7 +20,7 @@
 <link href="https://cdn.datatables.net/1.10.24/css/dataTables.bootstrap4.min.css" rel="stylesheet" />
 
 <script>
-    $(document).ready(function(){
+    $(document).ready(function () {
         $("#tblBatch").DataTable(
             {
                 ajax: {
@@ -30,7 +30,7 @@
                 },
                 scroller: true,
                 deferRender: true,
-                order:[[0,"desc"]],
+                order: [[0, "desc"]],
                 "columns":
                     [
                         { title: "CutOff Date", data: "formattedCuttOffDate" },
@@ -38,9 +38,7 @@
                         { title: "Batch Amount", data: "batchAmount" },
                         { title: "Terminal", data: "terminalDescription" }
                     ]
-
-
             }
-        );
-    })    ;
+        )
+    })
 </script>

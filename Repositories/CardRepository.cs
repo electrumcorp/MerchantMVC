@@ -2,6 +2,7 @@
 using MerchantMVC.Models;
 using MerchantMVC.Repositories.Base;
 using MerchantMVC.ViewModels;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,10 +22,10 @@ namespace MerchantMVC.Repositories
         public IEnumerable<CardViewModel> GetCardsByMerchantId(int merchantId)
         {
             IEnumerable<CardViewModel> cards = null;
-            cards = ebaseDbContext.Cards.Where(c => c.MerchantId == merchantId).Where(c => c.ChStatus == "P")
+            cards = ebaseDbContext.Cards.Where(c => c.ChStatus == "P")
             .Where(c => !string.IsNullOrEmpty(c.Email)).Where(c => c.PrivacyLevel == 330).Where(c => c.CommunicationsDeliveryCategoryId == 902)
             .Where(c => c.LastTransDate > DateTime.Now.AddYears(-1))
-            .Join(ebaseDbContext.Programs, c => c.ProgramId, e => e.ProgramId, (c, e) => new CardViewModel
+            .Join(ebaseDbContext.Locations, c => c.LocationId, e => e.LocationId, (c, e) => new CardViewModel
             {
                 CardId = c.CardId,
                 ChFname = c.ChFname,
@@ -41,14 +42,9 @@ namespace MerchantMVC.Repositories
                 LocationId = c.LocationId,
                 MerchantId = c.MerchantId
             })
+            .Where(e => e.MerchantId == merchantId)
+            .AsNoTracking()
             .OrderByDescending(c => c.AccountNumber).ToList();
-
-
-            //.Join(ebaseDBContext.Categories,ct=>ct.EntityCategoryId,ce=>ce.CategoryId,(ct,ce)=>new CallTrackingViewModel
-            //{
-            //    CategoryName=ce.CategoryName
-            //})
-            //.OrderByDescending(o => o.MerchantNumber).ToList();
 
             return cards;
         }
@@ -59,7 +55,7 @@ namespace MerchantMVC.Repositories
             cards = ebaseDbContext.Cards.Where(c => c.MerchantId == merchantId).Where(c => c.ChStatus == "P")
             .Where(c => !string.IsNullOrEmpty(c.Email)).Where(c => c.PrivacyLevel == 330).Where(c => c.CommunicationsDeliveryCategoryId == 902)
             .Where(c => c.LastTransDate > DateTime.Now.AddYears(-1))
-            .Join(ebaseDbContext.Programs, c => c.ProgramId, e => e.ProgramId, (c, e) => new CardExportViewModel
+            .Join(ebaseDbContext.Locations, c => c.EnrollmentLocationId, e => e.LocationId, (c, e) => new CardExportViewModel
             {
                 CardId = c.CardId,
                 ChFname = c.ChFname,
@@ -74,14 +70,8 @@ namespace MerchantMVC.Repositories
                 Email = c.Email,
                 Gender = c.Gender
             })
+            .AsNoTracking()
             .OrderByDescending(c => c.AccountNumber).ToList();
-
-
-            //.Join(ebaseDBContext.Categories,ct=>ct.EntityCategoryId,ce=>ce.CategoryId,(ct,ce)=>new CallTrackingViewModel
-            //{
-            //    CategoryName=ce.CategoryName
-            //})
-            //.OrderByDescending(o => o.MerchantNumber).ToList();
 
             return cards;
         }

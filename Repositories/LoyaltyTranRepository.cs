@@ -21,7 +21,7 @@ namespace MerchantMVC.Repositories
         public LoyaltyTranViewModel GetLoyaltyTransactionByLocationID(int id,int locationid)
         {
 
-            LoyaltyTranViewModel loyaltrans = ebaseDbContext.LoyaltyTransactionTEcs.Where(lt=>lt.LoyaltyTransactionId==id).Include(f => f.Card).Where(l => l.LocationId ==locationid)
+            LoyaltyTranViewModel loyaltrans = ebaseDbContext.LoyaltyTransactionTEcs.Where(lt=>lt.LoyaltyTransactionId==id).Include(f => f.Card).Where(l => l.LocationId ==locationid).Where(lt => lt.UpdatedDate > DateTime.Now.AddDays(-91))
                 .Join(ebaseDbContext.Categories, lt => lt.CategoryId, ct => ct.CategoryId, (lt, ct) =>
                       new LoyaltyTranViewModel
                       {
@@ -33,45 +33,11 @@ namespace MerchantMVC.Repositories
                           Discount = lt.Discount,
                           Quantity = lt.Quantity,
                           CategoryName = ct.CategoryName,
-                          CardName = string.Concat(lt.Card.ChFname, " ", lt.Card.ChLname),
+                          CardName = string.Concat(lt.Card.ChFname, " ", lt.Card.ChLname, " ", lt.Card.ChMphone, " ", lt.Card.AccountNumber),
                           LocationId = lt.LocationId,
                           UpdatedDateFormatted = DateTime.Parse(lt.UpdatedDate.ToString()).ToString("MM/dd/yyyy")
                       })
                  .SingleOrDefault();
-            //.Join()ToList();
-            //join c in ebaseDbContext.Cards on lt.CardId equals c.CardId
-            //join ct in ebaseDbContext.Categories on lt.CategoryId equals ct.CategoryId
-            //select new LoyaltyTranViewModel
-            //{
-            //    Amount = lt.Amount,
-            //    LoyaltyTransactionId = lt.LoyaltyTransactionId,
-            //    UpdatedDate = lt.UpdatedDate,
-            //    Item = lt.Item,
-            //    Discount = lt.Discount,
-            //    Quantity = lt.Quantity,
-            //    //CategoryName = ct.CategoryName,
-            //    // CardName = c.ChFname,
-            //    LocationId = lt.LocationId
-
-            //}).
-
-
-            //var    loyaltrans= ebaseDbContext.LoyaltyTransactionTEcs.Join(ebaseDbContext.Cards,lt=>lt.CardId,c=>c.CardId, (lt,c)=> new LoyaltyTranViewModel
-            //    {
-            //        Amount = lt.Amount,
-            //        LoyaltyTransactionId = lt.LoyaltyTransactionId,
-            //        UpdatedDate = lt.UpdatedDate,
-            //        Item = lt.Item,
-            //        Discount = lt.Discount,
-            //        Quantity = lt.Quantity,
-            //        //CategoryName = ct.CategoryName,
-            //         CardName = c.ChFname,
-            //        LocationId = lt.LocationId
-            //    }).Where(l => l.LocationId == locationID).OrderByDescending(l => l.UpdatedDate)
-            //                    .ToList();
-            // ebaseDbContext.inc
-            //  var loyaltrans= ebaseDbContext.LoyaltyTransactionTEcs.Where(l => l.LocationId == locationID).ToList();//.Join(l=>l.cat)inToList();
-
 
             return loyaltrans;
 
@@ -79,8 +45,8 @@ namespace MerchantMVC.Repositories
 
         public  IEnumerable<LoyaltyTranViewModel> GetAllLoyaltyTransactionByLocationID(int locationID)
         {
-
             var loyaltrans = ebaseDbContext.LoyaltyTransactionTEcs.Include(f => f.Card).Where(l => l.LocationId == locationID)
+            .Where(lt => lt.UpdatedDate > DateTime.Now.AddDays(-91))
                 .Join(ebaseDbContext.Categories, lt => lt.CategoryId, ct => ct.CategoryId, (lt, ct) =>
                       new LoyaltyTranViewModel
                       {
@@ -91,45 +57,13 @@ namespace MerchantMVC.Repositories
                           Discount = lt.Discount,
                           Quantity = lt.Quantity,
                           CategoryName = ct.CategoryName,
-                          CardName = string.Concat(lt.Card.ChFname, " ", lt.Card.ChLname),
+                          CardName = string.Concat(lt.Card.ChFname, " ", lt.Card.ChLname, " ", lt.Card.ChMphone, " ", lt.Card.AccountNumber),
                           LocationId = lt.LocationId,
                           UpdatedDateFormatted =  DateTime.Parse(lt.UpdatedDate.ToString()).ToString("MM/dd/yyyy")
-                      }).OrderByDescending(r=>r.UpdatedDate)
-                 .ToList();
-                              //.Join()ToList();
-            //join c in ebaseDbContext.Cards on lt.CardId equals c.CardId
-            //join ct in ebaseDbContext.Categories on lt.CategoryId equals ct.CategoryId
-            //select new LoyaltyTranViewModel
-            //{
-            //    Amount = lt.Amount,
-            //    LoyaltyTransactionId = lt.LoyaltyTransactionId,
-            //    UpdatedDate = lt.UpdatedDate,
-            //    Item = lt.Item,
-            //    Discount = lt.Discount,
-            //    Quantity = lt.Quantity,
-            //    //CategoryName = ct.CategoryName,
-            //    // CardName = c.ChFname,
-            //    LocationId = lt.LocationId
-
-            //}).
-            
-
-            //var    loyaltrans= ebaseDbContext.LoyaltyTransactionTEcs.Join(ebaseDbContext.Cards,lt=>lt.CardId,c=>c.CardId, (lt,c)=> new LoyaltyTranViewModel
-            //    {
-            //        Amount = lt.Amount,
-            //        LoyaltyTransactionId = lt.LoyaltyTransactionId,
-            //        UpdatedDate = lt.UpdatedDate,
-            //        Item = lt.Item,
-            //        Discount = lt.Discount,
-            //        Quantity = lt.Quantity,
-            //        //CategoryName = ct.CategoryName,
-            //         CardName = c.ChFname,
-            //        LocationId = lt.LocationId
-            //    }).Where(l => l.LocationId == locationID).OrderByDescending(l => l.UpdatedDate)
-            //                    .ToList();
-            // ebaseDbContext.inc
-            //  var loyaltrans= ebaseDbContext.LoyaltyTransactionTEcs.Where(l => l.LocationId == locationID).ToList();//.Join(l=>l.cat)inToList();
-
+                      })                    
+                .OrderByDescending(r=>r.UpdatedDate)
+                .AsNoTracking()
+                .ToList();
 
             return (IEnumerable<LoyaltyTranViewModel>) loyaltrans;
            

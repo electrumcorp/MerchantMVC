@@ -24,13 +24,11 @@ namespace MerchantMVC.Controllers
         [HttpGet]
         public IActionResult GetDetail(int id)
         {
-
             LoyaltyTranViewModel detailTranViewModel = _loyaltyTranRepository.GetLoyaltyTransactionByLocationID(id,(int) HttpContext.Session.GetInt32("LocationId"));
-            //_mapper.Map<LoyaltyTransactionTEc, LoyaltyTranViewModel>(lt, detailTranViewModel);
-
 
             return PartialView("_PartialLoyaltyTranDetail",detailTranViewModel);
         }
+
         [HttpGet]
         public IActionResult Detail (int id)
         {
@@ -42,6 +40,7 @@ namespace MerchantMVC.Controllers
 
             return View(detailTranViewModel);
         }
+
         public IActionResult Edit(int id=0)
         {
             if(id!=0)
@@ -51,6 +50,7 @@ namespace MerchantMVC.Controllers
             }
             return View();
         }
+
         public IActionResult Index()
         {
             return View();

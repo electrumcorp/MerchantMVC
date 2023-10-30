@@ -13,7 +13,6 @@ namespace MerchantMVC.Repositories
     {
         private readonly EbaseDBContext ebaseDBContext = null;
 
-
         public BatchRepository(EbaseDBContext context) : base(context)
         { 
             ebaseDBContext = context;
@@ -23,15 +22,6 @@ namespace MerchantMVC.Repositories
         {
             var terminal = ebaseDBContext.Terminals.Where(t => t.LocationId == locationID).ToList();
             var batchViews =  ebaseDBContext.Tapbatches
-            //                  join t in terminal on b.TerminalId equals t.Terminal30Id
-            //                  select new BatchViewModel
-            //                  {
-            //                      TerminalDescription = t.TermDescrip,
-            //                      CutoffDate = b.CutoffDate,
-            //                      BatchAmount = b.BatchAmount,
-            //                      TransactionCount = b.TransactionCount
-            //                  }).ToList();
-
                 .Join(ebaseDBContext.Terminals, c => c.TerminalId, e => e.Terminal30Id, (c, e) => new BatchViewModel
                 {
                     TerminalDescription = e.TermDescrip,
@@ -40,10 +30,14 @@ namespace MerchantMVC.Repositories
                     TransactionCount = c.TransactionCount,
                     LocationId=(int)e.LocationId,
                     FormattedCuttOffDate = DateTime.Parse(c.CutoffDate.ToString()).ToString("MM/dd/yyyy")
-                }).Where(rs => rs.LocationId == locationID).OrderByDescending(r=>r.CutoffDate).ToList();
+                })
+                .Where(rs => rs.LocationId == locationID && rs.CutoffDate > DateTime.Now.AddDays(-91))
+                .AsNoTracking()
+                .OrderByDescending(r=>r.CutoffDate)
+                .ToList();
             int co = batchViews.Count;
 
-            return (IEnumerable < BatchViewModel > )batchViews ;
+            return batchViews;
         }
     }
 }
