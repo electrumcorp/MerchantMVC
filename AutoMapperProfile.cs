@@ -11,8 +11,7 @@ namespace MerchantMVC
     public class AutoMapperProfile:Profile
     {
        public AutoMapperProfile()
-        {
-            
+        {            
             CreateMap<EditLocationViewModel, Location>()
                 .ReverseMap();
             CreateMap<EditLocationViewModel, LocationActivate>()
@@ -28,6 +27,8 @@ namespace MerchantMVC
             CreateMap<CardViewModel, Card>()
                 .ReverseMap();
             CreateMap<CardExportViewModel, Card>()
+                .ReverseMap();
+            CreateMap<VirtualTerminalViewModel, VirtualTerminal>()
                 .ReverseMap();
             CreateMap<CallTrackingViewModel, CallTracking>()
                 .ForMember(dest=>dest.DateTime, opt=>opt.MapFrom(src=>src.TrackingDateTime))

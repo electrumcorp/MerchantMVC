@@ -1,0 +1,165 @@
+﻿@model MerchantMVC.ViewModels.VirtualTerminalViewModel
+@{
+    ViewData["Title"] = "Virtual Terminal";
+    Layout = "_LayoutV";
+}
+
+
+<h2>Virtual Terminal </h2>
+<p> </p>
+
+
+<form asp-action="SubmitTransaction" data-ajax-method="POST" asp-controller="VirtualTerminal">
+    <div class="row d-flex flex-column justify-content-start">
+
+        <div class="form-group">
+            <label id="lblLocation" class="control-label col-md-2">Location</label>
+            <div class="col-md-5">
+                <select id="location" class="form-control" asp-for="SelectedLocation" asp-items="@(new SelectList(Model.LocationsList, "Value", "Text"))">
+                </select>
+                <span asp-validation-for="SelectedLocation" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label id="lblTerminal" class="control-label col-md-2">Terminal</label>
+            <div class="col-md-5">
+                <select id="terminal" class="form-control" asp-for="SelectedTerminal" asp-items="@(new SelectList(Model.TerminalsList, "Value", "Text"))">
+                </select>
+                <span asp-validation-for="SelectedTerminal" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label id="lblTerminal" class="control-label col-md-2">Card Type</label>
+            <div class="col-md-5">
+                <select id="cardType" class="form-control" asp-for="SelectedCardType" asp-items="@(new SelectList(Model.CardTypeList, "Value", "Text"))">
+                </select>
+                <span asp-validation-for="SelectedCardType" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-2">
+                <label id="lblCardAccountNumber" class="control-label">Card Account Number</label>
+            </div>
+            <div class="col-md-5">
+                <input id="CardAccountNumber" class="form-control" asp-for="CardAccountNumber" type="text" />
+                <span asp-validation-for="CardAccountNumber" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label id="lblAmount" class="control-label col-md-2">Amount (XX.XX)</label>
+            <div class="col-md-5">
+                <input id="Amount" class="form-control" asp-for="Amount" type="number" />
+                <span asp-validation-for="Amount" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label id="lblTransactionCode" class="control-label col-md-2">Transaction Code</label>
+            <div class="col-md-5">
+                <select id="transactionCode" class="form-control" asp-for="SelectedTransCode" asp-items="@(new SelectList(Model.TransCodeList, "Value", "Text"))">
+                </select>
+                <span asp-validation-for="SelectedTransCode" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label id="lblReferenceID" class="control-label col-md-2">Reference ID</label>
+            <div class="col-md-5">
+                <input id="amount" class="form-control" asp-for="ReferenceID" type="text" />
+                <span asp-validation-for="ReferenceID" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label id="lblReferenceType" class="control-label col-md-2">Reference Type</label>
+            <div class="col-md-5">
+                <select id="referenceType" class="form-control" asp-for="SelectedReferenceType" asp-items="@(new SelectList(Model.ReferenceTypeList, "Value", "Text"))">
+                </select>
+                <span asp-validation-for="SelectedReferenceType" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label id="lblComments" class="control-label col-md-2">Comments</label>
+            <div class="col-md-5">
+                <textarea id="transactionComments" class="form-control" asp-for="TransactionComments" rows="4"></textarea>
+                <span asp-validation-for="TransactionComments" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div class="row d-flex justify-content-center align-content-center">
+            <div class="form-group my-3">
+                <input type="submit" value="Submit Transaction" class="btn btn-lg btn-primary px-5" />
+            </div>
+        </div>
+        <div>
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            @if (ViewBag.message != null)
+            {
+                <div class="@(ViewBag.message.Contains(" success")? "alert alert-success alert-dismissible" :"alert alert-danger alert-dismissible")">
+                    <a href="#" aria-label="close" data-dismiss="alert" class="close">&times;</a>
+                    @ViewBag.message
+                </div>
+            }
+        </div>
+    </div>
+</form>
+
+
+@section Scripts {
+    Scripts.Render("~/bundles/jqueryval")
+    <script type="text/javascript">
+
+        $('#location').change(function () {
+            var selectedLocation = $("#location").val();
+            var terminalSelect = $("#terminal");
+            terminalSelect.empty()
+                $.ajax({
+                    type: 'GET',
+                    contentType: 'application/json',
+                    url: '/VirtualTerminal/GetTerminals',
+                    dataType: 'Json',
+                    data: { locationID:selectedLocation },
+                    success: function (data) {
+                        terminalSelect.html("");
+                        terminalSelect.append('<option value="0">' + "-- SELECT TERMINAL --" + '</option>');
+                        for (var i = 0; i < data.length; i++) {
+                            terminalSelect.append('<option value="' + data[i].id + '">' + data[i].text + '</option>');
+                        }
+                    },
+                    error: function (xhr, status, error) {
+                        var err = eval("(" + xhr.responseText + ")");
+                        alert(err.Message);
+                    }
+                });
+        });
+
+        $('#terminal').change(function () {
+            var selectedTerminal = $("#terminal").val();
+            var cardtypeSelect = $("#cardType");
+            cardtypeSelect.empty()
+                $.ajax({
+                    type: 'GET',
+                    contentType: 'application/json',
+                    url: '/VirtualTerminal/GetCardTypes',
+                    dataType: 'Json',
+                    data: { terminalID:selectedTerminal },
+                    success: function (data) {
+                        cardtypeSelect.html("");
+                        cardtypeSelect.append('<option value="0">' + "-- SELECT CARD TYPE --" + '</option>');
+                        for (var i = 0; i < data.length; i++) {
+                            cardtypeSelect.append('<option value="' + data[i].id + '">' + data[i].text + '</option>');
+                        }
+                    },
+                    error: function (xhr, status, error) {
+                        var err = eval("(" + xhr.responseText + ")");
+                        alert(err.Message);
+                    }
+                });
+        });
+    </script>
+}

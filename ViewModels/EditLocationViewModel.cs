@@ -26,7 +26,7 @@ namespace MerchantMVC.ViewModels
         public string LName { get; set; }
 
         [Required(ErrorMessage = "Please enter Address 1.")]
-        [Display(Name = "Address 1")]
+        [Display(Name = "Address")]
         public string LAddr1 { get; set; }
 
         [Display(Name = "Address 2")]

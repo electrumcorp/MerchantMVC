@@ -44,6 +44,8 @@ namespace MerchantMVC.Models
         public virtual DbSet<MerchantActivate> MerchantActivates { get; set; }
         public virtual DbSet<EntityDocumentMerchant> EntityDocumentMerchants { get; set; }
         public virtual DbSet<LocationActivate> LocationActivates { get; set; }
+        public virtual DbSet<TerminalCardType> TerminalCardTypes { get; set; }
+        public virtual DbSet<TerminalTranCode> TerminalTranCodes { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
@@ -60,6 +62,38 @@ namespace MerchantMVC.Models
         {
             modelBuilder.HasAnnotation("Relational:Collation", "SQL_Latin1_General_CP1_CI_AS");
 
+            modelBuilder.Entity<TerminalCardType>(entity =>
+            {
+                entity.HasNoKey();
+
+                entity.ToView("TerminalCardType_V_EC");
+
+                entity.Property(e => e.CardTypeId).HasColumnName("CardTypeID");
+
+                entity.Property(e => e.CardTypeName)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Terminal30Id).HasColumnName("Terminal30ID");
+            });
+
+            modelBuilder.Entity<TerminalTranCode>(entity =>
+            {
+                entity.HasNoKey();
+
+                entity.ToView("TerminalTranCode_V_EC");
+
+                entity.Property(e => e.TranCode)
+                    .HasMaxLength(10)
+                    .IsUnicode(false)
+                    .IsFixedLength(true);
+
+                entity.Property(e => e.TranCodeId)
+                    .ValueGeneratedOnAdd()
+                    .HasColumnName("TranCodeID");
+
+                entity.Property(e => e.TranCodeName).HasMaxLength(50);
+            });
             modelBuilder.Entity<LocationActivate>(entity =>
             {
                 entity.ToTable("LocationActivate");
@@ -2980,5 +3014,7 @@ namespace MerchantMVC.Models
         public DbSet<MerchantMVC.ViewModels.FeedBackViewModel> FeedBackViewModel { get; set; }
 
         public DbSet<MerchantMVC.ViewModels.EntityDocumentMerchantViewModel> EntityDocumentMerchantViewModel { get; set; }
+
+        public DbSet<MerchantMVC.ViewModels.VirtualTerminalViewModel> VirtualTerminalViewModel { get; set; }
     }
 }

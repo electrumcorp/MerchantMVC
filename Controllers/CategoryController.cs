@@ -23,11 +23,11 @@ namespace MerchantMVC.Controllers
         {
             return View();
         }
+
         [HttpGet]
         public JsonResult GetPriority(string searchTerm)
         {           
             List<Category> lstCs = new List<Category>();
-
             var lstC = _categoryRepository.GetCategoryForPriorityByCategoryId().ToList();
             lstC = lstC.Where(c => c.CategoryId != 171).ToList();
 
@@ -53,7 +53,6 @@ namespace MerchantMVC.Controllers
         [HttpGet]
         public JsonResult GetCategoryType(string searchTerm)
         {
-
             List<Category> lstCs = new List<Category>();
             List<Category> lstCSearch = new List<Category>();
 
@@ -71,7 +70,7 @@ namespace MerchantMVC.Controllers
             }
 
             var jsonData = lstCSearch.Select(x => new { id = x.CategoryId, text = x.CategoryName });
-            //JsonConvert.SerializeObject(jsVal);
+
             return Json(jsonData);
         }
     }
