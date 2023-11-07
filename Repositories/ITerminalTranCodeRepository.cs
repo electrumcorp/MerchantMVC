@@ -9,8 +9,6 @@ namespace MerchantMVC.Repositories
 {
     public interface ITerminalTranCodeRepository : IRepository<TerminalTranCode>
     {
-        //public IEnumerable<Category> GetCategoryByTypeId(int typeid);
-        //public IEnumerable<Category> GetCategoryForPriorityByCategoryId();
 
     }
 }

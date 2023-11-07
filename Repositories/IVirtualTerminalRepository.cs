@@ -14,5 +14,6 @@ namespace MerchantMVC.Repositories
         public VirtualTerminalViewModel CreateVirtualTerminal(int merchantID);
         public IEnumerable<Terminal> GetTerminals(int locationID);
         public IEnumerable<TerminalCardType> GetCardTypes(int terminalID);
+        public IEnumerable<TerminalTranCode> GetTransCodes(int terminalID);
     }
 }

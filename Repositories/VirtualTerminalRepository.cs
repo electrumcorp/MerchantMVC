@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using MerchantMVC.ViewModels;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Data.SqlClient;
 
 namespace MerchantMVC.Repositories
 {
@@ -45,14 +46,6 @@ namespace MerchantMVC.Repositories
                         Value = n.LocationId.ToString(),
                         Text = n.LName
                     }).ToList();
-
-            var locationtip = new SelectListItem()
-            {
-                Value = null,
-                Text = "-- Select Location --"
-            };
-
-            locations.Insert(0, locationtip);
 
             return new SelectList(locations, "Value", "Text");
         }
@@ -121,25 +114,27 @@ namespace MerchantMVC.Repositories
             referenceTypes.Insert(0, referenceTip);
             return new SelectList(referenceTypes, "Value", "Text");
         }
-
         public IEnumerable<SelectListItem> GetTransCodes()
         {
-            List<SelectListItem> referenceTypes = ebaseContext.TerminalTranCodes.AsNoTracking()
-                .OrderBy(n => n.TranCode)
-                    .Select(n =>
-                        new SelectListItem
-                        {
-                            Value = n.TranCode.ToString(),
-                            Text = n.TranCodeName
-                        }).ToList();
-
-            var referenceTip = new SelectListItem()
+            IEnumerable<SelectListItem> terminals = new List<SelectListItem>()
             {
-                Value = null,
-                Text = "-- Select Transaction Code --"
+                new SelectListItem
+                {
+                    Value = null,
+                    Text = "-- Select Terminal first --"
+                }
             };
-            referenceTypes.Insert(0, referenceTip);
-            return new SelectList(referenceTypes, "Value", "Text");
+
+            return terminals;
+        }
+
+        public IEnumerable<TerminalTranCode> GetTransCodes(int terminalID)
+        {
+
+            var param = new SqlParameter("@TerminalID", terminalID);
+            var transCodes = ebaseContext.TerminalTranCodes.FromSqlRaw("TerminalTranCode_S_EC @TerminalID", param).ToList();
+
+            return transCodes;
         }
 
         public IEnumerable<SelectListItem> GetCardTypes()
@@ -158,9 +153,8 @@ namespace MerchantMVC.Repositories
 
         public IEnumerable<TerminalCardType> GetCardTypes(int terminalID)
         {
-            var cardTypes = ebaseContext.TerminalCardTypes.AsNoTracking()
-                .Where(n => n.Terminal30Id == terminalID)
-                .OrderBy(n => n.CardTypeName).ToList();
+            var param = new SqlParameter("@TerminalID", terminalID);
+            var cardTypes = ebaseContext.TerminalCardTypes.FromSqlRaw("TerminalCardType_S_EC @TerminalID", param).ToList();
 
             return cardTypes;
         }

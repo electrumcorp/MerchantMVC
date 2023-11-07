@@ -9,33 +9,46 @@
 <p> </p>
 
 
-<form asp-action="SubmitTransaction" data-ajax-method="POST" asp-controller="VirtualTerminal">
+<form asp-action="Submit" data-ajax-method="POST" asp-controller="VirtualTerminal">
     <div class="row d-flex flex-column justify-content-start">
 
         <div class="form-group">
             <label id="lblLocation" class="control-label col-md-2">Location</label>
             <div class="col-md-5">
-                <select id="location" class="form-control" asp-for="SelectedLocation" asp-items="@(new SelectList(Model.LocationsList, "Value", "Text"))">
-                </select>
-                <span asp-validation-for="SelectedLocation" class="text-danger"></span>
+                @*<select id="location" name="locationID" class="form-control" asp-for="SelectedLocation" asp-items="@(new SelectList(Model.LocationsList, "Value", "Text"))">
+                </select>*@
+                @Html.DropDownListFor(x => Model.LocationID, new SelectList(Model.LocationsList, "Value", "Text"), "-- SELECT LOCATION --", new { @class = "form-control" })
+                <span asp-validation-for="LocationID" class="text-danger"></span>
             </div>
         </div>
 
         <div class="form-group">
             <label id="lblTerminal" class="control-label col-md-2">Terminal</label>
             <div class="col-md-5">
-                <select id="terminal" class="form-control" asp-for="SelectedTerminal" asp-items="@(new SelectList(Model.TerminalsList, "Value", "Text"))">
-                </select>
-                <span asp-validation-for="SelectedTerminal" class="text-danger"></span>
+                @*<select id="terminal" name="terminalID" class="form-control" asp-for="SelectedTerminal" asp-items="@(new SelectList(Model.TerminalsList, "Value", "Text"))">
+        </select>*@
+                @Html.DropDownListFor(x => Model.Terminal30ID, new SelectList(Model.TerminalsList, "Value", "Text"), "-- SELECT TERMINAL --", new { @class = "form-control"})
+                <span asp-validation-for="Terminal30ID" class="text-danger"></span>
             </div>
         </div>
 
         <div class="form-group">
             <label id="lblTerminal" class="control-label col-md-2">Card Type</label>
             <div class="col-md-5">
-                <select id="cardType" class="form-control" asp-for="SelectedCardType" asp-items="@(new SelectList(Model.CardTypeList, "Value", "Text"))">
-                </select>
-                <span asp-validation-for="SelectedCardType" class="text-danger"></span>
+                @*<select id="cardType" name="CardTypeID" class="form-control" asp-for="SelectedCardType" asp-items="@(new SelectList(Model.CardTypeList, "Value", "Text"))">
+        </select>*@                
+                @Html.DropDownListFor(x => Model.CardTypeID, new SelectList(Model.CardTypeList, "Value", "Text"), "-- SELECT CARD TYPE --", new { @class = "form-control"})
+            <span asp-validation-for="CardTypeID" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label id="lblTransactionCode" class="control-label col-md-2">Transaction Code</label>
+            <div class="col-md-5">
+                @*<select id="transactionCode" name="TransCodeID" class="form-control" asp-for="SelectedTransCode" asp-items="@(new SelectList(Model.TransCodeList, "Value", "Text"))">
+        </select>*@
+                @Html.DropDownListFor(x => Model.TransCodeID, new SelectList(Model.TransCodeList, "Value", "Text"), "-- SELECT TRANSACTION CODE --", new { @class = "form-control"})
+                <span asp-validation-for="TransCodeID" class="text-danger"></span>
             </div>
         </div>
 
@@ -44,7 +57,8 @@
                 <label id="lblCardAccountNumber" class="control-label">Card Account Number</label>
             </div>
             <div class="col-md-5">
-                <input id="CardAccountNumber" class="form-control" asp-for="CardAccountNumber" type="text" />
+                @*<input id="CardAccountNumber" name="CardAccountNumber" class="form-control" asp-for="CardAccountNumber" type="text" />*@
+                @Html.TextBoxFor(x => Model.CardAccountNumber, new { @class = "form-control" })
                 <span asp-validation-for="CardAccountNumber" class="text-danger"></span>
             </div>
         </div>
@@ -52,24 +66,17 @@
         <div class="form-group">
             <label id="lblAmount" class="control-label col-md-2">Amount (XX.XX)</label>
             <div class="col-md-5">
-                <input id="Amount" class="form-control" asp-for="Amount" type="number" />
+                @*<input id="Amount" class="form-control" name="Amount" asp-for="Amount" type="number" />*@ 
+                @Html.TextBoxFor(x => Model.Amount, new { @class = "form-control" })
                 <span asp-validation-for="Amount" class="text-danger"></span>
-            </div>
-        </div>
-
-        <div class="form-group">
-            <label id="lblTransactionCode" class="control-label col-md-2">Transaction Code</label>
-            <div class="col-md-5">
-                <select id="transactionCode" class="form-control" asp-for="SelectedTransCode" asp-items="@(new SelectList(Model.TransCodeList, "Value", "Text"))">
-                </select>
-                <span asp-validation-for="SelectedTransCode" class="text-danger"></span>
             </div>
         </div>
 
         <div class="form-group">
             <label id="lblReferenceID" class="control-label col-md-2">Reference ID</label>
             <div class="col-md-5">
-                <input id="amount" class="form-control" asp-for="ReferenceID" type="text" />
+                @*<input id="amount" class="form-control" name="ReferenceID" asp-for="ReferenceID" type="text" />*@
+                @Html.TextBoxFor(x => Model.ReferenceID, new { @class = "form-control" })
                 <span asp-validation-for="ReferenceID" class="text-danger"></span>
             </div>
         </div>
@@ -77,16 +84,17 @@
         <div class="form-group">
             <label id="lblReferenceType" class="control-label col-md-2">Reference Type</label>
             <div class="col-md-5">
-                <select id="referenceType" class="form-control" asp-for="SelectedReferenceType" asp-items="@(new SelectList(Model.ReferenceTypeList, "Value", "Text"))">
-                </select>
-                <span asp-validation-for="SelectedReferenceType" class="text-danger"></span>
+                @*<select id="referenceType" class="form-control" name="ReferenceTypeID" asp-for="SelectedReferenceType" asp-items="@(new SelectList(Model.ReferenceTypeList, "Value", "Text"))">
+        </select>*@
+                @Html.DropDownListFor(x => Model.ReferenceType, new SelectList(Model.ReferenceTypeList, "Value", "Text"), "", new { @class = "form-control"})
+                <span asp-validation-for="ReferenceType" class="text-danger"></span>
             </div>
         </div>
 
         <div class="form-group">
             <label id="lblComments" class="control-label col-md-2">Comments</label>
             <div class="col-md-5">
-                <textarea id="transactionComments" class="form-control" asp-for="TransactionComments" rows="4"></textarea>
+                <textarea id="transactionComments" class="form-control" name="TransactionComments" asp-for="TransactionComments" rows="4"></textarea>
                 <span asp-validation-for="TransactionComments" class="text-danger"></span>
             </div>
         </div>
@@ -96,15 +104,16 @@
                 <input type="submit" value="Submit Transaction" class="btn btn-lg btn-primary px-5" />
             </div>
         </div>
-        <div>
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            @if (ViewBag.message != null)
-            {
-                <div class="@(ViewBag.message.Contains(" success")? "alert alert-success alert-dismissible" :"alert alert-danger alert-dismissible")">
-                    <a href="#" aria-label="close" data-dismiss="alert" class="close">&times;</a>
-                    @ViewBag.message
-                </div>
-            }
+        <div class="form-row">
+            <div class="col">
+                @if (ViewBag.message != null)
+                {
+                    <div class="@(ViewBag.message.Contains("success")? "alert alert-success alert-dismissible":"alert alert-danger alert-dismissible")">
+                        <a href="#" aria-label="close" data-dismiss="alert" class="close">&times;</a>
+                        @ViewBag.message
+                    </div>
+                }
+            </div>
         </div>
     </div>
 </form>
@@ -113,53 +122,73 @@
 @section Scripts {
     Scripts.Render("~/bundles/jqueryval")
     <script type="text/javascript">
-
-        $('#location').change(function () {
-            var selectedLocation = $("#location").val();
-            var terminalSelect = $("#terminal");
+        $('#LocationID').change(function () {
+            var selectedLocation = $("#LocationID").val();
+            var terminalSelect = $("#Terminal30ID");
             terminalSelect.empty()
-                $.ajax({
-                    type: 'GET',
-                    contentType: 'application/json',
-                    url: '/VirtualTerminal/GetTerminals',
-                    dataType: 'Json',
-                    data: { locationID:selectedLocation },
-                    success: function (data) {
-                        terminalSelect.html("");
-                        terminalSelect.append('<option value="0">' + "-- SELECT TERMINAL --" + '</option>');
-                        for (var i = 0; i < data.length; i++) {
-                            terminalSelect.append('<option value="' + data[i].id + '">' + data[i].text + '</option>');
-                        }
-                    },
-                    error: function (xhr, status, error) {
-                        var err = eval("(" + xhr.responseText + ")");
-                        alert(err.Message);
+            $.ajax({
+                type: 'GET',
+                contentType: 'application/json',
+                url: '/VirtualTerminal/GetTerminals',
+                dataType: 'Json',
+                data: { locationID: selectedLocation },
+                success: function (data) {
+                    terminalSelect.html("");
+                    terminalSelect.append('<option value="0">' + "-- SELECT TERMINAL --" + '</option>');
+                    for (var i = 0; i < data.length; i++) {
+                        terminalSelect.append('<option value="' + data[i].id + '">' + data[i].text + '</option>');
                     }
-                });
+                },
+                error: function (xhr, status, error) {
+                    var err = eval("(" + xhr.responseText + ")");
+                    alert(err.Message);
+                }
+            });
         });
 
-        $('#terminal').change(function () {
-            var selectedTerminal = $("#terminal").val();
-            var cardtypeSelect = $("#cardType");
-            cardtypeSelect.empty()
-                $.ajax({
-                    type: 'GET',
-                    contentType: 'application/json',
-                    url: '/VirtualTerminal/GetCardTypes',
-                    dataType: 'Json',
-                    data: { terminalID:selectedTerminal },
-                    success: function (data) {
-                        cardtypeSelect.html("");
-                        cardtypeSelect.append('<option value="0">' + "-- SELECT CARD TYPE --" + '</option>');
-                        for (var i = 0; i < data.length; i++) {
-                            cardtypeSelect.append('<option value="' + data[i].id + '">' + data[i].text + '</option>');
-                        }
-                    },
-                    error: function (xhr, status, error) {
-                        var err = eval("(" + xhr.responseText + ")");
-                        alert(err.Message);
+        $('#Terminal30ID').change(function () {
+            var selectedTerminal = $("#Terminal30ID").val();
+
+            var cardtypeSelect = $("#CardTypeID");
+            $.ajax({
+                type: 'GET',
+                contentType: 'application/json',
+                url: '/VirtualTerminal/GetCardTypes',
+                dataType: 'Json',
+                data: { terminalID: selectedTerminal },
+                success: function (data) {
+                    cardtypeSelect.html("");
+                    cardtypeSelect.append('<option value="0">' + "-- SELECT CARD TYPE --" + '</option>');
+                    for (var i = 0; i < data.length; i++) {
+                        cardtypeSelect.append('<option value="' + data[i].id + '">' + data[i].text + '</option>');
                     }
-                });
+                },
+                error: function (xhr, status, error) {
+                    var err = eval("(" + xhr.responseText + ")");
+                    alert(err.Message);
+                }
+            });
+
+            var tranCodeSelect = $("#TransCodeID");
+            $.ajax({
+                type: 'GET',
+                contentType: 'application/json',
+                url: '/VirtualTerminal/GetTransCodes',
+                dataType: 'Json',
+                data: { terminalID: selectedTerminal },
+                success: function (data) {
+                    tranCodeSelect.html("");
+                    tranCodeSelect.append('<option value="0">' + "-- SELECT TRANSACTION CODE --" + '</option>');
+                    for (var i = 0; i < data.length; i++) {
+                        tranCodeSelect.append('<option value="' + data[i].id + '">' + data[i].text + '</option>');
+                    }
+                },
+                error: function (xhr, status, error) {
+                    var err = eval("(" + xhr.responseText + ")");
+                    alert(err.Message);
+                }
+            });
         });
+
     </script>
 }
