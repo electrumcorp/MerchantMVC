@@ -9,15 +9,16 @@
 <p> </p>
 
 
-<form asp-action="Submit" data-ajax-method="POST" asp-controller="VirtualTerminal">
-    <div class="row d-flex flex-column justify-content-start">
+<form asp-action="Index" data-ajax-method="POST" asp-controller="VirtualTerminal">
+    <div class="d-flex flex-column justify-content-start">
 
         <div class="form-group">
             <label id="lblLocation" class="control-label col-md-2">Location</label>
             <div class="col-md-5">
-                @*<select id="location" name="locationID" class="form-control" asp-for="SelectedLocation" asp-items="@(new SelectList(Model.LocationsList, "Value", "Text"))">
-                </select>*@
-                @Html.DropDownListFor(x => Model.LocationID, new SelectList(Model.LocationsList, "Value", "Text"), "-- SELECT LOCATION --", new { @class = "form-control" })
+                <select id="LocationID" class="form-control" asp-for="LocationID" asp-items="@Model.LocationsList">
+                    <option value="" hidden disabled selected>-- SELECT LOCATION --</option>
+                </select>
+                @*@Html.DropDownListFor(x => Model.SelectedLocation, new SelectList(Model.LocationsList, "Value", "Text"), "-- SELECT LOCATION --", new { @class = "form-control" })*@
                 <span asp-validation-for="LocationID" class="text-danger"></span>
             </div>
         </div>
@@ -25,19 +26,19 @@
         <div class="form-group">
             <label id="lblTerminal" class="control-label col-md-2">Terminal</label>
             <div class="col-md-5">
-                @*<select id="terminal" name="terminalID" class="form-control" asp-for="SelectedTerminal" asp-items="@(new SelectList(Model.TerminalsList, "Value", "Text"))">
-        </select>*@
-                @Html.DropDownListFor(x => Model.Terminal30ID, new SelectList(Model.TerminalsList, "Value", "Text"), "-- SELECT TERMINAL --", new { @class = "form-control"})
-                <span asp-validation-for="Terminal30ID" class="text-danger"></span>
+                <select id="TerminalID" class="form-control" asp-for="TerminalID" asp-items="@Model.TerminalsList">
+        </select>
+                @*@Html.DropDownListFor(x => Model.SelectedTerminal, new SelectList(Model.TerminalsList, "Value", "Text"), "-- SELECT TERMINAL --", new { @class = "form-control"})*@
+                <span asp-validation-for="TerminalID" class="text-danger"></span>
             </div>
         </div>
 
         <div class="form-group">
             <label id="lblTerminal" class="control-label col-md-2">Card Type</label>
             <div class="col-md-5">
-                @*<select id="cardType" name="CardTypeID" class="form-control" asp-for="SelectedCardType" asp-items="@(new SelectList(Model.CardTypeList, "Value", "Text"))">
-        </select>*@                
-                @Html.DropDownListFor(x => Model.CardTypeID, new SelectList(Model.CardTypeList, "Value", "Text"), "-- SELECT CARD TYPE --", new { @class = "form-control"})
+                <select id="CardTypeID" class="form-control" asp-for="CardTypeID" asp-items="@Model.CardTypeList">
+        </select>                
+                @*@Html.DropDownListFor(x => Model.SelectedCardType, new SelectList(Model.CardTypeList, "Value", "Text"), "-- SELECT CARD TYPE --", new { @class = "form-control"})*@
             <span asp-validation-for="CardTypeID" class="text-danger"></span>
             </div>
         </div>
@@ -45,9 +46,9 @@
         <div class="form-group">
             <label id="lblTransactionCode" class="control-label col-md-2">Transaction Code</label>
             <div class="col-md-5">
-                @*<select id="transactionCode" name="TransCodeID" class="form-control" asp-for="SelectedTransCode" asp-items="@(new SelectList(Model.TransCodeList, "Value", "Text"))">
-        </select>*@
-                @Html.DropDownListFor(x => Model.TransCodeID, new SelectList(Model.TransCodeList, "Value", "Text"), "-- SELECT TRANSACTION CODE --", new { @class = "form-control"})
+                <select id="TransCodeID" class="form-control" asp-for="TransCodeID" asp-items="@Model.TransCodeList">
+        </select>
+                @*@Html.DropDownListFor(x => Model.SelectedTransCode, new SelectList(Model.TransCodeList, "Value", "Text"), "-- SELECT TRANSACTION CODE --", new { @class = "form-control"})*@
                 <span asp-validation-for="TransCodeID" class="text-danger"></span>
             </div>
         </div>
@@ -84,9 +85,9 @@
         <div class="form-group">
             <label id="lblReferenceType" class="control-label col-md-2">Reference Type</label>
             <div class="col-md-5">
-                @*<select id="referenceType" class="form-control" name="ReferenceTypeID" asp-for="SelectedReferenceType" asp-items="@(new SelectList(Model.ReferenceTypeList, "Value", "Text"))">
-        </select>*@
-                @Html.DropDownListFor(x => Model.ReferenceType, new SelectList(Model.ReferenceTypeList, "Value", "Text"), "", new { @class = "form-control"})
+                <select id="ReferenceType" class="form-control" asp-for="ReferenceType" asp-items="@Model.ReferenceTypeList">
+        </select>
+                @*@Html.DropDownListFor(x => Model.SelectedReferenceType, new SelectList(Model.ReferenceTypeList, "Value", "Text"), "", new { @class = "form-control"})*@
                 <span asp-validation-for="ReferenceType" class="text-danger"></span>
             </div>
         </div>
@@ -124,7 +125,7 @@
     <script type="text/javascript">
         $('#LocationID').change(function () {
             var selectedLocation = $("#LocationID").val();
-            var terminalSelect = $("#Terminal30ID");
+            var terminalSelect = $("#TerminalID");
             terminalSelect.empty()
             $.ajax({
                 type: 'GET',
@@ -146,8 +147,8 @@
             });
         });
 
-        $('#Terminal30ID').change(function () {
-            var selectedTerminal = $("#Terminal30ID").val();
+        $('#TerminalID').change(function () {
+            var selectedTerminal = $("#TerminalID").val();
 
             var cardtypeSelect = $("#CardTypeID");
             $.ajax({

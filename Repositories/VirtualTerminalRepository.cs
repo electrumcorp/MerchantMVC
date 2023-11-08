@@ -73,6 +73,21 @@ namespace MerchantMVC.Repositories
             return terminals;
         }
 
+        public IEnumerable<SelectListItem> GetTerminalSelectItems(int locationID)
+        {
+            List<SelectListItem> locations = ebaseContext.Terminals.AsNoTracking()
+                .Where(n => n.LocationId == locationID && n.CategoryId == 589 && n.Status == "P")
+                .OrderBy(n => n.TermDescrip)
+                .Select(n =>
+                    new SelectListItem
+                    {
+                        Value = n.Terminal30Id.ToString(),
+                        Text = n.TermDescrip
+                    }).ToList();
+
+            return new SelectList(locations, "Value", "Text");
+        }
+
         public IEnumerable<SelectListItem> GetReferenceTypes()
         {
             List<SelectListItem> referenceTypes = ebaseContext.Categories.AsNoTracking()
@@ -137,6 +152,20 @@ namespace MerchantMVC.Repositories
             return transCodes;
         }
 
+        public IEnumerable<SelectListItem> GetTransCodeSelectItems(int terminalID)
+        {
+            var list = GetTransCodes(terminalID);
+            List<SelectListItem> transCodes = list
+                .Select(n =>
+                    new SelectListItem
+                    {
+                        Value = n.TranCodeId.ToString(),
+                        Text = n.TranCodeName
+                    }).ToList();
+
+            return new SelectList(transCodes, "Value", "Text");
+        }
+
         public IEnumerable<SelectListItem> GetCardTypes()
         {
             IEnumerable<SelectListItem> list = new List<SelectListItem>()
@@ -159,6 +188,19 @@ namespace MerchantMVC.Repositories
             return cardTypes;
         }
 
-#endregion
+        public IEnumerable<SelectListItem> GetCardTypeSelectItems(int terminalID)
+        {
+            var list = GetCardTypes(terminalID);
+            List<SelectListItem> transCodes = list
+                .Select(n =>
+                    new SelectListItem
+                    {
+                        Value = n.CardTypeId.ToString(),
+                        Text = n.CardTypeName
+                    }).ToList();
+
+            return new SelectList(transCodes, "Value", "Text");
+        }
+        #endregion
     }
 }

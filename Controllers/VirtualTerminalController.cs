@@ -14,6 +14,7 @@ using System.Text;
 using System.Net.Sockets;
 using static Humanizer.In;
 using System.Xml.Linq;
+using System.Xml;
 
 namespace MerchantMVC.Controllers
 {
@@ -33,20 +34,67 @@ namespace MerchantMVC.Controllers
         }
 
         [HttpPost]
-        public ActionResult Submit(VirtualTerminalViewModel viewModel)
+        public ActionResult Index(VirtualTerminalViewModel viewModel)
         {
-            var response = TransactionToXml(viewModel);
+            var newVM = _virtualTerminalRepository.CreateVirtualTerminal((int)HttpContext.Session.GetInt32("MerchantId"));
 
-            if (response != null)
+            try
             {
-                ViewBag.Message = "Transaction submitted successfully.";
-            }
-            else
-            {
-                ViewBag.Message = "Please verify transaction details.";
-            }
+                if (ModelState.IsValid)
+                {
+                    var response = TransactionToXml(viewModel);
 
-            return View("Index", viewModel);
+                    if (response.Contains("<Desc>Transaction Authorized Successfully</Desc>"))
+                    {
+                        ViewBag.Message = "Transaction created successfully.";
+
+                        newVM.LocationID = null;
+                        newVM.CardAccountNumber = "";
+                        newVM.Amount = null;
+                        newVM.TerminalID = null;
+                        newVM.CardTypeID = null;
+                        newVM.ReferenceID = null;
+                    }
+                    else
+                    {
+                        XmlDocument xmlDoc = new XmlDocument();
+                        xmlDoc.LoadXml(response);
+                        XmlNodeList list = xmlDoc.GetElementsByTagName("StatusDesc");
+                        var msg = list[0].InnerText;
+
+                        ViewBag.Message = String.Format("Unable to process transaction. Error message: {0}", msg);
+
+                        // refill selected values
+                        int LocID = (int)viewModel.LocationID;
+
+                        if (LocID != 0)
+                        {
+                            newVM.LocationID = LocID;
+                            newVM.TerminalsList = _virtualTerminalRepository.GetTerminalSelectItems(LocID);
+                            newVM.ReferenceID = viewModel.ReferenceID;
+                            newVM.ReferenceType = viewModel.ReferenceType;
+                            newVM.ReferenceTypeList = _virtualTerminalRepository.GetReferenceTypes();
+                        }
+
+                        int TermID = (int)viewModel.TerminalID;
+
+                        if (TermID != 0)
+                        {
+                            newVM.TerminalID = TermID;
+                            newVM.CardTypeList = _virtualTerminalRepository.GetCardTypeSelectItems(TermID);
+                            newVM.TransCodeList = _virtualTerminalRepository.GetTransCodeSelectItems(TermID);
+                            newVM.CardTypeID = viewModel.CardTypeID;
+                            newVM.TransCodeID = viewModel.TransCodeID;
+                        }
+                    }
+                }
+            }
+            catch(Exception ex)
+            {
+                ModelState.AddModelError("", ex.Message);
+            }
+            
+            return View(newVM);
         }
 
         [HttpGet]
@@ -81,7 +129,7 @@ namespace MerchantMVC.Controllers
         {
             using (EbaseDBContext dBContext = new EbaseDBContext())
             {
-                viewModel.Terminal = dBContext.Terminals.Where(x => x.Terminal30Id == viewModel.Terminal30ID).FirstOrDefault();
+                viewModel.Terminal = dBContext.Terminals.Where(x => x.Terminal30Id == viewModel.TerminalID).FirstOrDefault();
             }
 
             string sessionID = Guid.NewGuid().ToString().ToUpper();
@@ -91,8 +139,13 @@ namespace MerchantMVC.Controllers
             string tranCode = viewModel.TransCodeID.ToString();
             string comments = viewModel.TransactionComments;
             string acctID = viewModel.CardAccountNumber.ToString();
-            string refID = viewModel.ReferenceID.ToString();
-            string refCatID = viewModel.ReferenceType.ToString();
+
+            string refID = "";
+            string refCatID = "";
+            if (viewModel.ReferenceID != null)
+                refID = viewModel.ReferenceID.ToString();
+            if (viewModel.ReferenceType != null)
+                refCatID = viewModel.ReferenceType.ToString();
 
             XElement xmlTransaction = new XElement("EDC",
                 new XAttribute("Type", "TransactionRequest"),
