@@ -72,14 +72,8 @@
             <input asp-for="LocationStatus" class="form-control" />
             <span asp-validation-for="LocationStatus" class="text-danger"></span>
         </div>
-        @*<div class="form-group">
-            <label asp-for="TimeZone" class="control-label"></label>
-            <input asp-for="TimeZone" class="form-control" />
-            <span asp-validation-for="TimeZone" class="text-danger"></span>
-        </div>*@
         <div class="form-group">
             <label asp-for="TimeZone" class="control-label"></label>
-            @*<input asp-for="TimeZone" class="form-control" />*@
             <select id="ddlStatus" class="form-control" data-image="1.png">
                 <option selected value="-5">Eastern (GMT-5)</option>
                 <option value="-6">Central (GMT-6)</option>
@@ -153,17 +147,18 @@
             <input type="submit" value="Update" class="btn btn-primary btn-block" />
         </div>
     </div>
+</div>
 
+<div class="form-row">
     <div class="col">
         @if (ViewBag.message != null)
         {
-        <div class="@(ViewBag.message.Contains("success") ? "alert alert-success alert-dismissible" : "alert alert-danger alert-dismissible")">
-            <a href="#" aria-label="close" data-dismiss="alert" class="close">&times;</a>
-            @ViewBag.message
-        </div>            
+            <div class="@(ViewBag.message.Contains("success") ? "alert alert-success alert-dismissible" : "alert alert-danger alert-dismissible")">
+                <a href="#" aria-label="close" data-dismiss="alert" class="close">&times;</a>
+                @ViewBag.message
+            </div>
         }
     </div>
 </div>
-
 
 

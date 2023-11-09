@@ -151,7 +151,8 @@ namespace MerchantMVC.Controllers
                     locationViewModel = _mapper.Map<EditLocationViewModel>(locationResult);
                     ViewBag.Message = "Location updated successfully.";
 
-                    return PartialView("_PartialEditLocation", locationViewModel);
+                    return PartialView("_PartialEditMerchant", editLocationModel);
+
                 }
             }
             catch (Exception ex)
