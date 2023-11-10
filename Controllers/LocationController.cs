@@ -28,6 +28,7 @@ namespace MerchantMVC.Controllers
 
         [HttpGet]
         public IActionResult Index(string sortOrder, string searchString)
+        
         {
             ViewData["CurrentFilter"] = searchString;
             ViewData["NameSortParam"] = string.IsNullOrEmpty(sortOrder) ? "LName" : "";
@@ -59,7 +60,7 @@ namespace MerchantMVC.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddNewLocation(EditLocationViewModel newLocationViewModel)
+        public async Task<IActionResult> Create(EditLocationViewModel newLocationViewModel)
         {
             try
             {
@@ -74,7 +75,11 @@ namespace MerchantMVC.Controllers
                     _mapper.Map(newLocationViewModel, locationActivate);
 
                     await _locationActivateRepository.Add(locationActivate);
-                    TempData["Message"] = "New Location successfully added for review.";
+
+                    ViewBag.Message = "New Location added successfully. Once reviewed, your location will be activated.";
+
+                    EditLocationViewModel viewModel = new EditLocationViewModel();
+                    return PartialView("_PartialCreateLocation", viewModel);
                 }
                 else
                 {
@@ -92,40 +97,19 @@ namespace MerchantMVC.Controllers
                 ModelState.AddModelError("", ex.Message);
             }
 
-            return RedirectToAction("Create");
+            return View(newLocationViewModel);
         }
 
         [HttpGet]
-        public async Task<IActionResult> Edit1(int id)
+        public IActionResult Edit(int id)
         {
             HttpContext.Session.SetString("LocationId", id.ToString());
-            //Location locationResult = await _locationRepository.Get((int)HttpContext.Session.GetInt32("LocationId"));
-            Location locationResult = await _locationRepository.Get(id);
-            EditLocationViewModel locationViewModel = _mapper.Map<EditLocationViewModel>(locationResult);
+            EditLocationViewModel locationViewModel = _locationRepository.GetLocationViewModel(id);
+
 
             //set Session vars
             HttpContext.Session.SetString("LocationName", locationViewModel.LName.ToString());
             HttpContext.Session.SetString("LocationId", locationViewModel.LocationId.ToString());
-            TempData["LocationId"] = locationViewModel.LocationId;
-            TempData["LocationName"] = string.Concat(locationViewModel.LFname, " ", locationViewModel.LLname);
-
-            return View(locationViewModel);
-        }
-
-
-        [HttpGet]
-        public async Task<IActionResult> Edit(int id)
-        {
-            HttpContext.Session.SetString("LocationId", id.ToString());
-            //Location locationResult = await _locationRepository.Get((int)HttpContext.Session.GetInt32("LocationId"));
-            Location locationResult = await _locationRepository.Get(id);
-
-            EditLocationViewModel locationViewModel = new EditLocationViewModel();
-            locationViewModel = _mapper.Map<EditLocationViewModel>(locationResult); //new EditLocationViewModel();//
-
-            //set Session vars
-            HttpContext.Session.SetString("LocationName", locationViewModel.LName.ToString());
-            //HttpContext.Session.SetString("LocationId", locationViewModel.LocationId.ToString());
             TempData["LocationId"] = locationViewModel.LocationId;
             TempData["LocationName"] = string.Concat(locationViewModel.LFname, " ", locationViewModel.LLname);
             ViewBag.LocationId = locationViewModel.LocationId;
@@ -134,25 +118,17 @@ namespace MerchantMVC.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Edit(EditLocationViewModel editLocationModel)
+        public ActionResult Edit(EditLocationViewModel editLocationModel)
         {
             try
             {
-                Location locationResult = new Location();
-                EditLocationViewModel locationViewModel = new EditLocationViewModel();
-
                 if (ModelState.IsValid)
                 {
                     HttpContext.Session.SetString("LocationId", editLocationModel.LocationId.ToString());
-                    locationResult = await _locationRepository.Get((int)editLocationModel.LocationId);
-
-                    _mapper.Map(editLocationModel, locationResult);
-                    _locationRepository.Update(locationResult);
-                    locationViewModel = _mapper.Map<EditLocationViewModel>(locationResult);
+                    var viewModel = _locationRepository.UpdateLocation(editLocationModel);
                     ViewBag.Message = "Location updated successfully.";
 
-                    return PartialView("_PartialEditMerchant", editLocationModel);
-
+                    return PartialView("_PartialEditLocation", viewModel);
                 }
             }
             catch (Exception ex)

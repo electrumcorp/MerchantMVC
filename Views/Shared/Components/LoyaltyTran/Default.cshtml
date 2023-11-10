@@ -46,38 +46,39 @@
 <script>
     $(document).ready(function () {
 
-            $("#tblloyaltyTransactions").DataTable({
+        $("#tblloyaltyTransactions").DataTable({
 
-                ajax: {
-                    url: "../../LoyaltyTran/GetLoyaltyTran",
-                    data: { locationId: @ViewBag.locationId },
-                    dataSrc: '',
+            ajax: {
+                url: "../../LoyaltyTran/GetLoyaltyTran",
+                data: { locationId: @ViewBag.locationId },
+                dataSrc: '',
 
 
+            },
+            // data: @Json.Serialize(@Model),
+            scroller: true,
+            deferRender: true,
+            processing: true,
+
+            language: { "processing": " <div id='divLoader' class='loaderbody'><div class='loader'></div></div>" },
+            "columns": [
+                {
+                    data: 'loyaltyTransactionId',
+                    ordering: false,
+                    render: function (data, row, type) {
+                        return '<button onclick="getLoyaltyTranDetail( ' + data + ')" class="btn btn-link">View More</button>';
+                    }
                 },
-                // data: @Json.Serialize(@Model),
-                scroller: true,
-                deferRender: true,
-                processing: true,
-
-                language: { "processing": " <div id='divLoader' class='loaderbody'><div class='loader'></div></div>"},
-                "columns": [
-                    {
-                        data: 'loyaltyTransactionId',
-                        ordering: false,
-                        render: function (data, row, type) {
-                            return '<button onclick="getLoyaltyTranDetail( '+data + ')" class="btn btn-link">View More</button>';
-                        }
-                    },
-                    { title: 'Updated Date', data: 'updatedDateFormatted' ,ordering:true},
-                    { title: 'Category', data: 'categoryName' },
-                    { title: 'Name / Mobile / Acct No', data: 'cardName' },
-                    { title: 'Item', data: 'item' },
-                    { title: 'Amount', data: 'amount' },
-                    { title: 'Quantity', data: 'quantity' },
-                    { title: 'Discount', data: 'discount' }
-                ] })
-            })
+                { title: 'Updated Date', data: 'updatedDateFormatted', ordering: true },
+                { title: 'Category', data: 'categoryName' },
+                { title: 'Name / Mobile / Acct No', data: 'cardName' },
+                { title: 'Item', data: 'item' },
+                { title: 'Amount', data: 'amount' },
+                { title: 'Quantity', data: 'quantity' },
+                { title: 'Discount', data: 'discount' }
+            ]
+        })
+    });
 
     function getLoyaltyTranDetail(id) {
         $.get("../LoyaltyTran/GetDetail", { id: id }, function (res) {
@@ -85,8 +86,7 @@
             $('#form-modal .modal-title').html('Loyalty Transaction Details');
             $('#form-modal').modal('show');
         })
-    }
-
+    };
 
 </script>
 

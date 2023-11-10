@@ -10,6 +10,9 @@ namespace MerchantMVC.Repositories
 {
     public interface ILocationRepository : IRepository<Location>
     {
+        public Location GetLocation(int locationId);
+        public EditLocationViewModel GetLocationViewModel(int locationId);
         public IEnumerable<EditLocationViewModel> GetLocationsByMerchantId(int merchantId);
+        public EditLocationViewModel UpdateLocation(EditLocationViewModel viewModel);
     }
 }

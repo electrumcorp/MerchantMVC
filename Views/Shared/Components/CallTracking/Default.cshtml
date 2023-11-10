@@ -43,21 +43,10 @@
 <script>
 
     $(document).ready(function () {
-        //$.get("/Employee/DTEmployee", function (data) {
-        //    var jsonData = data;
-
-
-        // var jsonData =@Json.Serialize(@Model);
-        //var data = [];
-        //for (var i = 0; i < 50000; i++) {
-        //    data.push([i, i, i, i, i]);
-        //}
-
-
         $("#tblCallTracking").DataTable({
             ajax: {
                 url: "../../CallTracking/GetCallTracking",
-                    data: { locationId: @ViewBag.locationId },
+                data: { locationId: @ViewBag.locationId },
                 dataSrc: ''
             },
             // data: @Json.Serialize(@Model),
@@ -75,7 +64,7 @@
                 { title: 'Status', data: 'statusName' },
                 { title: 'Comment', data: 'comment' }
             ]
-        })
+        });
     })
 </script>
 

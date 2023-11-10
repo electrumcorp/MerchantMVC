@@ -10,7 +10,7 @@
         <h4>Edit Location - <label>@Model.LName</label></h4>
     </div>
     <div class="card-body">
-        <form asp-action="Edit" data-ajax-method="POST" asp-controller="Location" data-ajax="true" data-ajax-update="#ajaxEditLocation" data-ajax-mode="replace">
+        <form id="sbLocation" asp-action="Edit" data-ajax-method="POST" asp-controller="Location" data-ajax="true" data-ajax-update="#ajaxEditLocation" data-ajax-mode="replace">
             <div id="ajaxEditLocation">
 
                 @await Html.PartialAsync("_PartialEditLocation", Model)

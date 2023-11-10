@@ -1,7 +1,7 @@
 ﻿@model MerchantMVC.ViewModels.EditLocationViewModel
 
 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-<input type="hidden" asp-for="LocationId" />
+<input type="hidden" asp-for="MerchantId" />
 <div class="form-row">
     <div class="col-lg-3">
         <div class="form-group">
@@ -30,16 +30,17 @@
             <input asp-for="LPhone" class="form-control" />
             <span asp-validation-for="LPhone" class="text-danger"></span>
         </div>
+
     </div>
 
     <div class="col-lg-3">
         <div class="form-group">
-            <label asp-for="LAddr1" class="control-label">Address1</label>
+            <label asp-for="LAddr1" class="control-label">Address 1</label>
             <input asp-for="LAddr1" class="form-control" />
             <span asp-validation-for="LAddr1" class="text-danger"></span>
         </div>
         <div class="form-group">
-            <label asp-for="LAddr2" class="control-label">Address2</label>
+            <label asp-for="LAddr2" class="control-label">Address 2</label>
             <input asp-for="LAddr2" class="form-control" />
             <span asp-validation-for="LAddr2" class="text-danger"></span>
         </div>
@@ -67,14 +68,9 @@
             <span asp-validation-for="MerchantNumber" class="text-danger"></span>
         </div>
         <div class="form-group">
-            <label asp-for="LocationStatus" class="control-label"></label>
-            <input asp-for="LocationStatus" class="form-control" />
-            <span asp-validation-for="LocationStatus" class="text-danger"></span>
-        </div>
-        <div class="form-group">
             <label asp-for="TimeZone" class="control-label"></label>
-            <select id="ddlStatus" class="form-control" data-image="1.png">
-                <option selected value="-5">Eastern (GMT-5)</option>
+            <select id="ddlTimeZone" class="form-control" data-image="1.png" asp-for="TimeZone">
+                <option value="-5">Eastern (GMT-5)</option>
                 <option value="-6">Central (GMT-6)</option>
                 <option value="-7">Mountain (GMT-7)</option>
                 <option value="-8">Pacific (GMT-8)</option>
@@ -83,6 +79,9 @@
             </select>
             <input asp-for="TimeZone" type="hidden" id="hdnTimeZoneID" />
             <span asp-validation-for="TimeZone" class="text-danger"></span>
+            @*@Html.LabelFor(m => m.TimeZone, new {@class = "control-label" })
+                @Html.DropDownListFor(m => m.TimeZone, , new { @class = "form-control"})
+                @Html.ValidationMessageFor(m => m.TimeZone, "", new { @class = "text-danger"})*@
         </div>
         <div class="form-group">
             <label asp-for="Brand" class="control-label">Store Brand</label>
@@ -94,13 +93,24 @@
             <input asp-for="FuelBrand" class="form-control" />
             <span asp-validation-for="FuelBrand" class="text-danger"></span>
         </div>
+        <div class="form-group">
+            <label asp-for="Url" class="control-label">URL</label>
+            <input asp-for="Url" class="form-control" />
+            <span asp-validation-for="Url" class="text-danger"></span>
+        </div>
     </div>
 
     <div class="col-lg-3">
         <div class="form-group">
-            <label asp-for="DefaultOriginationDeviceId" class="control-label">Origination Device</label>
-            <input asp-for="DefaultOriginationDeviceId" class="form-control" />
+            <label asp-for="DefaultOriginationDeviceId" class="control-label"></label>
+            <select id="ddlDefaultOriginationDeviceId" class="form-control" data-image="1.png" asp-for="DefaultOriginationDeviceId">
+                <option value="19">Gilbarco Passport</option>
+                <option value="22">Verifone Commander</option>
+            </select>
             <span asp-validation-for="DefaultOriginationDeviceId" class="text-danger"></span>
+            @*@Html.LabelFor(m => m.DefaultOriginationDeviceId, new { @class = "control-label" })
+                @Html.DropDownListFor(m => m.DefaultOriginationDeviceId, Model.AvailableOriginationDevices, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.DefaultOriginationDeviceId, "", new { @class = "text-danger"})*@
         </div>
         <div class="form-group">
             <label asp-for="PosmaintSupport" class="control-label">POS Support Contact</label>
@@ -111,11 +121,6 @@
             <label asp-for="PosmaintSupportPhone" class="control-label">POS Support Phone</label>
             <input asp-for="PosmaintSupportPhone" class="form-control" />
             <span asp-validation-for="PosmaintSupportPhone" class="text-danger"></span>
-        </div>
-        <div class="form-group">
-            <label asp-for="Url" class="control-label">URL</label>
-            <input asp-for="Url" class="form-control" />
-            <span asp-validation-for="Url" class="text-danger"></span>
         </div>
         <div class="form-group">
             <label asp-for="Latitude" class="control-label"></label>
@@ -131,10 +136,10 @@
 </div>
 
 <div class="form-row">
-    <div class="col-lg-8">
+    <div class="col">
         <div class="form-group">
-            <label asp-for="Comments" class="control-label">Comments</label>
-            <textarea asp-for="Comments" rows="5" class="form-control"></textarea>
+            <label asp-for="Comments" class="control-label"></label>
+            <textarea asp-for="Comments" class="form-control" type="text" rows="4"></textarea>
             <span asp-validation-for="Comments" class="text-danger"></span>
         </div>
     </div>
@@ -143,7 +148,7 @@
 <div class="form-row">
     <div class="col-sm-4">
         <div class="form-group">
-            <input type="submit" value="Update" class="btn btn-primary btn-block" />
+            <input type="submit" value="Create Location" class="btn btn-primary" />
         </div>
     </div>
 </div>
@@ -152,10 +157,10 @@
     <div class="col">
         @if (ViewBag.message != null)
         {
-            <div class="@(ViewBag.message.Contains("success") ? "alert alert-success alert-dismissible" : "alert alert-danger alert-dismissible")">
-                <a href="#" aria-label="close" data-dismiss="alert" class="close">&times;</a>
-                @ViewBag.message
-            </div>
+        <div class="@(ViewBag.message.Contains("success") ? "alert alert-success alert-dismissible" : "alert alert-danger alert-dismissible")">
+            <a href="#" aria-label="close" data-dismiss="alert" class="close">&times;</a>
+            @ViewBag.message
+        </div>
         }
     </div>
 </div>

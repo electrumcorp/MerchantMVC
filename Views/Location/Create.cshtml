@@ -4,161 +4,16 @@
     Layout = "_LayoutV";
 }
 
-
 <h2>Add New Location </h2>
 <p> </p>
 
-<form asp-action="AddNewLocation">
-    <div class="row">
-        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-        <input type="hidden" asp-for="MerchantId" />
-        <div class="col-lg-3">
-            <div class="form-group">
-                <label asp-for="LName" class="control-label">Location Name</label>
-                <input asp-for="LName" class="form-control" />
-                <span asp-validation-for="LName" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="LFname" class="control-label">Contact First Name</label>
-                <input asp-for="LFname" class="form-control" />
-                <span asp-validation-for="LFname" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="LLname" class="control-label">Contact Last Name</label>
-                <input asp-for="LLname" class="form-control" />
-                <span asp-validation-for="LLname" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="EmailAddr" class="control-label">Contact Email Address</label>
-                <input asp-for="EmailAddr" class="form-control" />
-                <span asp-validation-for="EmailAddr" class="text-danger"></span>
-            </div>
+<form asp-action="Create" asp-controller="Location" data-ajax-method="POST" data-ajax="true" data-ajax-update="#ajaxCreateLocation" data-ajax-mode="replace">
+    <div id="ajaxCreateLocation">
 
-            <div class="form-group">
-                <label asp-for="LPhone" class="control-label">Contact Phone</label>
-                <input asp-for="LPhone" class="form-control" />
-                <span asp-validation-for="LPhone" class="text-danger"></span>
-            </div>
+        @await Html.PartialAsync("_PartialCreateLocation", Model)
 
-        </div>
-
-        <div class="col-lg-3">
-            <div class="form-group">
-                <label asp-for="LAddr1" class="control-label">Address 1</label>
-                <input asp-for="LAddr1" class="form-control" />
-                <span asp-validation-for="LAddr1" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="LAddr2" class="control-label">Address 2</label>
-                <input asp-for="LAddr2" class="form-control" />
-                <span asp-validation-for="LAddr2" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="LCity" class="control-label">City</label>
-                <input asp-for="LCity" class="form-control" />
-                <span asp-validation-for="LCity" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="LState" class="control-label">State</label>
-                <input asp-for="LState" class="form-control" />
-                <span asp-validation-for="LState" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="LZip" class="control-label">Zip</label>
-                <input asp-for="LZip" class="form-control" />
-                <span asp-validation-for="LZip" class="text-danger"></span>
-            </div>
-        </div>
-
-        <div class="col-lg-3">
-            <div class="form-group">
-                <label asp-for="MerchantNumber" class="control-label">Merchant Number</label>
-                <input asp-for="MerchantNumber" class="form-control" />
-                <span asp-validation-for="MerchantNumber" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="TimeZone" class="control-label"></label>
-                <select id="ddlTimeZone" class="form-control" data-image="1.png" asp-for="TimeZone">
-                    <option value="-5">Eastern (GMT-5)</option>
-                    <option value="-6">Central (GMT-6)</option>
-                    <option value="-7">Mountain (GMT-7)</option>
-                    <option value="-8">Pacific (GMT-8)</option>
-                    <option value="-9">Alaska (GMT-9)</option>
-                    <option value="-10">Hawaii-Aleutian (GMT-10)</option>
-                </select>
-                <input asp-for="TimeZone" type="hidden" id="hdnTimeZoneID" />
-                <span asp-validation-for="TimeZone" class="text-danger"></span>
-                @*@Html.LabelFor(m => m.TimeZone, new {@class = "control-label" })
-                @Html.DropDownListFor(m => m.TimeZone, , new { @class = "form-control"})
-                @Html.ValidationMessageFor(m => m.TimeZone, "", new { @class = "text-danger"})*@
-            </div>
-            <div class="form-group">
-                <label asp-for="Brand" class="control-label">Store Brand</label>
-                <input asp-for="Brand" class="form-control" />
-                <span asp-validation-for="Brand" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="FuelBrand" class="control-label">Fuel Brand</label>
-                <input asp-for="FuelBrand" class="form-control" />
-                <span asp-validation-for="FuelBrand" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Url" class="control-label">URL</label>
-                <input asp-for="Url" class="form-control" />
-                <span asp-validation-for="Url" class="text-danger"></span>
-            </div>
-        </div>
-
-        <div class="col-lg-3">
-            <div class="form-group">
-                <label asp-for="DefaultOriginationDeviceId" class="control-label"></label>
-                <select id="ddlDefaultOriginationDeviceId" class="form-control" data-image="1.png" asp-for="DefaultOriginationDeviceId">
-                    <option value="19">Gilbarco Passport</option>
-                    <option value="22">Verifone Commander</option>
-                </select>
-                <span asp-validation-for="DefaultOriginationDeviceId" class="text-danger"></span>
-                @*@Html.LabelFor(m => m.DefaultOriginationDeviceId, new { @class = "control-label" })
-                @Html.DropDownListFor(m => m.DefaultOriginationDeviceId, Model.AvailableOriginationDevices, new { @class = "form-control" })
-                @Html.ValidationMessageFor(m => m.DefaultOriginationDeviceId, "", new { @class = "text-danger"})*@
-            </div>
-            <div class="form-group">
-                <label asp-for="PosmaintSupport" class="control-label">POS Support Contact</label>
-                <input asp-for="PosmaintSupport" class="form-control" />
-                <span asp-validation-for="PosmaintSupport" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="PosmaintSupportPhone" class="control-label">POS Support Phone</label>
-                <input asp-for="PosmaintSupportPhone" class="form-control" />
-                <span asp-validation-for="PosmaintSupportPhone" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Latitude" class="control-label"></label>
-                <input asp-for="Latitude" class="form-control" />
-                <span asp-validation-for="Latitude" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Longitude" class="control-label">Longitude</label>
-                <input asp-for="Longitude" class="form-control" />
-                <span asp-validation-for="Longitude" class="text-danger"></span>
-            </div>
-        </div>
-        <div class="col-md-10">
-            <div class="form-group">
-                <label asp-for="Comments" class="control-label"></label>
-                <input asp-for="Comments" class="form-control" />
-                <span asp-validation-for="Comments" class="text-danger"></span>
-            </div>
-        </div>
     </div>
-    <div class="form-group">
-        <input type="submit" value="Create Location" class="btn btn-primary" />
-    </div>
-    @if (ViewBag.message != null)
-    {
-        <div class="@(ViewBag.message.Contains("success")? "alert alert-success alert-dismissible":"alert alert-danger alert-dismissible")">
-            <a href="#" aria-label="close" data-dismiss="alert" class="close">&times;</a>
-            @ViewBag.message
-        </div>
-    }
 </form>
 
+
+@{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
