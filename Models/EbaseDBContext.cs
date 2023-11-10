@@ -51,10 +51,10 @@ namespace MerchantMVC.Models
             if (!optionsBuilder.IsConfigured)
             {
                 // production CS
-                //optionsBuilder.UseSqlServer("server=tcp:172.30.4.10;Database=Ebase5;Trusted_Connection=no;User Id=sqladmin;Password=sql@dm1n;");// ;
+                optionsBuilder.UseSqlServer("server=tcp:172.30.4.10;Database=Ebase5;Trusted_Connection=no;User Id=sqladmin;Password=sql@dm1n;");// ;
 
                 // dev CS
-                optionsBuilder.UseSqlServer("server=tcp:172.30.4.14;Database=Ebase5;Trusted_Connection=no;User Id=sqladmin;Password=sql@dm1n;");// ;
+                //optionsBuilder.UseSqlServer("server=tcp:172.30.4.14;Database=Ebase5;Trusted_Connection=no;User Id=sqladmin;Password=sql@dm1n;");// ;
             }
         }
 
