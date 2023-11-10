@@ -20,6 +20,8 @@ namespace MerchantMVC.Controllers
             _repository = repository;
             _mapper = mapper;
         }
+
+        [HttpGet]
         public IActionResult Index()
         {
             MainViewModel vm = new MainViewModel();
@@ -40,23 +42,34 @@ namespace MerchantMVC.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Edit(MainViewModel inputMainViewModel)
+        public IActionResult Index(MainViewModel inputFeedBack)
         {
+            MainViewModel vm = new MainViewModel();
+            vm.MerchantID = (int)HttpContext.Session.GetInt32("MerchantId");
+
             List<FeedBackViewModel> updated = new List<FeedBackViewModel>();
 
-            foreach (var feedback in inputMainViewModel.Feedback)
+            try
             {
-                FeedBack inputFeedBack = _mapper.Map<FeedBack>(feedback);
-                FeedBack feedBackResult = await _repository.Get((int)feedback.FeedBackId);
-                _mapper.Map(inputFeedBack, feedBackResult);
-                _repository.Update(feedBackResult);
-                FeedBackViewModel feedbackVM = _mapper.Map<FeedBackViewModel>(feedBackResult);
-                updated.Add(feedbackVM);
+                foreach (var input in inputFeedBack.Feedback)
+                {
+                    var item = _mapper.Map<FeedBack>(input);
+                    var update = _repository.UpdateFeedback(item);
+                    var updateVM = _mapper.Map<FeedBackViewModel>(update);
+                    updated.Add(updateVM);
+                }
+                vm.Feedback = updated;
+
+                ViewBag.Message = "Feedback questions updated successfully.";
+                return PartialView("_PartialEditFeedback", vm);
             }
 
-            inputMainViewModel.Feedback = updated;
-            ViewBag.Message = "Feedback questions updated successfully.";
-            return View("Index", inputMainViewModel);
+            catch (Exception ex)
+            {
+                ViewBag.Message = ex.Message;
+            }
+
+            return PartialView("_PartialEditFeedback", vm);
         }
     }
 }

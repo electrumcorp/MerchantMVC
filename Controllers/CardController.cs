@@ -13,6 +13,7 @@ using X.PagedList;
 using CsvHelper;
 using System.Text;
 using CsvHelper.Configuration;
+using Microsoft.CodeAnalysis;
 
 namespace MerchantMVC.Controllers
 {
@@ -36,8 +37,12 @@ namespace MerchantMVC.Controllers
         public IActionResult Index(string sortOrder, string searchString, int? page)
         {
             ViewData["AccountNumberSortParam"] = string.IsNullOrEmpty(sortOrder) ? "AccountNumber" : "";
-
             IEnumerable<CardViewModel> cards = _cardRepository.GetCardsByMerchantId((int)HttpContext.Session.GetInt32("MerchantId"));
+            
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                cards = cards.Where(x => x.AccountNumber.Contains(searchString.ToUpper()));
+            }
 
             switch (sortOrder)
             {

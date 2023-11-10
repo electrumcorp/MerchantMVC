@@ -37,7 +37,6 @@ namespace MerchantMVC.Repositories.Base
 
         public void Update(T entity)
         {
-
             EbaseDbContext.Set<T>().Update(entity);
             EbaseDbContext.SaveChanges();
         }

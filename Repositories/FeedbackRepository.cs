@@ -4,6 +4,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using MerchantMVC.Models;
 using MerchantMVC.Repositories.Base;
+using MerchantMVC.ViewModels;
+using Microsoft.AspNetCore.Http;
 
 namespace MerchantMVC.Repositories
 {
@@ -28,6 +30,21 @@ namespace MerchantMVC.Repositories
             //.OrderByDescending(o => o.MerchantNumber).ToList();
 
             return feedBacks;
+        }
+
+        public FeedBack UpdateFeedback(FeedBack input)
+        {
+            var dbFeedBack = ebaseDbContext.FeedBacks.Where(x => x.FeedBackId == input.FeedBackId).FirstOrDefault();
+
+            dbFeedBack.Answer = input.Answer;
+            dbFeedBack.Notes = input.Notes;
+            dbFeedBack.RespondentId = input.RespondentId;
+            dbFeedBack.ResponseDate = input.ResponseDate;
+
+            ebaseDbContext.Update(dbFeedBack);
+            ebaseDbContext.SaveChanges();
+
+            return dbFeedBack;
         }
     }
 }

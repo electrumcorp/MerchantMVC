@@ -1,0 +1,73 @@
+﻿@model MerchantMVC.ViewModels.MainViewModel
+
+<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>
+                Question
+            </th>
+            <th>
+                Answer
+            </th>
+            <th>
+                Notes
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model.Feedback == null || Model.Feedback.Count() == 0)
+        {
+            <tr>
+                <td>No Feedback questions found</td>
+                <td> </td>
+                <td> </td>
+            </tr>
+        }
+        else
+        {
+            @for (int i = 0; i < Model.Feedback.Count; i++)
+            {
+                <tr>
+                    <td width="33%">
+                        <input type="hidden" name="MerchantID" value="@Model.MerchantID" />
+                        <input type="hidden" name="Feedback[@i].FeedBackId" value="@Model.Feedback[i].FeedBackId" />
+                        <input type="hidden" name="Feedback[@i].RespondentId" value="@Model.Feedback[i].RespondentId" />
+
+
+                        <label class="control-label">@Model.Feedback[i].Question</label>
+                    </td>
+
+                    <td width="33%">
+                        <input asp-for="@Model.Feedback[i].Answer" type="text" class="form-control" name="Feedback[@i].Answer" id="Feedback[@i].Answer" />
+                        <span asp-validation-for="Feedback[@i].Answer" class="text-danger"></span>
+                    </td>
+
+                    <td width="33%">
+                        <input asp-for="@Model.Feedback[i].Notes" type="text" class="form-control" name="Feedback[@i].Notes" id="Feedback[@i].Notes" />
+                        <span asp-validation-for="Feedback[@i].Answer" class="text-danger"></span>
+                    </td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>
+@if (Model.Feedback != null || Model.Feedback.Count() > 0)
+{
+    <div class="row d-flex justify-content-center align-content-center">
+        <div class="form-group my-3">
+            <input type="submit" value="Submit" class="btn btn-lg btn-primary px-5" />
+        </div>
+    </div>
+    <div>
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        @if (ViewBag.message != null)
+        {
+            <div class="@(ViewBag.message.Contains("success")? "alert alert-success alert-dismissible":"alert alert-danger alert-dismissible")">
+                <a href="#" aria-label="close" data-dismiss="alert" class="close">&times;</a>
+                @ViewBag.message
+            </div>
+        }
+    </div>
+
+}
